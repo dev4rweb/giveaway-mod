@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\HomePageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', [HomePageController::class, 'index'])->name('home-page');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
