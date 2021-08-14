@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdminPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AdminPageController extends Controller
@@ -25,7 +26,11 @@ class AdminPageController extends Controller
      */
     public function index()
     {
-        return Inertia::render('AdminPage');
+        $user = Auth::user();
+
+        return Inertia::render('AdminPage', [
+            'user' => $user
+        ]);
     }
 
     /**

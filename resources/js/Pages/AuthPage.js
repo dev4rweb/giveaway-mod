@@ -40,6 +40,7 @@ const AuthPage = () => {
                 console.log(res)
                 if (res.status === 204) {
                     console.log('You are logged in')
+                    document.location.reload()
                 }
             })
             .catch(err => {
@@ -61,6 +62,7 @@ const AuthPage = () => {
                     label="Standard"
                     name="email"
                     type="email"
+                    variant="outlined"
                     value={email}
                     onChange={event => setEmail(event.target.value)}
                 />
@@ -69,6 +71,7 @@ const AuthPage = () => {
                     label="Password"
                     type="password"
                     autoComplete="current-password"
+                    variant="outlined"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 />

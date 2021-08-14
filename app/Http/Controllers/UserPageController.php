@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HomePage;
+use App\Models\UserPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class HomePageController extends Controller
+class UserPageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        return Inertia::render('HomePage', [
-            'homePage' => HomePage::all(),
-            'user' => Auth::user(),
+        $user = Auth::user();
+        return Inertia::render('UserPage', [
+            'user' => $user
         ]);
     }
 
@@ -46,10 +46,10 @@ class HomePageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HomePage  $homePage
+     * @param  \App\Models\UserPage  $userPage
      * @return \Illuminate\Http\Response
      */
-    public function show(HomePage $homePage)
+    public function show(UserPage $userPage)
     {
         //
     }
@@ -57,10 +57,10 @@ class HomePageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\HomePage  $homePage
+     * @param  \App\Models\UserPage  $userPage
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomePage $homePage)
+    public function edit(UserPage $userPage)
     {
         //
     }
@@ -69,10 +69,10 @@ class HomePageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\HomePage  $homePage
+     * @param  \App\Models\UserPage  $userPage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomePage $homePage)
+    public function update(Request $request, UserPage $userPage)
     {
         //
     }
@@ -80,10 +80,10 @@ class HomePageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\HomePage  $homePage
+     * @param  \App\Models\UserPage  $userPage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomePage $homePage)
+    public function destroy(UserPage $userPage)
     {
         //
     }

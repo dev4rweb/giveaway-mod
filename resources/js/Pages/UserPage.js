@@ -1,10 +1,10 @@
 import React from 'react';
 import {InertiaLink} from "@inertiajs/inertia-react";
 
-const AdminPage = ({user}) => {
+const UserPage = ({user}) => {
     return (
         <div>
-            <h1>Admin Page</h1>
+            <h1>User Page</h1>
             <InertiaLink
                 href="/logout"
                 method="post"
@@ -17,4 +17,4 @@ const AdminPage = ({user}) => {
     );
 };
 
-export default AdminPage;
+export default UserPage;

@@ -40,6 +40,7 @@ const RegisterPage = () => {
                 console.log(res)
                 if (res.status === 204) {
                     console.log('You are logged in')
+                    document.location.reload()
                 }
             })
             .catch(err => {
@@ -62,6 +63,7 @@ const RegisterPage = () => {
                     id="standard-basic-name"
                     label="Name"
                     type="text"
+                    variant="outlined"
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
@@ -69,6 +71,7 @@ const RegisterPage = () => {
                     id="standard-basic-email"
                     label="Email"
                     type="email"
+                    variant="outlined"
                     value={email}
                     onChange={event => setEmail(event.target.value)}
                 />
@@ -76,6 +79,7 @@ const RegisterPage = () => {
                     id="standard-password-input"
                     label="Password"
                     type="password"
+                    variant="outlined"
                     autoComplete="current-password"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
@@ -84,6 +88,7 @@ const RegisterPage = () => {
                     id="standard-password-input-confirm"
                     label="Password"
                     type="password"
+                    variant="outlined"
                     autoComplete="current-password"
                     value={passwordConfirm}
                     onChange={event => setPasswordConfirm(event.target.value)}
