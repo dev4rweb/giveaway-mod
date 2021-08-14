@@ -1,13 +1,13 @@
-const SET_COUNT = 'SET_COUNT'
 const SET_IS_AUTH = 'SET_IS_AUTH'
 const SET_USER = 'SET_USER'
+const SET_POSTS = 'SET_POSTS'
 
 const defaultState = {
     isAuth: false,
     user: {
 
     },
-    count: 0
+    posts: []
 }
 
 export default function userReducer(state = defaultState, action) {
@@ -17,21 +17,21 @@ export default function userReducer(state = defaultState, action) {
                 ...state,
                 isAuth: action.payload
             }
-        case SET_COUNT:
-            return {
-                ...state,
-                count: action.payload
-            }
         case SET_USER:
             return {
                 ...state,
                 user: action.payload
+            }
+        case SET_POSTS:
+            return {
+                ...state,
+                posts: action.payload
             }
         default:
             return state
     }
 };
 
-export const setCount = (count) => ({type: SET_COUNT, payload: count})
 export const setIsAuth = (isAuth) => ({type: SET_IS_AUTH, payload: isAuth})
 export const setUser = (user) => ({type: SET_USER, payload: user})
+export const setPosts = (posts) => ({type: SET_POSTS, payload: posts})

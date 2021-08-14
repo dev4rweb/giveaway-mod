@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
 Route::get('/user-panel', [UserPageController::class, 'index'])->name('user-panel');
+
+// Error Page
+Route::fallback([ErrorPageController::class, 'index']);
