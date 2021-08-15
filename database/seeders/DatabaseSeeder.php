@@ -32,5 +32,7 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => false,
             'password' => \bcrypt('password')
         ]);
+
+        $this->call(GameSeeder::class);
     }
 }

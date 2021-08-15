@@ -12,11 +12,12 @@ import Timer from "../components/Timer";
 import SocialBlock from "../components/SocialBlock";
 import Modal from "../components/Modal";
 import CustomSelect from "../components/UI/CustomSelect";
-import GameContainer from "../components/GameContainer";
+import GameContainer from "../components/GameBox/GameContainer";
+import {setGames, setSponsorGames} from "../reducers/gameReducer";
 
 /*https://youtu.be/tODggNhelQ4*/
 
-const HomePage = ({user, errors}) => {
+const HomePage = ({user, errors, games, sponsorGames}) => {
         const dispatch = useDispatch()
         const stateData = useSelector(state => state.lang)
         const isLoading = useSelector(state => state.error.isLoading)
@@ -29,7 +30,9 @@ const HomePage = ({user, errors}) => {
         useEffect(() => {
             dispatch(setIsAuth(!!user))
             dispatch(setUser(user))
-            dispatch(getPosts())
+            // dispatch(getPosts())
+            dispatch(setGames(games))
+            dispatch(setSponsorGames(sponsorGames))
             console.log(posts)
         }, []);
 

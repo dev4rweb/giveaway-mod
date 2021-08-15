@@ -1,0 +1,75 @@
+.box {
+  position: relative;
+  margin-top: 60px; }
+  .box .gameBox {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 350px;
+    justify-content: center;
+    align-content: center; }
+  .box .sponsorBox {
+    position: absolute;
+    top: 293px;
+    right: 15px;
+    left: 15px; }
+    .box .sponsorBox .sponsorCard {
+      width: 100%;
+      height: 140px;
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      border: 2px solid #272b45;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      box-shadow: 4px 5px 10px #191e40;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -ms-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s; }
+      .box .sponsorBox .sponsorCard .content h3 {
+        margin-bottom: 0;
+        font-size: 17px;
+        line-height: 24px; }
+      .box .sponsorBox .sponsorCard .content a {
+        color: white;
+        text-decoration: underline; }
+      .box .sponsorBox .sponsorCard:hover {
+        cursor: pointer;
+        -webkit-transform: scale(1.1, 1.1);
+        -moz-transform: scale(1.1, 1.1);
+        -ms-transform: scale(1.1, 1.1);
+        -o-transform: scale(1.1, 1.1);
+        transform: scale(1.1, 1.1); }
+
+.paginBox {
+  display: flex;
+  justify-content: center; }
+
+@media (min-width: 768px) {
+  .box .gameBox {
+    grid-template-columns: 1fr 1fr; }
+  .box .sponsorBox .sponsorCard {
+    flex-direction: row;
+    justify-content: space-between; }
+    .box .sponsorBox .sponsorCard .content, .box .sponsorBox .sponsorCard button {
+      margin-left: 30px;
+      margin-right: 30px; }
+    .box .sponsorBox .sponsorCard .content h3 {
+      font-size: 34px;
+      line-height: 35px; }
+    .box .sponsorBox .sponsorCard .content a {
+      font-size: 15px;
+      line-height: 36px; } }
+@media (min-width: 1200px) {
+  .box .gameBox {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 32px; } }
+
+/*# sourceMappingURL=GameBox.module.css.map */

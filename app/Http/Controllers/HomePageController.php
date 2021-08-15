@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\HomePage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,15 @@ class HomePageController extends Controller
      */
     public function index()
     {
+        $games = Game::orderBy('endDate', 'desc')
+            ->where('isSponsored', '=', false)
+            ->get();
+        $sponsorGames = Game::where('isSponsored', '=', true)->get();
         return Inertia::render('HomePage', [
             'homePage' => HomePage::all(),
             'user' => Auth::user(),
+            'games' => $games,
+            'sponsorGames' => $sponsorGames
         ]);
     }
 
