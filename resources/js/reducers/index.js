@@ -6,7 +6,7 @@ import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 
 const rootReducer = combineReducers({
-    translate: translateReducer,
+    lang: translateReducer,
     user: userReducer,
     error: errorReducer
 })
