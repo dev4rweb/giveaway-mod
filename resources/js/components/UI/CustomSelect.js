@@ -1,9 +1,11 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem';
+import {useDispatch, useSelector} from "react-redux";
+import {setFilterGames} from "../../reducers/gameReducer";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
                 borderColor: '#9a9fbe',
             }
         },
-        '& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl:hover':{
+        '& .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl:hover': {
 
             '& .MuiOutlinedInput-root:hover, & .MuiOutlinedInput-root, & .MuiOutlinedInput-notchedOutline': {
                 borderColor: 'white',
@@ -42,12 +44,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CustomSelect = () => {
-    const [age, setAge] = React.useState('');
+    const dispatch = useDispatch();
+    const allGames = useSelector(state => state.games.games)
     const classes = useStyles();
+    const [state, setState] = React.useState({
+        age: '',
+        name: 'hai',
+    });
 
     const handleChange = (event) => {
-        setAge(event.target.value);
-        console.log(age)
+        // console.log(event.target.value)
+        const name = event.target.name;
+        const value = event.target.value
+        setState({
+            ...state,
+            [name]: event.target.value,
+        });
+        switch (value) {
+            case '10':
+                // console.log('handleChange 10')
+                dispatch(setFilterGames(allGames))
+                break
+            case '20':
+                // console.log('handleChange 20')
+                dispatch(setFilterGames(allGames.filter(item => item.isCompetition)))
+                break
+            case '30':
+                // console.log('handleChange 30')
+                dispatch(setFilterGames(allGames.filter(item => !item.isCompetition)))
+                break
+        }
     };
 
     return (
@@ -63,7 +89,7 @@ const CustomSelect = () => {
             </InputLabel>
             <Select
                 native
-                value={age}
+                value={state.age}
                 onChange={handleChange}
                 label="Sort"
                 className={classes.select}
@@ -72,7 +98,7 @@ const CustomSelect = () => {
                     id: 'outlined-age-native-simple',
                 }}
             >
-                <option aria-label="None" value="" />
+                <option aria-label="None" value=""/>
                 <option value={10}>All</option>
                 <option value={20}>Competition</option>
                 <option value={30}>Giveaways</option>

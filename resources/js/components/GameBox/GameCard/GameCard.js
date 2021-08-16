@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 
 const GameCard = ({item}) => {
     const stateData = useSelector(state => state.lang)
-    const star = item.isFavorite == 1 ? fullStar : halfStar;
+    const star = item.isFavorite === true ? fullStar : halfStar;
 
     const handleClick = (e) => {
         console.log('handleClick')
@@ -19,7 +19,7 @@ const GameCard = ({item}) => {
             <div className={s.content}>
                 <h3>{item.name}</h3>
                 {
-                    !item.isCompetition &&
+                    item.isCompetition &&
                     <div className={s.steamBox}>
                         {
                             // item.taskOne &&

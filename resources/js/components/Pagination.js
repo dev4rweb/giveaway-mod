@@ -8,7 +8,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate, currentPage}) => {
         pageNumbers.push(i);
     }
 
-    console.log('activePage', currentPage);
+    // console.log('activePage', currentPage);
 
     return (
         <nav aria-label="Page navigation example">

@@ -13,7 +13,7 @@ import SocialBlock from "../components/SocialBlock";
 import Modal from "../components/Modal";
 import CustomSelect from "../components/UI/CustomSelect";
 import GameContainer from "../components/GameBox/GameContainer";
-import {setGames, setSponsorGames} from "../reducers/gameReducer";
+import {setFilterGames, setGames, setSponsorGames} from "../reducers/gameReducer";
 
 /*https://youtu.be/tODggNhelQ4*/
 
@@ -24,7 +24,7 @@ const HomePage = ({user, errors, games, sponsorGames}) => {
         const error = useSelector(state => state.error.error)
         const isAuth = useSelector(state => state.user.isAuth)
         const currentUser = useSelector(state => state.user.user)
-        const posts = useSelector(state => state.user.posts)
+        // const posts = useSelector(state => state.user.posts)
         const [modal, setModal] = useState(false)
 
         useEffect(() => {
@@ -33,7 +33,8 @@ const HomePage = ({user, errors, games, sponsorGames}) => {
             // dispatch(getPosts())
             dispatch(setGames(games))
             dispatch(setSponsorGames(sponsorGames))
-            console.log(posts)
+            dispatch(setFilterGames(games))
+            // console.log(posts)
         }, []);
 
         const handleIsLogged = () => {
