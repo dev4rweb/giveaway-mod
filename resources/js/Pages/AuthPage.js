@@ -1,21 +1,83 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: '25ch',
+            width: '100%',
             display: 'flex',
             flexDirection: 'column'
         },
     },
+    input: {
+        '& input, label': {
+            color: 'white',
+            fontFamaly: 'Montserrat, sans-serif'
+        },
+        '& label.Mui-focused': {
+            color: '#9a9a9a',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#9a9a9a',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#b6c4d2',
+            },
+            '&:hover fieldset': {
+                borderColor: '#9a9fbe',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#9a9a9a',
+            },
+        },
+    },
+    cbx: {
+        color: 'white',
+        '&$checked': {
+            color: 'white',
+        },
+        '& .MuiCheckbox-root': {
+            color: 'white'
+        }
+    },
+    button: {
+        boxShadow: 'none',
+        textTransform: 'none',
+        fontSize: 16,
+        padding: '6px 12px',
+        border: '1px solid',
+        lineHeight: 1.5,
+        // backgroundColor: '#0063cc',
+        borderColor: '#fdfdfd',
+        color: '#fdfdfd',
+        fontFamily: [
+            'Montserrat',
+            'sans-serif',
+        ].join(','),
+        '&:hover': {
+            // backgroundColor: '#0069d9',
+            borderColor: '#6f7bb6',
+            color: '#6f7bb6',
+            // boxShadow: 'none',
+        },
+        /*'&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#0062cc',
+            borderColor: '#005cbf',
+        },*/
+        '&:focus': {
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+        },
+    }
 }));
 
 const AuthPage = () => {
@@ -23,6 +85,10 @@ const AuthPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isRemember, setIsRemember] = useState(false)
+
+    const registerHandler = (e) => {
+        console.log('registerHandler')
+    };
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -49,16 +115,27 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="container">
-            <h1>Auth Page </h1>
+        <div
+            className="container"
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}
+        >
+            <h1><InertiaLink href="/">Giveaway</InertiaLink></h1>
+            <h3>Auth</h3>
             <form
                 className={classes.root}
                 noValidate
                 autoComplete="off"
                 onSubmit={submitHandler}
             >
+                {/*<ThemeProvider theme={theme}>*/}
                 <TextField
                     id="standard-basic"
+                    className={classes.input}
                     label="Standard"
                     name="email"
                     type="email"
@@ -70,18 +147,20 @@ const AuthPage = () => {
                     id="standard-password-input"
                     label="Password"
                     type="password"
+                    className={classes.input}
                     autoComplete="current-password"
                     variant="outlined"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
                 />
                 <FormControlLabel
+                    className={classes.cbx}
                     control={
                         <Checkbox
                             checked={isRemember}
                             onChange={event => setIsRemember(event.target.checked)}
                             name="remember"
-                            color="primary"
+                            // color="primary"
                         />
                     }
                     label="Remember me"
@@ -89,13 +168,20 @@ const AuthPage = () => {
 
                 <Button
                     variant="outlined"
-                    color="primary"
+                    // color="primary"
+                    className={classes.button}
                     type="submit"
                 >
-                    Primary
+                    Login
                 </Button>
-            </form>
 
+                {/*</ThemeProvider>*/}
+            </form>
+            <InertiaLink
+                href={'/register'}
+            >
+                or Register
+            </InertiaLink>
         </div>
     );
 };

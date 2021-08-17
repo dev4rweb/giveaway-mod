@@ -26,6 +26,7 @@ const defaultState = {
                 en: 'Seconds', ru: 'Секунды'
             }
         },
+        select_sort: {en: 'Sort', ru: 'Сортировка'},
         select_all: {en: 'All', ru: 'Все'},
         select_comp: {en: 'Competition', ru: 'Соревнования'},
         select_give: {en: 'Giveaways', ru: 'Раздачи'},

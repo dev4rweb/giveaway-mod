@@ -1,17 +1,24 @@
 import React from 'react';
 import s from '../../../sass/components/GameBox.module.scss'
 import GameCard from "./GameCard/GameCard";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsAuthModalOpen, setModalKey} from "../../reducers/modalReducer";
 
 const GameBox = ({games, sponsorGames}) => {
     const stateData = useSelector(state => state.lang)
+    const dispatch = useDispatch()
+    const isAuth = useSelector(state => state.user.isAuth)
     const minHeight = sponsorGames && sponsorGames.length ?
         '440px' : ''
     const isSponsorGame = sponsorGames && sponsorGames.length ?
         '230px' : '32px'
 
     const takeKeyHandler = (ev) => {
-        console.log('takeKeyHandler')
+        // console.log('takeKeyHandler')
+        if (isAuth) {
+            dispatch(setModalKey(true))
+        } else
+            dispatch(setIsAuthModalOpen(true))
     };
 
     return (

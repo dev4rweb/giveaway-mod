@@ -22,8 +22,8 @@ const Footer = () => {
                                     F.A.Q.
                                 </InertiaLink>
                             </li>
-                            <li><a href="#">{stateData.footer.af_program[stateData.lang]}</a></li>
-                            <li><a href="#">{stateData.footer.contacts[stateData.lang]}</a></li>
+                            <li><a href="/affiliate-program">{stateData.footer.af_program[stateData.lang]}</a></li>
+                            <li><a href="/contacts">{stateData.footer.contacts[stateData.lang]}</a></li>
                         </ul>
                     </nav>
                 </div>

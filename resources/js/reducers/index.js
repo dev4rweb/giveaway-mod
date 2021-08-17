@@ -5,12 +5,14 @@ import translateReducer from "./translateReducer";
 import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 import gameReducer from "./gameReducer";
+import modalReducer from "./modalReducer";
 
 const rootReducer = combineReducers({
     lang: translateReducer,
     user: userReducer,
     error: errorReducer,
-    games: gameReducer
+    games: gameReducer,
+    modal: modalReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

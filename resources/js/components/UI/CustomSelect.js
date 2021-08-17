@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const CustomSelect = () => {
     const dispatch = useDispatch();
     const allGames = useSelector(state => state.games.games)
+    const stateData = useSelector(state=>state.lang)
     const classes = useStyles();
     const [state, setState] = React.useState({
         age: '',
@@ -85,13 +86,13 @@ const CustomSelect = () => {
                 htmlFor="outlined-age-native-simple"
                 className={classes.label}
             >
-                Sort
+                {stateData.home.select_sort[stateData.lang]}
             </InputLabel>
             <Select
                 native
                 value={state.age}
                 onChange={handleChange}
-                label="Sort"
+                label={stateData.home.select_sort[stateData.lang]}
                 className={classes.select}
                 inputProps={{
                     name: 'age',
@@ -99,9 +100,9 @@ const CustomSelect = () => {
                 }}
             >
                 <option aria-label="None" value=""/>
-                <option value={10}>All</option>
-                <option value={20}>Competition</option>
-                <option value={30}>Giveaways</option>
+                <option value={10}>{stateData.home.select_all[stateData.lang]}</option>
+                <option value={20}>{stateData.home.select_comp[stateData.lang]}</option>
+                <option value={30}>{stateData.home.select_give[stateData.lang]}</option>
             </Select>
         </FormControl>
     );

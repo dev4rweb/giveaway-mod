@@ -1,0 +1,44 @@
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import s from "../../../sass/components/Modal.module.scss";
+import {setGameDescription, setModalGameDescription} from "../../reducers/modalReducer";
+
+const ModalGameDescription = ({children, zIndex = 10}) => {
+    const dispatch = useDispatch()
+    const visible = useSelector(state => state.modal.modalGameDescription)
+    const rootClasses = [s.modal]
+
+    if (visible) {
+        rootClasses.push(s.active)
+    }
+
+    const handleClose = (ev) => {
+        dispatch(setModalGameDescription(false))
+        dispatch(setGameDescription(null))
+    };
+
+    return (
+        <div
+            className={rootClasses.join(' ')}
+            onClick={handleClose}
+            style={{zIndex: zIndex}}
+        >
+            <div
+                className={`${s.modalBody}  ${s.animate}`}
+                onClick={event => event.stopPropagation()}
+            >
+                <span
+                    className={s.close}
+                    onClick={handleClose}
+                >
+                  &times;
+              </span>
+                <div>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ModalGameDescription;

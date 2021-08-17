@@ -3,14 +3,22 @@ import s from '../../../../sass/components/GameCard/GameCard.module.scss'
 import fullStar from '../../../../assets/icons/full-star.png';
 import halfStar from '../../../../assets/icons/star.png';
 import steam from '../../../../assets/icons/steam.png'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setGameDescription, setIsAuthModalOpen, setModalGameDescription} from "../../../reducers/modalReducer";
 
 const GameCard = ({item}) => {
     const stateData = useSelector(state => state.lang)
-    const star = item.isFavorite === true ? fullStar : halfStar;
+    const star = item.isFavorite == 1 ? fullStar : halfStar;
+    const dispatch = useDispatch()
+    const isAuth = useSelector(state => state.user.isAuth)
 
     const handleClick = (e) => {
-        console.log('handleClick')
+        // console.log('handleClick', item)
+        if (isAuth) {
+            dispatch(setModalGameDescription(true))
+            dispatch(setGameDescription(item))
+        } else
+            dispatch(setIsAuthModalOpen(true))
     };
 
     return (
@@ -19,7 +27,7 @@ const GameCard = ({item}) => {
             <div className={s.content}>
                 <h3>{item.name}</h3>
                 {
-                    item.isCompetition &&
+                    item.isCompetition ?
                     <div className={s.steamBox}>
                         {
                             // item.taskOne &&
@@ -34,6 +42,7 @@ const GameCard = ({item}) => {
                             <a href="#"><img src={steam} alt="steam"/></a>
                         }
                     </div>
+                        : <div/>
                 }
 
                 <div className={s.btnBox}>
