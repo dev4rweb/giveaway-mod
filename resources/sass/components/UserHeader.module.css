@@ -1,0 +1,18 @@
+.userHeader {
+  background-color: #2b2f4c; }
+  .userHeader > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 10px; }
+    .userHeader > div h1 {
+      line-height: 60px;
+      margin-bottom: -10px; }
+    .userHeader > div h4 {
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: 900;
+      line-height: 20px; }
+
+/*# sourceMappingURL=UserHeader.module.css.map */

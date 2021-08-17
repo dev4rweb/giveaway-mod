@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,WAAY;EACR,gBAAgB,ECEF,OAAO;EDArB,iBAAQ;IACJ,OAAO,EAAE,IAAI;IACb,eAAe,EAAE,UAAU;IAC3B,WAAW,EAAE,MAAM;IACnB,WAAW,EAAE,IAAI;IACjB,cAAc,EAAE,IAAI;IAEpB,oBAAG;MACC,WAAW,EAAE,IAAI;MACjB,aAAa,EAAE,KAAK;IAGxB,oBAAG;MACC,SAAS,EAAE,IAAI;MACf,cAAc,EAAE,SAAS;MACzB,WAAW,EAAE,GAAG;MAChB,WAAW,EAAE,IAAI",
+"sources": ["UserHeader.module.scss","../_variables.scss"],
+"names": [],
+"file": "UserHeader.module.css"
+}

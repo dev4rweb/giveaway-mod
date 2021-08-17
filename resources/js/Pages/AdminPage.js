@@ -1,19 +1,121 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
+import s from '../../sass/pages/AdminPage.module.scss'
+import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
+import AdminLayout from "../components/AdminLayout";
+import {useDispatch, useSelector} from "react-redux";
+import {setLang} from "../reducers/translateReducer";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import steam from '../../assets/png/steam-icon-white.png'
+import logout from '../../assets/icons/logout-blue.png'
+import management from '../../assets/icons/management.svg'
+import managementOrange from '../../assets/icons/management-hover.svg'
+import trophy from '../../assets/icons/trophy.svg'
+import trophyOrange from '../../assets/icons/trophy-hover.svg'
+import profile from '../../assets/icons/user.svg'
+import profileOrange from '../../assets/icons/user-hover.svg'
 
 const AdminPage = ({user}) => {
+    const dispatch = useDispatch()
+    const stateData = useSelector(state => state.lang)
+    const language = localStorage.getItem('lang') ?? "en"
+    if (!stateData) {
+        dispatch(setLang(language))
+    }
+    let hidTab = useRef(null);
+
+    const [tabIndex, setTabIndex] = useState(0);
+
+    function hiddenTabHandler(event) {
+        // console.log('hiddenTabHandler');
+        hidTab.current.click();
+    }
+
     return (
-        <div>
-            <h1>Admin Page</h1>
-            <InertiaLink
-                href="/logout"
-                method="post"
-                as="button"
-                type="button"
+        <AdminLayout
+            hiddenTabHandler={hiddenTabHandler}
+        >
+            <Tabs
+                className={`container admin-page ${s.adminPage}`}
+                selectedIndex={tabIndex}
+                onSelect={index => setTabIndex(index)}
             >
-                Logout
-            </InertiaLink>
-        </div>
+                <TabList className={s.navigation}>
+                    <Tab className={s.item}>
+                        {
+                            tabIndex === 0 ?
+                                <img src={managementOrange} width="23px" alt=""/> :
+                                <img src={management} width="23px" alt=""/>
+                        }
+                        {stateData.admin.mainTab[stateData.lang]}
+                    </Tab>
+                    <Tab
+                        className={s.item}>
+                        {
+                            tabIndex === 1 ?
+                                <img src={trophyOrange} width="24px" alt=""/> :
+                                <img src={trophy} width="24px" alt=""/>
+                        }
+                        {stateData.admin.competitionTab[stateData.lang]}
+                    </Tab>
+                    <Tab
+                        className={s.item}>
+                        {
+                            tabIndex === 2 ?
+                                <img src={profileOrange} width="18px" alt=""/> :
+                                <img src={profile} width="18px" alt=""/>
+                        }
+                        {stateData.admin.usersTab[stateData.lang]}
+                    </Tab>
+                    <Tab
+                        style={{display: 'none'}}
+                    >
+                        <p ref={hidTab}>Create</p>
+                    </Tab>
+                    <div className={s.btnWrapper}>
+                        <div className='outline-radius'
+                        >
+                            <InertiaLink
+                                href="/logout"
+                                method="post"
+                                as="button"
+                                type="button"
+                                className="btn btn-success w-100 btn-logout"
+                            >
+                            <span>
+                                <img src={steam} alt="icon"/>
+                            </span>
+                                {user.name}
+                                <img src={logout} alt="icon"/>
+                            </InertiaLink>
+                        </div>
+                    </div>
+                </TabList>
+
+                <TabPanel>
+                    {/*<AdminMainPage
+                        users={users.length - 1}
+                        games={games.length}
+                    />*/}
+                    1
+                </TabPanel>
+                <TabPanel>
+                    {/*<AdminCompetitionPage
+                        games={games}
+                        users={users}
+                        allTasks={allTasks}
+                    />*/}
+                    2
+                </TabPanel>
+                <TabPanel>
+                    {/*<AdminUsersPage users={users}/>*/}
+                    3
+                </TabPanel>
+                <TabPanel>
+                    {/*<AdminCreatePage/>*/}
+                    4
+                </TabPanel>
+            </Tabs>
+        </AdminLayout>
     );
 };
 
