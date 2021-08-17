@@ -13,8 +13,10 @@ import trophy from '../../assets/icons/trophy.svg'
 import trophyOrange from '../../assets/icons/trophy-hover.svg'
 import profile from '../../assets/icons/user.svg'
 import profileOrange from '../../assets/icons/user-hover.svg'
+import AdminMainPage from "./AdminPanel/AdminMainPage";
+import AdminUsersPage from "./AdminPanel/AdminUsersPage";
 
-const AdminPage = ({user}) => {
+const AdminPage = ({user, allUsers, allGames}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const language = localStorage.getItem('lang') ?? "en"
@@ -92,11 +94,10 @@ const AdminPage = ({user}) => {
                 </TabList>
 
                 <TabPanel>
-                    {/*<AdminMainPage
-                        users={users.length - 1}
-                        games={games.length}
-                    />*/}
-                    1
+                    <AdminMainPage
+                        users={allUsers.length}
+                        games={allGames.length}
+                    />
                 </TabPanel>
                 <TabPanel>
                     {/*<AdminCompetitionPage
@@ -107,8 +108,7 @@ const AdminPage = ({user}) => {
                     2
                 </TabPanel>
                 <TabPanel>
-                    {/*<AdminUsersPage users={users}/>*/}
-                    3
+                    <AdminUsersPage users={allUsers}/>
                 </TabPanel>
                 <TabPanel>
                     {/*<AdminCreatePage/>*/}

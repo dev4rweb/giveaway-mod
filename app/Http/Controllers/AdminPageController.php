@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminPage;
+use App\Models\Game;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -27,9 +29,15 @@ class AdminPageController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $allUsers = User::where('isAdmin', '!=', 1)->get();
+        $allGames = Game::orderBy('endDate', 'desc')
+            ->where('isSponsored', '=', false)
+            ->get();
 
         return Inertia::render('AdminPage', [
-            'user' => $user
+            'user' => $user,
+            'allUsers' => $allUsers,
+            'allGames' => $allGames
         ]);
     }
 
