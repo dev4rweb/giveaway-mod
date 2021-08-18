@@ -20,6 +20,7 @@ import {setError} from "../reducers/errorReducer";
 import {setGames} from "../reducers/gameReducer";
 import {setAllUsers} from "../reducers/userReducer";
 import ErrorMessage from "../components/UI/ErrorMessage";
+import AdminCompetitionPage from "./AdminPanel/AdminCompetitionPage";
 
 const AdminPage = ({currentUser, allUsers, allGames}) => {
     const dispatch = useDispatch()
@@ -141,12 +142,9 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
                     />
                 </TabPanel>
                 <TabPanel>
-                    {/*<AdminCompetitionPage
+                    <AdminCompetitionPage
                         games={games}
-                        users={users}
-                        allTasks={allTasks}
-                    />*/}
-                    2
+                    />
                 </TabPanel>
                 <TabPanel>
                     <AdminUsersPage users={users}/>

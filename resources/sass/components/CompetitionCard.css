@@ -1,0 +1,22 @@
+.competitionCard {
+  width: 100%;
+  max-width: 345px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  border: 1px solid #3d4266;
+  background-color: #2b2f4c;
+  padding: 25px 25px 50px;
+  -webkit-box-shadow: 4px 5px 10px #191e40;
+  -moz-box-shadow: 4px 5px 10px #191e40;
+  box-shadow: 4px 5px 10px #191e40; }
+  .competitionCard .title {
+    text-decoration: underline; }
+  .competitionCard .double {
+    display: flex; }
+    .competitionCard .double .name {
+      width: 40%;
+      color: #3d4266; }
+    .competitionCard .double .value {
+      flex: 1; }
+
+/*# sourceMappingURL=CompetitionCard.css.map */

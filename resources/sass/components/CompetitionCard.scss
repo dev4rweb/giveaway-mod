@@ -1,0 +1,31 @@
+@import "../variables";
+
+.competitionCard{
+    width: 100%;
+    max-width: 345px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    border: 1px solid $footer-bg;
+    background-color: $admin-header-bg;
+    padding: 25px 25px 50px;
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+    box-shadow: $box-shadow;
+
+    .title{
+        text-decoration: underline;
+    }
+
+    .double{
+        display: flex;
+
+        .name {
+            width: 40%;
+            color: $footer-bg;
+        }
+
+        .value{
+            flex: 1;
+        }
+    }
+}

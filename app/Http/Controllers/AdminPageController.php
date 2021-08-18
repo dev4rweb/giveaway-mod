@@ -34,6 +34,7 @@ class AdminPageController extends Controller
             ->where('isAdmin', '!=', 1)
             ->get();
         $allGames = Game::with('users')
+            ->orderBy('status')
             ->orderBy('endDate', 'desc')
             ->where('isSponsored', '=', false)
             ->get();

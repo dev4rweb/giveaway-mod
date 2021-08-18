@@ -19,6 +19,7 @@ class HomePageController extends Controller
     {
         $games = Game::orderBy('endDate', 'desc')
             ->where('isSponsored', '=', false)
+            ->where('status', '=', 0)
             ->get();
         $sponsorGames = Game::where('isSponsored', '=', true)->get();
         return Inertia::render('HomePage', [

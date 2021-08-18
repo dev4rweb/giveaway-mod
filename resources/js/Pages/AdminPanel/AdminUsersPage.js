@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "../../../sass/pages/AdminMainPage.module.scss";
 import {useSelector} from "react-redux";
-import AdminTableUsers from "../../components/AdminTableUsers";
+import AdminTableUsers from "../../components/tables/AdminTableUsers";
 
 const AdminUsersPage = ({users}) => {
     const stateData = useSelector(state => state.lang)

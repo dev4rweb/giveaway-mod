@@ -91,7 +91,7 @@ const defaultState = {
                 prize: {en: 'Prize', ru: 'Приз'},
                 status: {en: 'Status', ru: 'Статус'},
                 rec: {en: 'Received', ru: 'Получен'}
-            }
+            },
         },
         userPage: {
             date: {en: 'Registration date', ru: 'Дата регистрации'},

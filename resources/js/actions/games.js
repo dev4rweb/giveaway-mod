@@ -90,7 +90,7 @@ export const removeGame = (id) => {
         await axios.delete(`/game/${id}`)
             .then(res => {
                 if (res.data.success) {
-                    dispatch(deleteGame(res.data.id));
+                    dispatch(deleteGame(id));
                     dispatch(setError(res.data.message))
                 } else {
                     dispatch(setError(res.data.message))

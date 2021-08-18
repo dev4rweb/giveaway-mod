@@ -18,6 +18,7 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('isCompetition')->default(false);
+            $table->integer('status')->default(0);
             $table->integer('startDate');
             $table->integer('endDate');
             $table->string('mainImage')->default('/images/bg-main.png');

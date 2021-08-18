@@ -28,9 +28,10 @@ class GameController extends Controller
                 ->get();*/
             $games = GameResource::collection(
                 Game::with('users')
-                ->orderBy('endDate', 'desc')
-                ->where('isSponsored', '!=', '1')
-                ->get());
+                    ->orderBy('status')
+                    ->orderBy('endDate', 'desc')
+                    ->where('isSponsored', '!=', '1')
+                    ->get());
             $response['message'] = 'All games';
             $response['success'] = true;
             $response['models'] = $games;
