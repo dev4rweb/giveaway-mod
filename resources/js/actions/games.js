@@ -33,6 +33,11 @@ export const addGame = () => {
     fd.set('name', 'New Game')
     fd.set('startDate', time)
     fd.set('endDate', time)
+    fd.set('description', 'description')
+    fd.set('isCompetition', 0)
+    fd.set('status', 2)
+    fd.set('isFavorite', 1)
+    fd.set('isSponsored', 0)
 
     return async (dispatch) => {
         dispatch(setLoading(true))

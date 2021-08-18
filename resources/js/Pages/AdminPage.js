@@ -21,6 +21,8 @@ import {setGames} from "../reducers/gameReducer";
 import {setAllUsers} from "../reducers/userReducer";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import AdminCompetitionPage from "./AdminPanel/AdminCompetitionPage";
+import AdminCreatePage from "./AdminPanel/AdminCreatePage";
+import {addGame} from "../actions/games";
 
 const AdminPage = ({currentUser, allUsers, allGames}) => {
     const dispatch = useDispatch()
@@ -39,6 +41,7 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
 
     function hiddenTabHandler(event) {
         // console.log('hiddenTabHandler');
+        dispatch(addGame())
         hidTab.current.click();
     }
 
@@ -150,8 +153,7 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
                     <AdminUsersPage users={users}/>
                 </TabPanel>
                 <TabPanel>
-                    {/*<AdminCreatePage/>*/}
-                    4
+                    <AdminCreatePage/>
                 </TabPanel>
             </Tabs>
             {error && <ErrorMessage message={error} />}
