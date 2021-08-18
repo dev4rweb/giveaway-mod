@@ -1,6 +1,11 @@
 const SET_GAMES = 'SET_GAMES'
 const SET_SPONSOR_GAMES = 'SET_SPONSOR_GAMES'
 const SET_FILTER_GAMES = 'SET_FILTER_GAMES'
+const SET_GAMES_FROM_API = 'SET_GAMES_FROM_API'
+const CREATE_GAME = 'CREATE_GAME'
+const ADD_GAME = 'ADD_GAME'
+const UPDATE_GAME = 'UPDATE_GAME'
+const REMOVE_GAME = 'REMOVE_GAME'
 
 const defaultState = {
     games: [],
@@ -25,6 +30,23 @@ export default function gameReducer(state = defaultState, action) {
                 ...state,
                 filterGames: action.payload
             }
+        case SET_GAMES_FROM_API:
+            return {
+                ...state,
+                games: action.payload
+            }
+        case ADD_GAME:
+        case CREATE_GAME:
+        case UPDATE_GAME:
+            return {
+                ...state,
+                games: [...state.games, action.payload]
+            }
+        case REMOVE_GAME:
+            return {
+                ...state,
+                games: state.games.filter(game => game.id !== action.payload)
+            }
         default:
             return state
     }
@@ -33,3 +55,7 @@ export default function gameReducer(state = defaultState, action) {
 export const setGames = (games) => ({type: SET_GAMES, payload: games})
 export const setSponsorGames = (sponsorGames) => ({type: SET_SPONSOR_GAMES, payload: sponsorGames})
 export const setFilterGames = (games) => ({type: SET_FILTER_GAMES, payload: games})
+export const createNewGame = (game) => ({type: CREATE_GAME, payload: game})
+export const setGame = (game) => ({type: ADD_GAME, payload: game})
+export const setUpdatedGame = (game) => ({type: UPDATE_GAME, payload: game})
+export const deleteGame = (id) => ({type: REMOVE_GAME, payload: id})

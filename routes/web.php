@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
 Route::get('/user-panel', [UserPageController::class, 'index'])->name('user-panel');
 
+Route::get('/games', [GameController::class, 'index']);
+Route::post('/game/create', [GameController::class, 'create']);
+Route::post('/game/store', [GameController::class, 'store']);
+Route::post('/game/update', [GameController::class, 'update']);
+Route::delete('/game/{id}', [GameController::class, 'destroy']);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::delete('/admin-panel/destroy/{id}', [AdminPageController::class, 'destroy']);
+});
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

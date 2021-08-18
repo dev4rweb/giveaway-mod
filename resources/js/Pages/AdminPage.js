@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from '../../sass/pages/AdminPage.module.scss'
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import AdminLayout from "../components/AdminLayout";
@@ -15,10 +15,19 @@ import profile from '../../assets/icons/user.svg'
 import profileOrange from '../../assets/icons/user-hover.svg'
 import AdminMainPage from "./AdminPanel/AdminMainPage";
 import AdminUsersPage from "./AdminPanel/AdminUsersPage";
+import Loader from "../components/Loader";
+import {setError} from "../reducers/errorReducer";
+import {setGames} from "../reducers/gameReducer";
+import {setAllUsers} from "../reducers/userReducer";
+import ErrorMessage from "../components/UI/ErrorMessage";
 
-const AdminPage = ({user, allUsers, allGames}) => {
+const AdminPage = ({currentUser, allUsers, allGames}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
+    const isLoading = useSelector(state => state.error.isLoading)
+    const error = useSelector(state => state.error.error)
+    const users = useSelector(state => state.user.users)
+    const games = useSelector(state => state.games.games)
     const language = localStorage.getItem('lang') ?? "en"
     if (!stateData) {
         dispatch(setLang(language))
@@ -30,6 +39,38 @@ const AdminPage = ({user, allUsers, allGames}) => {
     function hiddenTabHandler(event) {
         // console.log('hiddenTabHandler');
         hidTab.current.click();
+    }
+
+    // console.log('allGames', allUsers)
+
+
+    useEffect(() => {
+        dispatch(setGames(allGames))
+        dispatch(setAllUsers(allUsers))
+        const time = (Math.ceil(new Date(Date.now()).getTime()/1000))
+        // dispatch(getGames())
+        // dispatch(addGame())
+        /*let game = {
+            id: 36,
+            name: 'Updated Name',
+            startDate: time + 50000,
+            endDate: time - 20000,
+            mainImage: '/images/bg-main.png',
+            description: 'Some text'
+        }
+        dispatch(updateGame(game))*/
+        // dispatch(removeGame(36))
+    }, []);
+
+
+    if (isLoading) {
+        return <Loader/>
+    }
+
+    if (error) {
+        setTimeout(() => {
+            dispatch(setError(''))
+        }, 3000);
     }
 
     return (
@@ -86,7 +127,7 @@ const AdminPage = ({user, allUsers, allGames}) => {
                             <span>
                                 <img src={steam} alt="icon"/>
                             </span>
-                                {user.name}
+                                {currentUser.name}
                                 <img src={logout} alt="icon"/>
                             </InertiaLink>
                         </div>
@@ -95,8 +136,8 @@ const AdminPage = ({user, allUsers, allGames}) => {
 
                 <TabPanel>
                     <AdminMainPage
-                        users={allUsers.length}
-                        games={allGames.length}
+                        users={users}
+                        games={games}
                     />
                 </TabPanel>
                 <TabPanel>
@@ -108,13 +149,14 @@ const AdminPage = ({user, allUsers, allGames}) => {
                     2
                 </TabPanel>
                 <TabPanel>
-                    <AdminUsersPage users={allUsers}/>
+                    <AdminUsersPage users={users}/>
                 </TabPanel>
                 <TabPanel>
                     {/*<AdminCreatePage/>*/}
                     4
                 </TabPanel>
             </Tabs>
+            {error && <ErrorMessage message={error} />}
         </AdminLayout>
     );
 };

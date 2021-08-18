@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from '../../../sass/pages/AdminMainPage.module.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {addGame, createGame, getGames, removeGame, updateGame} from "../../actions/games";
+import Loader from "../../components/Loader";
+import {setError} from "../../reducers/errorReducer";
+import ErrorMessage from "../../components/UI/ErrorMessage";
+import {setGames} from "../../reducers/gameReducer";
+import {setAllUsers} from "../../reducers/userReducer";
 
 const AdminMainPage = ({users, games}) => {
+    const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
+
+    // console.log('users', users)
+
     return (
         <div className={`container ${s.adminMainPage}`}>
             <div className="title-wrapper">
@@ -18,7 +28,7 @@ const AdminMainPage = ({users, games}) => {
                     {stateData.admin.mainPage.register[stateData.lang]}
                 </p>
                 <span>
-                    {users}
+                    {users.length}
                 </span>
             </div>
 
@@ -29,7 +39,7 @@ const AdminMainPage = ({users, games}) => {
                     {stateData.admin.mainPage.give[stateData.lang]}
                 </p>
                 <span>
-                    {games}
+                    {games.length}
                 </span>
             </div>
 

@@ -23,7 +23,7 @@ const ErrorMessage = ({message = ''}) => {
                     horizontal: 'left',
                 }}
                 open={open}
-                autoHideDuration={2000}
+                autoHideDuration={3000}
                 onClose={handleClose}
                 message={message}
                 action={

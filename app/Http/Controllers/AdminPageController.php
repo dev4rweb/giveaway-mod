@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminPage;
 use App\Models\Game;
 use App\Models\User;
+use App\Models\UserGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -29,15 +30,18 @@ class AdminPageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $allUsers = User::where('isAdmin', '!=', 1)->get();
-        $allGames = Game::orderBy('endDate', 'desc')
+        $allUsers = User::with('games')
+            ->where('isAdmin', '!=', 1)
+            ->get();
+        $allGames = Game::with('users')
+            ->orderBy('endDate', 'desc')
             ->where('isSponsored', '=', false)
             ->get();
 
         return Inertia::render('AdminPage', [
-            'user' => $user,
+            'currentUser' => $user,
             'allUsers' => $allUsers,
-            'allGames' => $allGames
+            'allGames' => $allGames,
         ]);
     }
 
@@ -54,7 +58,7 @@ class AdminPageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,7 +69,7 @@ class AdminPageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdminPage  $adminPage
+     * @param \App\Models\AdminPage $adminPage
      * @return \Illuminate\Http\Response
      */
     public function show(AdminPage $adminPage)
@@ -76,7 +80,7 @@ class AdminPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdminPage  $adminPage
+     * @param \App\Models\AdminPage $adminPage
      * @return \Illuminate\Http\Response
      */
     public function edit(AdminPage $adminPage)
@@ -87,8 +91,8 @@ class AdminPageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdminPage  $adminPage
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\AdminPage $adminPage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, AdminPage $adminPage)
@@ -99,11 +103,21 @@ class AdminPageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdminPage  $adminPage
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\AdminPage $adminPage
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(AdminPage $adminPage)
+    public function destroy($userId)
     {
-        //
+        try {
+            $user = User::find($userId);
+            $user->delete();
+            $response['message'] = 'User was deleted';
+            $response['success'] = true;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 }
