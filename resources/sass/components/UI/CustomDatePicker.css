@@ -1,0 +1,27 @@
+.custom-date-picker {
+  border: 1px solid #3d4266;
+  background-color: #2b2f4c;
+  display: flex;
+  padding-left: 8px;
+  margin-bottom: 15px; }
+
+.react-date-picker__wrapper {
+  border: none; }
+
+.title-picker {
+  margin-bottom: 0;
+  margin-right: 5px;
+  font-size: 14px; }
+
+.react-date-picker__inputGroup__input {
+  color: #fdfdfd;
+  font-size: 14px; }
+
+@media (min-width: 992px) {
+  .custom-date-picker {
+    margin-bottom: -8px; } }
+@media (min-width: 1200px) {
+  .custom-date-picker {
+    width: 240px; } }
+
+/*# sourceMappingURL=CustomDatePicker.css.map */

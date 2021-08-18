@@ -1,20 +1,17 @@
 import React from 'react';
 import '../../../sass/components/ToggleBtn.scss'
 import {useSelector} from "react-redux";
+import {booleanConverter} from "../../utils/booleanConverter";
 
 const ToggleBtn = ({game, setGame}) => {
     const stateData = useSelector(state => state.lang)
-    console.log('ToggleBtn' , game)
+    // console.log('ToggleBtn' , game)
 
-    const isCompetition = () => {
-        if (game.isCompetition == 0) return false
-        if (game.isCompetition == 1) return true
-    }
 
     const handleClick = (ev) => {
-        console.log('handleClick name', ev.target.name.includes('giveaway'))
-        console.log('handleClick value', ev.target.checked)
-        console.log('handleClick value', ev.target.checked ? 1 : 0)
+        // console.log('handleClick name', ev.target.name.includes('giveaway'))
+        // console.log('handleClick value', ev.target.checked)
+        // console.log('handleClick value', ev.target.checked ? 1 : 0)
         if (ev.target.name.includes('giveaway')) {
             setGame({
                 ...game,
@@ -36,7 +33,7 @@ const ToggleBtn = ({game, setGame}) => {
                     type="checkbox"
                     className="custom-control-input"
                     id={`customSwitch${game.id}`}
-                    checked={!isCompetition()}
+                    checked={!booleanConverter(game.isCompetition)}
                     onChange={handleClick}
                     name="giveaway"
                 />
@@ -55,7 +52,7 @@ const ToggleBtn = ({game, setGame}) => {
                     type="checkbox"
                     className="custom-control-input"
                     id={`customSwitch${game.id + 1}`}
-                    checked={isCompetition()}
+                    checked={booleanConverter(game.isCompetition)}
                     onChange={handleClick}
                     name="competition"
                 />
@@ -69,6 +66,7 @@ const ToggleBtn = ({game, setGame}) => {
                     </span>
                 </label>
             </div>
+
         </div>
     );
 };

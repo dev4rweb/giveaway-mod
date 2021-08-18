@@ -1,0 +1,38 @@
+@import "../../variables";
+
+.custom-date-picker {
+    border: 1px solid $footer-bg;
+    background-color: $admin-header-bg;
+    display: flex;
+    padding-left: 8px;
+    margin-bottom: 15px;
+}
+
+.react-date-picker__wrapper {
+    border: none;
+}
+
+.title-picker {
+    margin-bottom: 0;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.react-date-picker__inputGroup__input {
+    color: $text-color;
+    font-size: 14px;
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    .custom-date-picker {
+        margin-bottom: -8px;
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    .custom-date-picker {
+        width: 240px;
+    }
+}
