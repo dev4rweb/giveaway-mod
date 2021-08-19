@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import ToggleBtn from "../../components/UI/ToggleBtn";
-import {addGame} from "../../actions/games";
+import {addGame, updateGame} from "../../actions/games";
 import CustomDatePicker from "../../components/UI/CustomDatePicker";
 import AttachFilesBlock from "../../components/AttachFilesBlock";
+import {changeNewGame} from "../../reducers/gameReducer";
 
 const AdminCreatePage = () => {
     const dispatch = useDispatch()
@@ -13,8 +14,19 @@ const AdminCreatePage = () => {
     const [game, setGame] = useState(mainGame)
 
     useEffect(() => {
+        setGame({
+            ...game,
+            ['status']: 0
+        })
         console.log('game', game)
     }, []);
+
+    const submitHandler = async e => {
+        console.log('submitHandler', game)
+        await dispatch(updateGame(game))
+        await dispatch(changeNewGame({}))
+        window.location.reload()
+    };
 
     return (
         <div className={`container ${s.createPage}`}>
@@ -78,6 +90,15 @@ const AdminCreatePage = () => {
                 game={game}
                 setGame={setGame}
             />
+
+            <div className={s.btnWrapper}>
+                <button
+                    className="btn btn-warning w-100 mt-3"
+                    onClick={submitHandler}
+                >
+                    {stateData.admin.createGive.btnCreate[stateData.lang]}
+                </button>
+            </div>
         </div>
     );
 };

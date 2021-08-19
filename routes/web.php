@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\UserPageController;
@@ -39,6 +40,8 @@ Route::delete('/game/{id}', [GameController::class, 'destroy']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::delete('/admin-panel/destroy/{id}', [AdminPageController::class, 'destroy']);
+
+    Route::post('/file-upload', [FileUploadController::class, 'store']);
 });
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

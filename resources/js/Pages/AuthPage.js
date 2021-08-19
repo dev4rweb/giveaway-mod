@@ -136,7 +136,7 @@ const AuthPage = () => {
                 <TextField
                     id="standard-basic"
                     className={classes.input}
-                    label="Standard"
+                    label="Email"
                     name="email"
                     type="email"
                     variant="outlined"
