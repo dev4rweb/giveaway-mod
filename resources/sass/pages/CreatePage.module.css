@@ -31,6 +31,21 @@
     margin-top: 20px; }
     .createPage .tasksBlock p {
       margin-bottom: 5px; }
+  .createPage .btnWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; }
+
+.editPage {
+  position: absolute;
+  z-index: 3;
+  background-color: #303555;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0; }
 
 @media (min-width: 576px) {
   .createPage .inputBox .calendarBox {

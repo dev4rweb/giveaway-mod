@@ -1,6 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {removeGame} from "../../../actions/games";
+import {setEditPage} from "../../../reducers/modalReducer";
+import {editGame} from "../../../reducers/gameReducer";
 
 const AdminTableCompetitionItem = ({item}) => {
     const dispatch = useDispatch()
@@ -33,7 +35,9 @@ const AdminTableCompetitionItem = ({item}) => {
     };
 
     const editHandler = (ev) => {
-        console.log('editHandler', item)
+        // console.log('editHandler', item)
+        dispatch(setEditPage(true))
+        dispatch(editGame(item))
     };
 
     const drawHandler = (ev) => {

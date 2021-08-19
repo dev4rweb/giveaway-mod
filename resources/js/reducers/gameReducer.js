@@ -6,12 +6,14 @@ const CREATE_GAME = 'CREATE_GAME'
 const UPDATE_GAME = 'UPDATE_GAME'
 const REMOVE_GAME = 'REMOVE_GAME'
 const CHANGE_NEW_GAME = 'CHANGE_NEW_GAME'
+const EDIT_GAME = 'EDIT_GAME'
 
 const defaultState = {
     games: [],
     sponsorGames: [],
     filterGames: [],
-    newGame: {}
+    newGame: {},
+    editGame: {}
 }
 
 export default function gameReducer(state = defaultState, action) {
@@ -46,6 +48,11 @@ export default function gameReducer(state = defaultState, action) {
                 ...state,
                 newGame: action.payload
             }
+        case EDIT_GAME:
+            return {
+                ...state,
+                editGame: action.payload
+            }
         case UPDATE_GAME:
             return {
                 ...state,
@@ -67,4 +74,5 @@ export const setFilterGames = (games) => ({type: SET_FILTER_GAMES, payload: game
 export const createNewGame = (game) => ({type: CREATE_GAME, payload: game})
 export const changeNewGame = (game) => ({type: CHANGE_NEW_GAME, payload: game})
 export const setUpdatedGame = (game) => ({type: UPDATE_GAME, payload: game})
+export const editGame = (game) => ({type: EDIT_GAME, payload: game})
 export const deleteGame = (id) => ({type: REMOVE_GAME, payload: id})

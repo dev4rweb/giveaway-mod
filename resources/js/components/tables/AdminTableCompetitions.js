@@ -26,7 +26,7 @@ const AdminTableCompetitions = () => {
                 games && games.length >0
                     &&
                     games.map((item, index) =>
-                        <AdminTableCompetitionItem item={item} key={item.id} />)
+                        <AdminTableCompetitionItem item={item} key={index} />)
             }
             </tbody>
         </table>

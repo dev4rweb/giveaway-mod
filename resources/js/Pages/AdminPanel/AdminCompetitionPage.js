@@ -3,9 +3,11 @@ import s from '../../../sass/pages/AdminMainPage.module.scss'
 import {useSelector} from "react-redux";
 import AdminTableCompetitions from "../../components/tables/AdminTableCompetitions";
 import CompetitionCard from "../../components/CompetitionCard";
+import AdminEditPage from "./AdminEditPage";
 
 const AdminCompetitionPage = ({games}) => {
     const stateData = useSelector(state => state.lang)
+    const isEditPageOpen = useSelector(state => state.modal.editPage)
 
     return (
         <div className={`container ${s.adminMainPage}`}>
@@ -38,6 +40,9 @@ const AdminCompetitionPage = ({games}) => {
                 <CompetitionCard/>
                 <CompetitionCard/>
             </div>
+            {
+                isEditPageOpen && <AdminEditPage />
+            }
         </div>
     );
 };

@@ -123,6 +123,9 @@ const defaultState = {
             btnUpdate: {
                 en: 'Update', ru: 'Обновить'
             },
+            btnReturn: {
+                en: 'Return', ru: 'Вернутся'
+            },
             btnFinishComp: {
                 en: 'Finish competition', ru: 'Закончить'
             },
