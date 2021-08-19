@@ -6,6 +6,7 @@ import {addGame, updateGame} from "../../actions/games";
 import CustomDatePicker from "../../components/UI/CustomDatePicker";
 import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {changeNewGame} from "../../reducers/gameReducer";
+import GiftBlock from "../../components/GiftBlock/GiftBlock";
 
 const AdminCreatePage = () => {
     const dispatch = useDispatch()
@@ -90,6 +91,10 @@ const AdminCreatePage = () => {
                 game={game}
                 setGame={setGame}
             />
+
+            <div className={s.giftBox}>
+                <GiftBlock gameId={game.id} />
+            </div>
 
             <div className={s.btnWrapper}>
                 <button
