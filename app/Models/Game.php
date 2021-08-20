@@ -20,4 +20,9 @@ class Game extends Model
     {
         return $this->hasMany(Gift::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

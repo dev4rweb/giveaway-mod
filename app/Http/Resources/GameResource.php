@@ -31,6 +31,7 @@ class GameResource extends JsonResource
             'created_at' => $this->created_at,
             'users' => $this->users,
             'gifts' => $this->gifts,
+            'tasks' => $this->tasks,
         ];
     }
 }

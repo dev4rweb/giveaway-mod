@@ -1,6 +1,9 @@
 const SET_TASK_TYPE_ONE = 'SET_TASK_TYPE_ONE'
 const SET_TASK_TYPE_TWO = 'SET_TASK_TYPE_TWO'
 const SET_TASK_TYPE_THREE = 'SET_TASK_TYPE_THREE'
+const SET_DATA_TASK_ONE = 'SET_DATA_TASK_ONE'
+const SET_DATA_TASK_TWO = 'SET_DATA_TASK_TWO'
+const SET_DATA_TASK_THREE = 'SET_DATA_TASK_THREE'
 
 const defaultState = {
     actionType: 0,
@@ -48,15 +51,30 @@ export default function taskTypeReducer(state = defaultState, action) {
                 ...state,
                 taskOne: state.tasks.filter(item => item.taskType == action.payload)
             }
+        case SET_DATA_TASK_ONE:
+            return {
+                ...state,
+                taskOne: [...state.taskOne, action.payload]
+            }
         case SET_TASK_TYPE_TWO:
             return {
                 ...state,
                 taskTwo: state.tasks.filter(item => item.taskType == action.payload)
             }
+        case SET_DATA_TASK_TWO:
+            return {
+                ...state,
+                taskTwo: [...state.taskTwo, action.payload]
+            }
         case SET_TASK_TYPE_THREE:
             return {
                 ...state,
                 taskThree: state.tasks.filter(item => item.taskType == action.payload)
+            }
+        case SET_DATA_TASK_THREE:
+            return {
+                ...state,
+                taskThree: [...state.taskThree, action.payload]
             }
         default:
             return state
@@ -66,3 +84,6 @@ export default function taskTypeReducer(state = defaultState, action) {
 export const setTaskOne = (taskType) => ({type: SET_TASK_TYPE_ONE, payload: taskType})
 export const setTaskTwo = (taskType) => ({type: SET_TASK_TYPE_TWO, payload: taskType})
 export const setTaskThree = (taskType) => ({type: SET_TASK_TYPE_THREE, payload: taskType})
+export const setDataTaskOne = (taskData) => ({type: SET_DATA_TASK_ONE, payload: taskData})
+export const setDataTaskTwo = (taskData) => ({type: SET_DATA_TASK_TWO, payload: taskData})
+export const setDataTaskThree = (taskData) => ({type: SET_DATA_TASK_THREE, payload: taskData})

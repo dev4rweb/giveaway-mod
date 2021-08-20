@@ -1,14 +1,40 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import TaskBlock from "./TaskBlock";
-import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
+import {
+    setDataTaskOne,
+    setDataTaskThree,
+    setDataTaskTwo,
+    setTaskOne,
+    setTaskThree,
+    setTaskTwo
+} from "../../reducers/taskTypeReducer";
 
-const TaskContainer = () => {
+const TaskContainer = ({tasks}) => {
+    const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const taskSelectorOne = useSelector(state => state.taskType.taskOne)
     const taskSelectorTwo = useSelector(state => state.taskType.taskTwo)
     const taskSelectorThree = useSelector(state => state.taskType.taskThree)
+
+    useEffect(() => {
+        if (tasks.length > 0)
+            for (let i = 0; i < tasks.length; i++) {
+                if (i === 0) {
+                    dispatch(setTaskOne(tasks[0].taskType))
+                    dispatch(setDataTaskOne(tasks[0]))
+                }
+                if (i === 1) {
+                    dispatch(setTaskTwo(tasks[1].taskType));
+                    dispatch(setDataTaskTwo(tasks[1]))
+                }
+                if (i === 2) {
+                    dispatch(setTaskThree(tasks[2].taskType))
+                    dispatch(setDataTaskThree(tasks[2]))
+                }
+            }
+    }, []);
 
     return (
         <div className={s.tasksBlock}>

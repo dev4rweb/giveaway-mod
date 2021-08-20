@@ -8,6 +8,7 @@ import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {getGames, updateGame} from "../../actions/games";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
+import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
@@ -22,6 +23,9 @@ const AdminEditPage = () => {
 
     const closeHandler = e => {
         dispatch(setEditPage(false))
+        dispatch(setTaskOne(null))
+        dispatch(setTaskTwo(null))
+        dispatch(setTaskThree(null))
     };
 
     return (
@@ -90,11 +94,11 @@ const AdminEditPage = () => {
             />
 
             <div className={s.giftBox}>
-                <GiftBlock gameId={game.id} />
+                <GiftBlock gameId={game.id} gifts={game.gifts}/>
             </div>
 
             {
-                game.isCompetition && <TaskContainer />
+                game.isCompetition && <TaskContainer tasks={game.tasks}/>
             }
 
             <div className={s.btnWrapper}>

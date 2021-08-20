@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../../sass/components/GiftBlock/GiftBlock.scss"
 import GiftButton from "./GiftButton";
 
-const GiftBlock = ({gameId}) => {
+const GiftBlock = ({gameId, gifts}) => {
     const [keys, setKeys] = useState([
-        {id: 1, game_id: gameId, key: '5896-7896-4445-128896-25'}
+        {id: 1, game_id: gameId, giftKey: '5896-7896-4445-128896-25'}
     ]);
+
+    useEffect(() => {
+        if (gifts.length > 0)
+            setKeys(gifts)
+    }, []);
 
     const addKey = item => {
         console.log('addKey', item)
@@ -23,7 +28,7 @@ const GiftBlock = ({gameId}) => {
                             #{index + 1} -
                         </span>
                         <p>
-                            {item.key}
+                            {item.giftKey}
                         </p>
                     </li>
                 )}

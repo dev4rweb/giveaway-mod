@@ -35,6 +35,7 @@ class AdminPageController extends Controller
             ->get();
         $allGames = Game::with('users')
             ->with('gifts')
+            ->with('tasks')
             ->orderBy('status')
             ->orderBy('endDate', 'desc')
             ->where('isSponsored', '=', false)

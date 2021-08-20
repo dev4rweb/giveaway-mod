@@ -35,7 +35,7 @@ const AdminTableCompetitionItem = ({item}) => {
     };
 
     const editHandler = (ev) => {
-        // console.log('editHandler', item)
+        console.log('editHandler', item)
         dispatch(setEditPage(true))
         dispatch(editGame(item))
     };

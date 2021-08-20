@@ -19,14 +19,6 @@ const TaskBlockMod = ({selector}) => {
     return (
         <div className="task-block">
             <div className="radio-choice">
-{/*                <RadioGroup
-                    containerStyle="options-container"
-                    onChange={onChange}
-                >
-                    {selector !== null && selector.map((option, index) =>
-                       <RadioItem option={option} key={index} />
-                    )}
-                </RadioGroup>*/}
                 <CustomRadioGroup items={selector} />
             </div>
         </div>

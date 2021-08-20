@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../../sass/components/UI/RadioItem.module.scss'
 import { withStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -21,6 +21,12 @@ const GreenRadio = withStyles({
 const RadioItem = ({option, selectedValue, handleChange, value}) => {
     const [state, setState] = useState(option.url)
     let checked = selectedValue == value
+
+    useEffect(() => {
+        if (option.urlOne) {
+            setState(option.urlOne)
+        }
+    }, []);
 
     const changeInput = (e) => {
         setState(e.target.value)
