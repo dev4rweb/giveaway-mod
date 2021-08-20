@@ -7,18 +7,16 @@ import CustomDatePicker from "../../components/UI/CustomDatePicker";
 import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {getGames, updateGame} from "../../actions/games";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
+import TaskContainer from "../../components/Tasks/TaskContainer";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
     const editingGame = useSelector(state => state.games.editGame)
     const stateData = useSelector(state => state.lang)
-    delete editingGame.users
     const [game, setGame] = useState(editingGame)
-    // console.log('AdminEditPage', editingGame)
 
     const submitHandler = e => {
         dispatch(updateGame(game))
-        dispatch(getGames())
         dispatch(setEditPage(false))
     };
 
@@ -94,6 +92,10 @@ const AdminEditPage = () => {
             <div className={s.giftBox}>
                 <GiftBlock gameId={game.id} />
             </div>
+
+            {
+                game.isCompetition && <TaskContainer />
+            }
 
             <div className={s.btnWrapper}>
                 <button

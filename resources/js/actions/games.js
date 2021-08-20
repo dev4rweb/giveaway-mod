@@ -62,6 +62,8 @@ export const addGame = () => {
 }
 
 export const updateGame = (game) => {
+    delete game.users
+    delete game.gifts
     const fd = new FormData()
     for (let key in game) {
         fd.set(key, game[key])
@@ -72,7 +74,8 @@ export const updateGame = (game) => {
         await axios.post('/game/update', fd)
             .then(res => {
                 if (res.data.success) {
-                    dispatch(setUpdatedGame(res.data.model));
+                    // dispatch(setUpdatedGame(res.data.model));
+                    dispatch(setUpdatedGame(res.data.models));
                     dispatch(setError(res.data.message))
                 } else {
                     dispatch(setError(res.data.message))

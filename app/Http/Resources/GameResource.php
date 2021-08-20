@@ -29,7 +29,8 @@ class GameResource extends JsonResource
             'isFavorite' => $this->isFavorite,
             'isSponsored' => $this->isSponsored,
             'created_at' => $this->created_at,
-            'users' => $this->users
+            'users' => $this->users,
+            'gifts' => $this->gifts,
         ];
     }
 }

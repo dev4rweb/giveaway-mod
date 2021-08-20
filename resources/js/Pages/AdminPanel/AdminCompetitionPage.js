@@ -8,6 +8,7 @@ import AdminEditPage from "./AdminEditPage";
 const AdminCompetitionPage = ({games}) => {
     const stateData = useSelector(state => state.lang)
     const isEditPageOpen = useSelector(state => state.modal.editPage)
+    console.log('AdminCompetitionPage', games)
 
     return (
         <div className={`container ${s.adminMainPage}`}>

@@ -1,0 +1,27 @@
+.gift-list-item {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center; }
+  .gift-list-item span {
+    color: #fdfdfd; }
+  .gift-list-item p {
+    margin-bottom: 0;
+    margin-left: 20px; }
+
+.gift-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+
+.gift-list {
+  max-height: 100px;
+  width: 45%;
+  overflow: auto;
+  margin-bottom: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-right: 20px; }
+
+/*# sourceMappingURL=GiftBlock.css.map */

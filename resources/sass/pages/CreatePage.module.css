@@ -31,6 +31,9 @@
     margin-top: 20px; }
     .createPage .tasksBlock p {
       margin-bottom: 5px; }
+    .createPage .tasksBlock .tasks {
+      display: flex;
+      flex-direction: column; }
   .createPage .btnWrapper {
     display: flex;
     flex-wrap: wrap;

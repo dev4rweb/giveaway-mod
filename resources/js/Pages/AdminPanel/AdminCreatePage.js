@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import ToggleBtn from "../../components/UI/ToggleBtn";
-import {addGame, updateGame} from "../../actions/games";
+import {updateGame} from "../../actions/games";
 import CustomDatePicker from "../../components/UI/CustomDatePicker";
 import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {changeNewGame} from "../../reducers/gameReducer";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
+import TaskContainer from "../../components/Tasks/TaskContainer";
+import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 
 const AdminCreatePage = () => {
     const dispatch = useDispatch()
@@ -19,6 +21,9 @@ const AdminCreatePage = () => {
             ...game,
             ['status']: 0
         })
+        dispatch(setTaskOne(null))
+        dispatch(setTaskTwo(null))
+        dispatch(setTaskThree(null))
         console.log('game', game)
     }, []);
 
@@ -95,6 +100,10 @@ const AdminCreatePage = () => {
             <div className={s.giftBox}>
                 <GiftBlock gameId={game.id} />
             </div>
+
+            {
+                game.isCompetition && <TaskContainer />
+            }
 
             <div className={s.btnWrapper}>
                 <button

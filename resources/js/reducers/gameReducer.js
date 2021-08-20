@@ -54,9 +54,13 @@ export default function gameReducer(state = defaultState, action) {
                 editGame: action.payload
             }
         case UPDATE_GAME:
-            return {
+            /*return {
                 ...state,
                 games: [...state.games, action.payload]
+            }*/
+            return {
+                ...state,
+                games: action.payload
             }
         case REMOVE_GAME:
             return {

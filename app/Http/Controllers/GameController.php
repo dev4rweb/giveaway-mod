@@ -28,6 +28,7 @@ class GameController extends Controller
                 ->get();*/
             $games = GameResource::collection(
                 Game::with('users')
+                    ->with('gifts')
                     ->orderBy('status')
                     ->orderBy('endDate', 'desc')
                     ->where('isSponsored', '!=', '1')
@@ -127,9 +128,17 @@ class GameController extends Controller
         try {
             $game = Game::find($request['id']);
             $game->update($request->all());
+            $games = GameResource::collection(
+                Game::with('users')
+                    ->with('gifts')
+                    ->orderBy('status')
+                    ->orderBy('endDate', 'desc')
+                    ->where('isSponsored', '!=', '1')
+                    ->get());
             $response['message'] = 'Game updated';
             $response['success'] = true;
             $response['model'] = $game;
+            $response['models'] = $games;
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
