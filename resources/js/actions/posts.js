@@ -7,11 +7,11 @@ export const getPosts = () => {
         dispatch(setLoading(true))
         await axios.get('https://jsonplaceholder.typicode.com/posts/')
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 dispatch(setPosts(res.data))
             })
             .catch(err => {
-                console.log(err.response.status)
+                // console.log(err.response.status)
                 dispatch(setError(err.response.status))
             })
             .finally(() => {

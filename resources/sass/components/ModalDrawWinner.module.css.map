@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,gBAAgB;EACZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EAGlB,oCAAW;IACP,aAAa,EAAE,IAAI;IACnB,OAAO,EAAE,IAAI;IACb,eAAe,EAAE,MAAM",
+"sources": ["ModalDrawWinner.module.scss"],
+"names": [],
+"file": "ModalDrawWinner.module.css"
+}

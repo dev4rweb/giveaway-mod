@@ -17,8 +17,8 @@ export const getGames = () => {
                 }
             })
             .catch(err => {
-                console.log('failure',err.response)
-                console.log('err - data',err.data)
+                // console.log('failure',err.response)
+                // console.log('err - data',err.data)
                 dispatch(setError(err.response.message))
             })
             .finally(() => {
@@ -51,8 +51,8 @@ export const addGame = () => {
                 }
             })
             .catch(err => {
-                console.log('failure',err.response)
-                console.log('err - data',err.data)
+                // console.log('failure',err.response)
+                // console.log('err - data',err.data)
                 dispatch(setError(err.response.data.message))
             })
             .finally(() => {
@@ -83,8 +83,8 @@ export const updateGame = (game) => {
                 }
             })
             .catch(err => {
-                console.log('failure',err.response)
-                console.log('err - data',err.data)
+                // console.log('failure',err.response)
+                // console.log('err - data',err.data)
                 dispatch(setError(err.response.data.message))
             })
             .finally(() => {
@@ -106,8 +106,8 @@ export const removeGame = (id) => {
                 }
             })
             .catch(err => {
-                console.log('failure',err.response)
-                console.log('err - data',err.data)
+                // console.log('failure',err.response)
+                // console.log('err - data',err.data)
                 dispatch(setError(err.response.data.message))
             })
             .finally(() => {

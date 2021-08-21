@@ -6,16 +6,8 @@ import RadioItem from "./RadioItem";
 import CustomRadioGroup from "./CustomRadioGroup";
 
 const TaskBlockMod = ({selector}) => {
-    const [opt, setOpt] = useState({})
 
 
-    const onChange = option => {
-        console.log('option', option);
-        setOpt(option)
-    };
-
-
-    console.log('taskSelector',selector)
     return (
         <div className="task-block">
             <div className="radio-choice">

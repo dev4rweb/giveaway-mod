@@ -87,8 +87,8 @@ const RegisterPage = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('email', email)
-        console.log('password', password)
+        // console.log('email', email)
+        // console.log('password', password)
 
         const fd = new FormData();
         fd.set('name', name)
@@ -99,9 +99,9 @@ const RegisterPage = () => {
 
         axios.post('/register', fd)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === 204) {
-                    console.log('You are logged in')
+                    // console.log('You are logged in')
                     document.location.reload()
                 }
             })

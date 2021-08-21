@@ -16,7 +16,7 @@ const Header = () => {
     let lng = language === 'en' ? 'GB' : 'RU'
     const [selected, setSelected] = useState(lng);
 
-    console.log(currentUser)
+    // console.log(currentUser)
 
     function changeLanguage(code) {
         let lang = code === "GB" ? 'en' : 'ru'

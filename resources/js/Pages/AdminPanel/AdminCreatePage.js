@@ -24,7 +24,7 @@ const AdminCreatePage = () => {
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
-        console.log('game', game)
+        // console.log('game', game)
     }, []);
 
     const submitHandler = async e => {

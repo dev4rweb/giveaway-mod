@@ -1,0 +1,12 @@
+.modalDrawWinner{
+    display: flex;
+    flex-direction: column;
+
+    .btnBox{
+        .btnWrapper{
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

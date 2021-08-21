@@ -4,10 +4,13 @@ import {useSelector} from "react-redux";
 import AdminTableCompetitions from "../../components/tables/AdminTableCompetitions";
 import CompetitionCard from "../../components/CompetitionCard";
 import AdminEditPage from "./AdminEditPage";
+import ModalDrawWinner from "../../components/modals/ModalDrawWinner";
+import DrawWinner from "../../components/modals/DrawWinner";
 
 const AdminCompetitionPage = ({games}) => {
     const stateData = useSelector(state => state.lang)
     const isEditPageOpen = useSelector(state => state.modal.editPage)
+    const isModalDrawWinnerOpen = useSelector(state => state.modal.modalDrawWinner)
     console.log('AdminCompetitionPage', games)
 
     return (
@@ -43,6 +46,12 @@ const AdminCompetitionPage = ({games}) => {
             </div>
             {
                 isEditPageOpen && <AdminEditPage />
+            }
+            {
+                isModalDrawWinnerOpen &&
+                <ModalDrawWinner>
+                    <DrawWinner/>
+                </ModalDrawWinner>
             }
         </div>
     );

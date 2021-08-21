@@ -5,6 +5,7 @@ const SET_MODAL_KEY = 'SET_MODAL_KEY'
 const SET_MODAL_AUTH = 'SET_MODAL_AUTH'
 const SET_MODAL_REGISTER = 'SET_MODAL_REGISTER'
 const SET_EDIT_PAGE = 'SET_EDIT_PAGE'
+const SET_MODAL_DRAW_WINNER = 'SET_MODAL_DRAW_WINNER'
 
 const defaultState = {
     modalIsAuth: false,
@@ -13,7 +14,8 @@ const defaultState = {
     modalKey: false,
     modalAuth: false,
     modalRegister: false,
-    editPage: false
+    editPage: false,
+    modalDrawWinner: false,
 }
 
 export default function modalReducer(state = defaultState, action) {
@@ -53,6 +55,11 @@ export default function modalReducer(state = defaultState, action) {
                 ...state,
                 editPage: action.payload
             }
+        case SET_MODAL_DRAW_WINNER:
+            return {
+                ...state,
+                modalDrawWinner: action.payload
+            }
         default:
             return state
     }
@@ -65,3 +72,4 @@ export const setModalKey = (isOpen) => ({type: SET_MODAL_KEY, payload: isOpen})
 export const setModalAuth = (isOpen) => ({type: SET_MODAL_AUTH, payload: isOpen})
 export const setModalRegister = (isOpen) => ({type: SET_MODAL_REGISTER, payload: isOpen})
 export const setEditPage = (isOpen) => ({type: SET_EDIT_PAGE, payload: isOpen})
+export const setModalDrawWinner = (isOpen) => ({type: SET_MODAL_DRAW_WINNER, payload: isOpen})

@@ -10,7 +10,7 @@ const InputAttachFile = ({game, setGame, inputName}) => {
     let btn = createRef();
 
     const changeHandlerInput = e => {
-        console.log('changeHandlerInput')
+        // console.log('changeHandlerInput')
         setGame({
             ...game,
             [inputName]: e.target.value
@@ -18,7 +18,7 @@ const InputAttachFile = ({game, setGame, inputName}) => {
     };
 
     const changeHandler = e => {
-        console.log('changeHandler', e.target.value)
+        // console.log('changeHandler', e.target.value)
 
         const fd = new FormData();
         fd.set('image', e.target.files[0])
@@ -42,7 +42,7 @@ const InputAttachFile = ({game, setGame, inputName}) => {
     };
 
     const uploadFile = e => {
-        console.log('uploadFile')
+        // console.log('uploadFile')
         btn.current.click();
     };
 

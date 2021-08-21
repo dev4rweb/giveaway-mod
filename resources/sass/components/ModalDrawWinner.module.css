@@ -1,0 +1,9 @@
+.modalDrawWinner {
+  display: flex;
+  flex-direction: column; }
+  .modalDrawWinner .btnBox .btnWrapper {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center; }
+
+/*# sourceMappingURL=ModalDrawWinner.module.css.map */

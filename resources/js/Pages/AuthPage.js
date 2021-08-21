@@ -87,14 +87,14 @@ const AuthPage = () => {
     const [isRemember, setIsRemember] = useState(false)
 
     const registerHandler = (e) => {
-        console.log('registerHandler')
+        // console.log('registerHandler')
     };
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('email', email)
-        console.log('password', password)
-        console.log('isRemember', isRemember)
+        // console.log('email', email)
+        // console.log('password', password)
+        // console.log('isRemember', isRemember)
 
         const fd = new FormData();
         fd.set('email', email)
@@ -103,9 +103,9 @@ const AuthPage = () => {
 
         axios.post('/login', fd)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === 204) {
-                    console.log('You are logged in')
+                    // console.log('You are logged in')
                     document.location.reload()
                 }
             })
