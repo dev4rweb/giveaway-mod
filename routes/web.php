@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/admin-panel/destroy/{id}', [AdminPageController::class, 'destroy']);
 
     Route::post('/file-upload', [FileUploadController::class, 'store']);
+
+    Route::get('/gifts', [GiftController::class, 'index']);
+    Route::post('/gift/create', [GiftController::class, 'store']);
+    Route::post('/gift/update', [GiftController::class, 'update']);
+    Route::delete('/gift/{id}', [GiftController::class, 'destroy']);
 });
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

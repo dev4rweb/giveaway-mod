@@ -10,11 +10,20 @@ class GiftController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        try {
+            $allGifts = Gift::all();
+            $response['message'] = 'All gifts';
+            $response['success'] = true;
+            $response['models'] = $allGifts;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -31,11 +40,21 @@ class GiftController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $gift = Gift::create($request->all());
+//             $gift = Gift::updateOrCreate($request->all());
+            $response['message'] = 'Gift created';
+            $response['success'] = true;
+            $response['model'] = $gift;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -64,22 +83,42 @@ class GiftController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gift  $gift
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Gift $gift)
+    public function update(Request $request)
     {
-        //
+        try {
+            $gift = Gift::findOrFail($request['id']);
+            $gift->update($request->all());
+            $response['message'] = 'Gift updated';
+            $response['success'] = true;
+            $response['model'] = $gift;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Gift  $gift
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Gift $gift)
+    public function destroy($id)
     {
-        //
+        try {
+            $gift = Gift::findOrFail($id);
+            $gift->delete();
+            $response['message'] = 'Gift deleted';
+            $response['success'] = true;
+            $response['id'] = $id;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 }

@@ -17,7 +17,7 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        $games = Game::orderBy('endDate', 'desc')
+        $games = Game::orderBy('endDate')
             ->where('isSponsored', '=', false)
             ->where('status', '=', 0)
             ->get();

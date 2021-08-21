@@ -37,7 +37,7 @@ class AdminPageController extends Controller
             ->with('gifts')
             ->with('tasks')
             ->orderBy('status')
-            ->orderBy('endDate', 'desc')
+            ->orderBy('endDate')
             ->where('isSponsored', '=', false)
             ->get();
 

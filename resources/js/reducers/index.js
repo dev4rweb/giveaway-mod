@@ -7,6 +7,7 @@ import errorReducer from "./errorReducer";
 import gameReducer from "./gameReducer";
 import modalReducer from "./modalReducer";
 import taskTypeReducer from "./taskTypeReducer";
+import giftReducer from "./giftReducer";
 
 const rootReducer = combineReducers({
     lang: translateReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     error: errorReducer,
     games: gameReducer,
     modal: modalReducer,
-    taskType: taskTypeReducer
+    taskType: taskTypeReducer,
+    gifts: giftReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

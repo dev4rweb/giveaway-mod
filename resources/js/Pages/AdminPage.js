@@ -23,6 +23,7 @@ import ErrorMessage from "../components/UI/ErrorMessage";
 import AdminCompetitionPage from "./AdminPanel/AdminCompetitionPage";
 import AdminCreatePage from "./AdminPanel/AdminCreatePage";
 import {addGame} from "../actions/games";
+import {createGift, getGifts} from "../actions/gifts";
 
 const AdminPage = ({currentUser, allUsers, allGames}) => {
     const dispatch = useDispatch()
@@ -46,12 +47,8 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
     }
 
     // console.log('allGames', allUsers)
-
-
-    useEffect(() => {
-        dispatch(setGames(allGames))
-        dispatch(setAllUsers(allUsers))
-        const time = (Math.ceil(new Date(Date.now()).getTime()/1000))
+    const testApi = ()=> {
+        // const time = (Math.ceil(new Date(Date.now()).getTime()/1000))
         // dispatch(getGames())
         // dispatch(addGame())
         /*let game = {
@@ -64,6 +61,14 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
         }
         dispatch(updateGame(game))*/
         // dispatch(removeGame(36))
+
+
+    }
+    // testApi()
+
+    useEffect(() => {
+        dispatch(setGames(allGames))
+        dispatch(setAllUsers(allUsers))
     }, []);
 
 
