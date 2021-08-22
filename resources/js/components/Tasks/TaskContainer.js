@@ -19,7 +19,7 @@ const TaskContainer = ({tasks}) => {
     const taskSelectorThree = useSelector(state => state.taskType.taskThree)
 
     useEffect(() => {
-        if (tasks.length > 0)
+        if ( tasks.length > 0)
             for (let i = 0; i < tasks.length; i++) {
                 if (i === 0) {
                     dispatch(setTaskOne(tasks[0].taskType))

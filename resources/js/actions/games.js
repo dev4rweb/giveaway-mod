@@ -44,6 +44,7 @@ export const addGame = () => {
         await axios.post('/game/store', fd)
             .then(res => {
                 if (res.data.success) {
+                    console.log(res)
                     dispatch(createNewGame(res.data.model));
                     dispatch(setError(res.data.message))
                 } else {

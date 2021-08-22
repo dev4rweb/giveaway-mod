@@ -75,9 +75,15 @@ class GameController extends Controller
     {
         try {
             $game = Game::create($request->all());
-            $response['message'] = 'Game created';
+            $response['message'] = 'Game creating';
             $response['success'] = true;
             $response['model'] = $game;
+           /* $response['model'] = new GameResource(
+                Game::findOrFail($game.id)
+                    ->with('users')
+                    ->with('tasks')
+                    ->with('gifts')
+            );*/
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
@@ -136,7 +142,7 @@ class GameController extends Controller
                     ->orderBy('endDate', 'desc')
                     ->where('isSponsored', '!=', '1')
                     ->get());
-            $response['message'] = 'Game updated';
+            $response['message'] = 'Game saved';
             $response['success'] = true;
             $response['model'] = $game;
             $response['models'] = $games;

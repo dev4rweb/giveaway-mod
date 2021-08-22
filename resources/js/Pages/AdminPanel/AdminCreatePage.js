@@ -14,17 +14,20 @@ const AdminCreatePage = () => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const mainGame = useSelector(state => state.games.newGame)
-    const [game, setGame] = useState(mainGame)
+    const [game, setGame] = useState({...mainGame,
+        status: 0,
+        users: [],
+        gifts: [],
+        tasks: [],
+        isCompetition: 0
+    })
 
     useEffect(() => {
-        setGame({
-            ...game,
-            ['status']: 0
-        })
+
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
-        // console.log('game', game)
+        console.log('game', game)
     }, []);
 
     const submitHandler = async e => {
@@ -98,11 +101,11 @@ const AdminCreatePage = () => {
             />
 
             <div className={s.giftBox}>
-                <GiftBlock gameId={game.id} />
+                {game && <GiftBlock gameId={game.id} gifts={game.gifts} />}
             </div>
 
             {
-                game.isCompetition && <TaskContainer />
+                game.isCompetition && <TaskContainer tasks={game.tasks} />
             }
 
             <div className={s.btnWrapper}>
