@@ -10,11 +10,20 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        try {
+            $allTasks = Task::all();
+            $response['message'] = 'All Tasks';
+            $response['success'] = true;
+            $response['models'] = $allTasks;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -31,11 +40,20 @@ class TaskController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $task = Task::create($request->all());
+            $response['message'] = 'Task created';
+            $response['success'] = true;
+            $response['model'] = $task;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -64,22 +82,42 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request)
     {
-        //
+        try {
+            $task = Task::findOrFail($request['id']);
+            $task->update($request->all());
+            $response['message'] = 'Gift updated';
+            $response['success'] = true;
+            $response['model'] = $task;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        try {
+            $task = Task::findOrFail($id);
+            $task->delete();
+            $response['message'] = 'Task deleted';
+            $response['success'] = true;
+            $response['id'] = $id;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 }

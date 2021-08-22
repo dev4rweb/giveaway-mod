@@ -6,6 +6,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/gift/create', [GiftController::class, 'store']);
     Route::post('/gift/update', [GiftController::class, 'update']);
     Route::delete('/gift/{id}', [GiftController::class, 'destroy']);
+
+    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::post('/task/create', [TaskController::class, 'store']);
+    Route::post('/task/update', [TaskController::class, 'update']);
+    Route::delete('/task/{id}', [TaskController::class, 'destroy']);
 });
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

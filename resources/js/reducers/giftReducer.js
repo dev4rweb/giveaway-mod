@@ -20,10 +20,11 @@ export default function giftReducer(state = defaultState, action) {
                 gifts: [...state.gifts, action.payload]
             }
         case UPDATE_GIFT:
+            const tempArray = state.gifts.filter(gift => gift.id !== action.payload.id)
             return {
                 ...state,
                 gifts: [
-                    state.gifts.filter(gift => gift.id !== action.payload.id),
+                    ...tempArray,
                     action.payload
                 ]
             }
