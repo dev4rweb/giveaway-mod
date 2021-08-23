@@ -27,7 +27,7 @@ const ToggleBtn = ({game, setGame}) => {
     };
 
     return (
-        <div className="toggle-box">>
+        <div className="toggle-box">
             <div className={`custom-control custom-switch`}>
                 <input
                     type="checkbox"

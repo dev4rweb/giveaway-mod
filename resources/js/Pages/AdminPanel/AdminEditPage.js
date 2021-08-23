@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {setEditPage} from "../../reducers/modalReducer";
@@ -9,16 +9,24 @@ import {getGames, updateGame} from "../../actions/games";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
 import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
+import {fetchAllGifts} from "../../reducers/giftReducer";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
     const editingGame = useSelector(state => state.games.editGame)
     const stateData = useSelector(state => state.lang)
     const [game, setGame] = useState(editingGame)
+    const gifts = useSelector(state => state.gifts.gifts)
+
+    useEffect(() => {
+        dispatch(fetchAllGifts(game.gifts))
+        console.log('AdminEditPage',gifts)
+    });
 
     const submitHandler = e => {
         dispatch(updateGame(game))
         dispatch(setEditPage(false))
+        dispatch(fetchAllGifts([]))
     };
 
     const closeHandler = e => {
@@ -26,6 +34,7 @@ const AdminEditPage = () => {
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
+        dispatch(fetchAllGifts([]))
     };
 
     return (
@@ -94,7 +103,7 @@ const AdminEditPage = () => {
             />
 
             <div className={s.giftBox}>
-                <GiftBlock gameId={game.id} gifts={game.gifts}/>
+                <GiftBlock gameId={game.id} gifts={gifts}/>
             </div>
 
             {

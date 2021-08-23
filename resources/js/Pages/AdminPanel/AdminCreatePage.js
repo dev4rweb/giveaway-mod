@@ -13,17 +13,27 @@ import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReduc
 const AdminCreatePage = () => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
-    const mainGame = useSelector(state => state.games.newGame)
-    const [game, setGame] = useState({...mainGame,
+    const game = useSelector(state => state.games.newGame)
+    const setGame = game => {
+        dispatch(changeNewGame(game))
+    };
+/*    const [game, setGame] = useState({
+        ...mainGame,
         status: 0,
         users: [],
         gifts: [],
         tasks: [],
         isCompetition: 0
-    })
+    })*/
+    const gifts = useSelector(state => state.gifts.gifts)
+    const tasks = useSelector(state => state.tasks.tasks)
 
     useEffect(() => {
-
+        if (game.status == 2) {
+            const tempGame = game
+            tempGame.status = 0
+            dispatch(changeNewGame(tempGame));
+        }
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
@@ -101,11 +111,11 @@ const AdminCreatePage = () => {
             />
 
             <div className={s.giftBox}>
-                {game && <GiftBlock gameId={game.id} gifts={game.gifts} />}
+                {game && <GiftBlock gameId={game.id} gifts={gifts}/>}
             </div>
 
             {
-                game.isCompetition && <TaskContainer tasks={game.tasks} />
+                game.isCompetition ? <TaskContainer tasks={tasks}/> : <div/>
             }
 
             <div className={s.btnWrapper}>

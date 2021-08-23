@@ -3,13 +3,10 @@ import "../../../sass/components/GiftBlock/GiftBlock.scss"
 import GiftButton from "./GiftButton";
 import {createGift, removeGift, updateGift} from "../../actions/gifts";
 import {useDispatch, useSelector} from "react-redux";
-import {createTask, getTasks, removeTask, updateTask} from "../../actions/tasks";
 
 
 const GiftBlock = ({gameId, gifts}) => {
     const dispatch = useDispatch()
-    const isError = useSelector(state => state.error.error)
-    const allTask = useSelector(state => state.tasks.tasks)
     const [keys, setKeys] = useState([
         {id: 1, game_id: gameId, giftKey: '5896-7896-4445-128896-25'}
     ]);
@@ -17,7 +14,7 @@ const GiftBlock = ({gameId, gifts}) => {
     useEffect(() => {
         if (gifts.length > 0)
             setKeys(gifts)
-    }, []);
+    }, [gifts]);
 
     const testApi = () => {
         // dispatch(getGifts())
@@ -59,7 +56,11 @@ const GiftBlock = ({gameId, gifts}) => {
 
     const addKey = item => {
         console.log('addKey', item)
-        testApi()
+        const gift = {
+            giftKey: item,
+            game_id: gameId,
+        }
+        dispatch(createGift(gift))
     };
 
     return (
