@@ -82,7 +82,7 @@ const SelectTasks = ({handleTaskChange}) => {
                 htmlFor="outlined-age-native-simple"
                 className={classes.label}
             >
-                {stateData.home.select_sort[stateData.lang]}
+                {stateData.home.task[stateData.lang]}
             </InputLabel>
             <Select
                 native

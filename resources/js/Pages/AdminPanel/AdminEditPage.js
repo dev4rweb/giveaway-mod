@@ -5,28 +5,35 @@ import {setEditPage} from "../../reducers/modalReducer";
 import ToggleBtn from "../../components/UI/ToggleBtn";
 import CustomDatePicker from "../../components/UI/CustomDatePicker";
 import AttachFilesBlock from "../../components/AttachFilesBlock";
-import {getGames, updateGame} from "../../actions/games";
+import {updateGame} from "../../actions/games";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
 import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 import {fetchAllGifts} from "../../reducers/giftReducer";
+import {editGame} from "../../reducers/gameReducer";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
-    const editingGame = useSelector(state => state.games.editGame)
+    const game = useSelector(state => state.games.editGame)
     const stateData = useSelector(state => state.lang)
-    const [game, setGame] = useState(editingGame)
     const gifts = useSelector(state => state.gifts.gifts)
 
     useEffect(() => {
-        dispatch(fetchAllGifts(game.gifts))
+        if (gifts.length === 0) {
+            dispatch(fetchAllGifts(game.gifts));
+        }
         console.log('AdminEditPage',gifts)
     });
+
+    const setGame = (game) => {
+        dispatch(editGame(game))
+    };
 
     const submitHandler = e => {
         dispatch(updateGame(game))
         dispatch(setEditPage(false))
         dispatch(fetchAllGifts([]))
+        window.location.reload()
     };
 
     const closeHandler = e => {
@@ -35,6 +42,7 @@ const AdminEditPage = () => {
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
         dispatch(fetchAllGifts([]))
+        window.location.reload()
     };
 
     return (

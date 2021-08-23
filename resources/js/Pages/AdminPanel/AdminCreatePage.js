@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import ToggleBtn from "../../components/UI/ToggleBtn";
