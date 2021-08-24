@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import RadioItem from "./RadioItem";
-const CustomRadioGroup = ({items}) => {
+
+const CustomRadioGroup = ({items, setSelectedTask}) => {
     const [selectedValue, setSelectedValue] = useState(0);
 
     const handleChange = (event) => {
-        console.log('val ', event.target.value)
-        setSelectedValue(event.target.value);
+        // console.log('handleChange', items)
+        // console.log('val ', items[event.target.value])
+        setSelectedValue(event.target.value)
     };
 
     return (
@@ -19,6 +21,7 @@ const CustomRadioGroup = ({items}) => {
                         handleChange={handleChange}
                         value={index}
                         option={item}
+                        setSelectedTask={setSelectedTask}
                     />
                 )
             }

@@ -23,7 +23,7 @@ class TaskFactory extends Factory
     {
         return [
             'game_id' => $this->faker->numberBetween(1, 35),
-            'taskType' => $this->faker->numberBetween(1, 8),
+            'taskTypeId' => $this->faker->numberBetween(1, 22),
             'task'=> 'task',
             'url' =>$this->faker->domainName,
         ];

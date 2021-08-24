@@ -70,14 +70,15 @@ export const updateGame = (game) => {
     for (let key in game) {
         fd.set(key, game[key])
     }
-
+    console.log('updateGame',game)
     return async (dispatch) => {
         dispatch(setLoading(true))
         await axios.post('/game/update', fd)
             .then(res => {
+                console.log('result ', res)
                 if (res.data.success) {
-                    // dispatch(setUpdatedGame(res.data.model));
-                    dispatch(setUpdatedGame(res.data.models));
+                    dispatch(setUpdatedGame(res.data.model));
+                    // dispatch(setUpdatedGame(res.data.models));
                     dispatch(setError(res.data.message))
                 } else {
                     dispatch(setError(res.data.message))

@@ -1,9 +1,6 @@
 const SET_TASK_TYPE_ONE = 'SET_TASK_TYPE_ONE'
 const SET_TASK_TYPE_TWO = 'SET_TASK_TYPE_TWO'
 const SET_TASK_TYPE_THREE = 'SET_TASK_TYPE_THREE'
-const SET_DATA_TASK_ONE = 'SET_DATA_TASK_ONE'
-const SET_DATA_TASK_TWO = 'SET_DATA_TASK_TWO'
-const SET_DATA_TASK_THREE = 'SET_DATA_TASK_THREE'
 
 const defaultState = {
     actionType: 0,
@@ -12,69 +9,72 @@ const defaultState = {
     taskThree: null,
     tasks: [
         /*steam*/
-        {id: 1, taskType: 1, task: 'Add game to wishlist', url: 'https://www.steam.com'},
-        {id: 2, taskType: 1, task: 'Join to the group', url: 'https://www.steam.com'},
-        {id: 3, taskType: 1, task: 'Follow group', url: 'https://www.steam.com'},
+        {taskTypeId: 1, taskType: 1, task: 'Add game to wishlist', url: 'https://www.steam.com'},
+        {taskTypeId: 2, taskType: 1, task: 'Join to the group', url: 'https://www.steam.com'},
+        {taskTypeId: 3, taskType: 1, task: 'Follow group', url: 'https://www.steam.com'},
         /*twitter*/
-        {id: 4, taskType: 2, task: 'follow', url: 'https://www.twitter.com'},
-        {id: 5, taskType: 2, task: 'Like', url: 'https://www.twitter.com'},
-        {id: 6, taskType: 2, task: 'repost', url: 'https://www.twitter.com'},
-        {id: 7, taskType: 2, task: 'post', url: 'https://www.twitter.com'},
+        {taskTypeId: 4, taskType: 2, task: 'follow', url: 'https://www.twitter.com'},
+        {taskTypeId: 5, taskType: 2, task: 'Like', url: 'https://www.twitter.com'},
+        {taskTypeId: 6, taskType: 2, task: 'repost', url: 'https://www.twitter.com'},
+        {taskTypeId: 7, taskType: 2, task: 'post', url: 'https://www.twitter.com'},
         /*youtube*/
-        {id: 8, taskType: 3, task: 'Watch the video', url: 'https://www.youtube.com'},
-        {id: 9, taskType: 3, task: 'Like', url: 'https://www.youtube.com'},
-        {id: 10, taskType: 3, task: 'comment', url: 'https://www.youtube.com'},
-        {id: 11, taskType: 3, task: 'Subscribe', url: 'https://www.youtube.com'},
+        {taskTypeId: 8, taskType: 3, task: 'Watch the video', url: 'https://www.youtube.com'},
+        {taskTypeId: 9, taskType: 3, task: 'Like', url: 'https://www.youtube.com'},
+        {taskTypeId: 10, taskType: 3, task: 'comment', url: 'https://www.youtube.com'},
+        {taskTypeId: 11, taskType: 3, task: 'Subscribe', url: 'https://www.youtube.com'},
         /*discord*/
-        {id: 12, taskType: 4, task: 'Join the server', url: 'https://www.discord.com'},
+        {taskTypeId: 12, taskType: 4, task: 'Join the server', url: 'https://www.discord.com'},
         /*facebook*/
-        {id: 13, taskType: 5, task: 'Like post', url: 'https://www.facebook.com'},
-        {id: 14, taskType: 5, task: 'Share post', url: 'https://www.facebook.com'},
-        {id: 15, taskType: 5, task: 'Like fanpage', url: 'https://www.facebook.com'},
-        {id: 16, taskType: 5, task: 'comment post', url: 'https://www.facebook.com'},
+        {taskTypeId: 13, taskType: 5, task: 'Like post', url: 'https://www.facebook.com'},
+        {taskTypeId: 14, taskType: 5, task: 'Share post', url: 'https://www.facebook.com'},
+        {taskTypeId: 15, taskType: 5, task: 'Like fanpage', url: 'https://www.facebook.com'},
+        {taskTypeId: 16, taskType: 5, task: 'comment post', url: 'https://www.facebook.com'},
         /*instagram*/
-        {id: 17, taskType: 6, task: 'Like photo', url: 'https://www.instagram.com'},
-        {id: 18, taskType: 6, task: 'comment', url: 'https://www.instagram.com'},
-        {id: 19, taskType: 6, task: 'share', url: 'https://www.instagram.com'},
+        {taskTypeId: 17, taskType: 6, task: 'Like photo', url: 'https://www.instagram.com'},
+        {taskTypeId: 18, taskType: 6, task: 'comment', url: 'https://www.instagram.com'},
+        {taskTypeId: 19, taskType: 6, task: 'share', url: 'https://www.instagram.com'},
         /*reddit*/
-        {id: 20, taskType: 7, task: 'join group', url: 'https://www.reddit.com'},
-        {id: 21, taskType: 7, task: 'Give upvote', url: 'https://www.reddit.com'},
+        {taskTypeId: 20, taskType: 7, task: 'join group', url: 'https://www.reddit.com'},
+        {taskTypeId: 21, taskType: 7, task: 'Give upvote', url: 'https://www.reddit.com'},
         /*website*/
-        {id: 22, taskType: 8, task: 'Check website', url: 'https://www.website.com'},
+        {taskTypeId: 22, taskType: 8, task: 'Check website', url: 'https://www.website.com'},
     ]
 }
 
 export default function taskTypeReducer(state = defaultState, action) {
     switch (action.type) {
         case SET_TASK_TYPE_ONE:
+            if (action.payload === null) {
+                return {
+                    ...state,
+                    taskOne: null
+                }
+            }
             return {
                 ...state,
                 taskOne: state.tasks.filter(item => item.taskType == action.payload)
-            }
-        case SET_DATA_TASK_ONE:
-            return {
-                ...state,
-                taskOne: [...state.taskOne, action.payload]
-            }
+            };
         case SET_TASK_TYPE_TWO:
+            if (action.payload === null) {
+                return {
+                    ...state,
+                    taskTwo: null
+                }
+            }
             return {
                 ...state,
                 taskTwo: state.tasks.filter(item => item.taskType == action.payload)
             }
-        case SET_DATA_TASK_TWO:
-            return {
-                ...state,
-                taskTwo: [...state.taskTwo, action.payload]
-            }
         case SET_TASK_TYPE_THREE:
+            if (action.payload === null) {
+                return {
+                    ...state,
+                    taskThree: null
+                }
+            }
             return {
                 ...state,
                 taskThree: state.tasks.filter(item => item.taskType == action.payload)
-            }
-        case SET_DATA_TASK_THREE:
-            return {
-                ...state,
-                taskThree: [...state.taskThree, action.payload]
             }
         default:
             return state
@@ -84,6 +84,3 @@ export default function taskTypeReducer(state = defaultState, action) {
 export const setTaskOne = (taskType) => ({type: SET_TASK_TYPE_ONE, payload: taskType})
 export const setTaskTwo = (taskType) => ({type: SET_TASK_TYPE_TWO, payload: taskType})
 export const setTaskThree = (taskType) => ({type: SET_TASK_TYPE_THREE, payload: taskType})
-export const setDataTaskOne = (taskData) => ({type: SET_DATA_TASK_ONE, payload: taskData})
-export const setDataTaskTwo = (taskData) => ({type: SET_DATA_TASK_TWO, payload: taskData})
-export const setDataTaskThree = (taskData) => ({type: SET_DATA_TASK_THREE, payload: taskData})

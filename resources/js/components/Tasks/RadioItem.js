@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import s from '../../../sass/components/UI/RadioItem.module.scss'
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import {withStyles} from '@material-ui/core/styles';
+import {green} from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
+import {useDispatch} from "react-redux";
 
 const GreenRadio = withStyles({
     root: {
@@ -18,18 +19,25 @@ const GreenRadio = withStyles({
     checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const RadioItem = ({option, selectedValue, handleChange, value}) => {
-    const [state, setState] = useState(option.url)
+const RadioItem = ({option, selectedValue, handleChange, value, setSelectedTask}) => {
+    const dispatch = useDispatch()
+    const [state, setState] = useState('')
     let checked = selectedValue == value
+    // console.log('RadioItem', option)
 
     useEffect(() => {
-        if (option.urlOne) {
-            setState(option.urlOne)
+        if (option.url) {
+            setState(option.url)
         }
-    }, []);
+    }, [option]);
 
     const changeInput = (e) => {
-        setState(e.target.value)
+        if (setSelectedTask  && checked) {
+            option.url = e.target.value
+            dispatch(setSelectedTask(option))
+            // console.log('RadioItem', option)
+        }
+        setState(e.target.value);
     };
 
     return (
@@ -39,7 +47,7 @@ const RadioItem = ({option, selectedValue, handleChange, value}) => {
                 onChange={handleChange}
                 value={value}
                 name="radio-button-demo"
-                inputProps={{ 'aria-label': 'A' }}
+                inputProps={{'aria-label': 'A'}}
             />
 
             <div className={s.optionsContainer}>

@@ -11,12 +11,19 @@ import TaskContainer from "../../components/Tasks/TaskContainer";
 import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 import {fetchAllGifts} from "../../reducers/giftReducer";
 import {editGame} from "../../reducers/gameReducer";
+import {
+    setInitialSelectedTaskOne,
+    setTaskOneFromServer,
+    setTasksForGameAction,
+    updateTasksForGameAction
+} from "../../reducers/TaskReducer";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
     const game = useSelector(state => state.games.editGame)
     const stateData = useSelector(state => state.lang)
     const gifts = useSelector(state => state.gifts.gifts)
+    const tasks = game.tasks
 
     useEffect(() => {
         if (gifts.length === 0) {
@@ -24,6 +31,23 @@ const AdminEditPage = () => {
         }
         console.log('AdminEditPage',gifts)
     });
+
+    useEffect(() => {
+        if (tasks.length > 0)
+            for (let i = 0; i < tasks.length; i++) {
+                if (i === 0) {
+                    dispatch(setTaskOneFromServer(tasks[0]))
+                    dispatch(updateTasksForGameAction(tasks[0]))
+                    dispatch(setInitialSelectedTaskOne(tasks[0]))
+                }
+                if (i === 1) {
+                    // dispatch(setTaskTwo(tasks[1].taskType));
+                }
+                if (i === 2) {
+                    // dispatch(setTaskThree(tasks[2].taskType))
+                }
+            }
+    }, []);
 
     const setGame = (game) => {
         dispatch(editGame(game))
@@ -33,7 +57,8 @@ const AdminEditPage = () => {
         dispatch(updateGame(game))
         dispatch(setEditPage(false))
         dispatch(fetchAllGifts([]))
-        window.location.reload()
+        dispatch(setTasksForGameAction(null))
+        // window.location.reload()
     };
 
     const closeHandler = e => {
@@ -42,7 +67,8 @@ const AdminEditPage = () => {
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
         dispatch(fetchAllGifts([]))
-        window.location.reload()
+        dispatch(setTasksForGameAction(null))
+        // window.location.reload()
     };
 
     return (

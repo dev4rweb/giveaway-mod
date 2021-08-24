@@ -1,9 +1,8 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import AdminTableCompetitionItem from "./AdminTableCompetition/AdminTableCompetitionItem";
 
 const AdminTableCompetitions = () => {
-    const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const games = useSelector(state => state.games.games)
     // console.log('AdminTableCompetitions', games)

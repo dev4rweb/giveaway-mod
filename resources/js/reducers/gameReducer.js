@@ -56,13 +56,10 @@ export default function gameReducer(state = defaultState, action) {
                 editGame: action.payload
             }
         case UPDATE_GAME:
-            /*return {
-                ...state,
-                games: [...state.games, action.payload]
-            }*/
+            let tempArray = state.games.filter(item => item.id != action.payload.id)
             return {
-                ...state,
-                games: action.payload
+                games: [...tempArray, action.payload],
+                ...state
             }
         case REMOVE_GAME:
             return {
