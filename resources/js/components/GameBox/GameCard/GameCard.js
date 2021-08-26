@@ -30,16 +30,19 @@ const GameCard = ({item}) => {
                     item.isCompetition ?
                     <div className={s.steamBox}>
                         {
+                            item.tasks && item.tasks.map((item, index) => <a key={index} href="#"><img src={steam} alt="steam"/></a>)
+                        }
+                        {
                             // item.taskOne &&
-                            <a href="#"><img src={steam} alt="steam"/></a>
+                            // <a href="#"><img src={steam} alt="steam"/></a>
                         }
                         {
                             // item.taskTwo &&
-                            <a href="#"><img src={steam} alt="steam"/></a>
+                            // <a href="#"><img src={steam} alt="steam"/></a>
                         }
                         {
                             // item.taskThree &&
-                            <a href="#"><img src={steam} alt="steam"/></a>
+                            // <a href="#"><img src={steam} alt="steam"/></a>
                         }
                     </div>
                         : <div/>

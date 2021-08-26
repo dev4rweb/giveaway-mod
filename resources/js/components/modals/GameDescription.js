@@ -25,10 +25,10 @@ const GameDescription = () => {
                 {item.description && <p className={s.content}>{item.description}</p>}
                 {
                     item.isCompetition == 1 ?
-                    <p className={s.content}
-                       style={{textAlign: 'left', marginBottom: '10px', paddingLeft: '15px'}}>
-                        {stateData.home.task[stateData.lang]}
-                    </p>
+                        <p className={s.content}
+                           style={{textAlign: 'left', marginBottom: '10px', paddingLeft: '15px'}}>
+                            {stateData.home.task[stateData.lang]}
+                        </p>
                         : <p/>
                 }
 
@@ -38,69 +38,97 @@ const GameDescription = () => {
                             <Tabs>
                                 <TabList className={s.tasks}>
                                     {
+                                        item.tasks && item.tasks.map((item, index) => <Tab key={index}><img src={steam}
+                                                                                                            alt="steam"/></Tab>)
+                                    }
+                                    {
                                         // item.taskOne &&
-                                        <Tab><img src={steam} alt="steam"/></Tab>
+                                        // <Tab><img src={steam} alt="steam"/></Tab>
                                     }
                                     {
                                         // item.taskTwo &&
-                                        <Tab><img src={steam} alt="steam"/></Tab>
+                                        // <Tab><img src={steam} alt="steam"/></Tab>
                                     }
                                     {
                                         // item.taskThree &&
-                                        <Tab><img src={steam} alt="steam"/></Tab>
+                                        // <Tab><img src={steam} alt="steam"/></Tab>
                                     }
                                 </TabList>
                                 <div>
                                     {
+                                        item.tasks && item.tasks.map((i, index) => {
+                                            return (
+                                                <TabPanel key={index}>
+                                                    <div className={s.subscribe}>
+                                                        <p>
+                                                            <span>
+                                                                {i.task}
+                                                            </span>
+                                                            {/*{item.taskOne}*/}
+                                                            {i.url}
+                                                        </p>
+                                                        <CopyToClipboard text={i.url}>
+                                                            <button
+                                                                className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
+                                                        </CopyToClipboard>
+                                                    </div>
+                                                </TabPanel>
+                                            )
+                                        })
+                                    }
+                                    {
                                         // item.taskOne &&
-                                        <TabPanel>
+                                        /*<TabPanel>
                                             <div className={s.subscribe}>
                                                 <p><span>
-                                                    {/*{translate(item.taskOneDesc)} : */}
+                                                    {/!*{translate(item.taskOneDesc)} : *!/}
                                                     Visit :
                                                 </span>
-                                                    {/*{item.taskOne}*/}
+                                                    {/!*{item.taskOne}*!/}
                                                     HTTPS://SOURCE-BYTE.COM/
                                                 </p>
-                                                {/*<CopyToClipboard text={item.taskOne}>*/}
-                                                    <button className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/*</CopyToClipboard>*/}
+                                                {/!*<CopyToClipboard text={item.taskOne}>*!/}
+                                                <button
+                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
+                                                {/!*</CopyToClipboard>*!/}
                                             </div>
-                                        </TabPanel>
+                                        </TabPanel>*/
                                     }
                                     {
                                         // item.taskTwo &&
-                                        <TabPanel>
+                                        /*<TabPanel>
                                             <div className={s.subscribe}>
                                                 <p><span>
-                                                    {/*{translate(item.taskTwoDesc)} : */}
+                                                    {/!*{translate(item.taskTwoDesc)} : *!/}
                                                     Subscribe :
                                                 </span>
-                                                    {/*{item.taskTwo}*/}
+                                                    {/!*{item.taskTwo}*!/}
                                                     HTTPS://SOURCE-BYTE.COM/
                                                 </p>
-                                                {/*<CopyToClipboard text={item.taskTwo}>*/}
-                                                    <button className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/*</CopyToClipboard>*/}
+                                                {/!*<CopyToClipboard text={item.taskTwo}>*!/}
+                                                <button
+                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
+                                                {/!*</CopyToClipboard>*!/}
                                             </div>
-                                        </TabPanel>
+                                        </TabPanel>*/
                                     }
                                     {
                                         // item.taskThree &&
-                                        <TabPanel>
+                                        /*<TabPanel>
                                             <div className={s.subscribe}>
                                                 <p><span>
-                                                    {/*{translate(item.taskThreeDesc)} : */}
+                                                    {/!*{translate(item.taskThreeDesc)} : *!/}
                                                     Repost :
                                                 </span>
-                                                    {/*{item.taskThree}*/}
+                                                    {/!*{item.taskThree}*!/}
                                                     HTTPS://SOURCE-BYTE.COM/
                                                 </p>
-                                                {/*<CopyToClipboard text={item.taskThree}>*/}
-                                                    <button className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/*</CopyToClipboard>*/}
+                                                {/!*<CopyToClipboard text={item.taskThree}>*!/}
+                                                <button
+                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
+                                                {/!*</CopyToClipboard>*!/}
                                             </div>
-                                        </TabPanel>
+                                        </TabPanel>*/
                                     }
                                 </div>
                             </Tabs>
