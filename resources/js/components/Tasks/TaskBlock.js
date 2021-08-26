@@ -4,7 +4,7 @@ import SelectTasks from "../UI/SelectTasks";
 import TaskBlockMod from "./TaskBlockMod";
 import {useDispatch} from "react-redux";
 
-const TaskBlock = ({selector, setTask, setSelectedTask, removeInitial = null}) => {
+const TaskBlock = ({selector, setTask, setSelectedTask, removeInitial = null, title = 'Task'}) => {
     const dispatch = useDispatch()
 
     const handleTaskChange = selectedOption => {
@@ -27,6 +27,7 @@ const TaskBlock = ({selector, setTask, setSelectedTask, removeInitial = null}) =
         <div className="task-wrapper mb-3">
             <SelectTasks
                 handleTaskChange={handleTaskChange}
+                title={title}
             />
             {
                 selector !== null && selector &&

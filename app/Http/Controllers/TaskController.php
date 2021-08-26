@@ -89,7 +89,7 @@ class TaskController extends Controller
         try {
             $task = Task::findOrFail($request['id']);
             $task->update($request->all());
-            $response['message'] = 'Gift updated';
+            $response['message'] = 'Task updated';
             $response['success'] = true;
             $response['model'] = $task;
         } catch (\Exception $exception) {

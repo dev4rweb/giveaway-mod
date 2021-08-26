@@ -8,43 +8,61 @@ import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {updateGame} from "../../actions/games";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
-import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 import {fetchAllGifts} from "../../reducers/giftReducer";
 import {editGame} from "../../reducers/gameReducer";
 import {
-    setInitialSelectedTaskOne,
-    setTaskOneFromServer,
-    setTasksForGameAction,
-    updateTasksForGameAction
+    setInitialSelectedTaskOne, setInitialSelectedTaskThree, setInitialSelectedTaskTwo,
+    setTaskOneFromServer, setTaskThreeFromServer, setTaskTwoFromServer,
+    updateTasksForGameAction, updateTasksForGameThreeAction, updateTasksForGameTwoAction
 } from "../../reducers/TaskReducer";
+import {cleanTempState, compareTasks, getTasks} from "../../actions/tasks";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
     const game = useSelector(state => state.games.editGame)
     const stateData = useSelector(state => state.lang)
     const gifts = useSelector(state => state.gifts.gifts)
+
+    const taskOneFromServer = useSelector(state => state.tasks.taskOneFromServer)
+    const selectedTaskOne = useSelector(state => state.tasks.selectedTaskOne)
+
+    const taskTwoFromServer = useSelector(state => state.tasks.taskTwoFromServer)
+    const selectedTaskTwo = useSelector(state => state.tasks.selectedTaskTwo)
+
+    const taskThreeFromServer = useSelector(state => state.tasks.taskThreeFromServer)
+    const selectedTaskThree = useSelector(state => state.tasks.selectedTaskThree)
     const tasks = game.tasks
 
     useEffect(() => {
         if (gifts.length === 0) {
             dispatch(fetchAllGifts(game.gifts));
         }
-        console.log('AdminEditPage',gifts)
+        // console.log('AdminEditPage', gifts)
     });
 
     useEffect(() => {
+        console.log('AdminEditPage', tasks)
         if (tasks.length > 0)
             for (let i = 0; i < tasks.length; i++) {
                 if (i === 0) {
-                    dispatch(setTaskOneFromServer(tasks[0]))
-                    dispatch(updateTasksForGameAction(tasks[0]))
-                    dispatch(setInitialSelectedTaskOne(tasks[0]))
+                    // console.log('AdminEditPage 0 ', tasks[i])
+                    dispatch(setTaskOneFromServer(tasks[i]))
+                    dispatch(updateTasksForGameAction(tasks[i]))
+                    dispatch(setInitialSelectedTaskOne(tasks[i]))
                 }
                 if (i === 1) {
                     // dispatch(setTaskTwo(tasks[1].taskType));
+                    // console.log('AdminEditPage 1 ', tasks[i])
+                    dispatch(setTaskTwoFromServer(tasks[i]))
+                    dispatch(updateTasksForGameTwoAction(tasks[i]))
+                    dispatch(setInitialSelectedTaskTwo(tasks[i]))
                 }
                 if (i === 2) {
                     // dispatch(setTaskThree(tasks[2].taskType))
+                    // console.log('AdminEditPage 2 ', tasks[i])
+                    dispatch(setTaskThreeFromServer(tasks[i]))
+                    dispatch(updateTasksForGameThreeAction(tasks[i]))
+                    dispatch(setInitialSelectedTaskThree(tasks[i]))
                 }
             }
     }, []);
@@ -53,21 +71,19 @@ const AdminEditPage = () => {
         dispatch(editGame(game))
     };
 
-    const submitHandler = e => {
+    const submitHandler = async e => {
         dispatch(updateGame(game))
-        dispatch(setEditPage(false))
-        dispatch(fetchAllGifts([]))
-        dispatch(setTasksForGameAction(null))
-        // window.location.reload()
+        await dispatch(compareTasks(taskOneFromServer, selectedTaskOne))
+        await dispatch(compareTasks(taskTwoFromServer, selectedTaskTwo))
+        await dispatch(compareTasks(taskThreeFromServer, selectedTaskThree))
+        await dispatch(cleanTempState())
+        await dispatch(setEditPage(false))
+        window.location.reload()
     };
 
     const closeHandler = e => {
         dispatch(setEditPage(false))
-        dispatch(setTaskOne(null))
-        dispatch(setTaskTwo(null))
-        dispatch(setTaskThree(null))
-        dispatch(fetchAllGifts([]))
-        dispatch(setTasksForGameAction(null))
+        dispatch(cleanTempState())
         // window.location.reload()
     };
 

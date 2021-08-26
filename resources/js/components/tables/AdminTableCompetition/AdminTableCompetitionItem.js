@@ -3,7 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {removeGame} from "../../../actions/games";
 import {setEditPage, setModalDrawWinner} from "../../../reducers/modalReducer";
 import {editDrawWinner, editGame} from "../../../reducers/gameReducer";
-import {dataTasksOneAction, setTasksForGameAction} from "../../../reducers/TaskReducer";
+import {
+    dataTasksOneAction,
+    setTasksForGameAction,
+    setTasksForGameThreeAction,
+    setTasksForGameTwoAction
+} from "../../../reducers/TaskReducer";
 
 const AdminTableCompetitionItem = ({item}) => {
     const dispatch = useDispatch()
@@ -40,6 +45,8 @@ const AdminTableCompetitionItem = ({item}) => {
         dispatch(setEditPage(true))
         dispatch(editGame(item))
         dispatch(setTasksForGameAction(item))
+        dispatch(setTasksForGameTwoAction(item))
+        dispatch(setTasksForGameThreeAction(item))
     };
 
     const drawHandler = (ev) => {

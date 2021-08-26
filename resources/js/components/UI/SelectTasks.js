@@ -55,7 +55,7 @@ const options = [
     {value: 8, label: 'Website'},
 ]
 
-const SelectTasks = ({handleTaskChange}) => {
+const SelectTasks = ({handleTaskChange, title}) => {
     const classes = useStyles();
     const stateData = useSelector(state=>state.lang)
     const [state, setState] = React.useState({
@@ -82,7 +82,7 @@ const SelectTasks = ({handleTaskChange}) => {
                 htmlFor="outlined-age-native-simple"
                 className={classes.label}
             >
-                {stateData.home.task[stateData.lang]}
+                {title}
             </InputLabel>
             <Select
                 native

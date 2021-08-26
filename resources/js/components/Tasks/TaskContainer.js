@@ -7,8 +7,13 @@ import {
     setTaskTwo
 } from "../../reducers/taskTypeReducer";
 import {
-    dataTasksOneAction,
-    setInitialSelectedTaskOne, setSelectedTaskOneAction,
+    dataTasksOneAction, dataTasksThreeAction,
+    dataTasksTwoAction,
+    setInitialSelectedTaskOne,
+    setInitialSelectedTaskThree,
+    setInitialSelectedTaskTwo,
+    setSelectedTaskOneAction, setSelectedTaskThreeAction,
+    setSelectedTaskTwoAction,
 } from "../../reducers/TaskReducer";
 
 const TaskContainer = ({tasks}) => {
@@ -17,11 +22,14 @@ const TaskContainer = ({tasks}) => {
 
     const taskSelectorOne = useSelector(state => state.tasks.dataTasksOne)
     const initialSelectorTaskOne = useSelector(state => state.tasks.initialSelectedTaskOne)
+    const taskSelectorTwo = useSelector(state => state.tasks.dataTasksTwo)
+    const initialSelectorTaskTwo = useSelector(state => state.tasks.initialSelectedTaskTwo)
+    const taskSelectorThree = useSelector(state => state.tasks.dataTasksThree)
+    const initialSelectorTaskThree = useSelector(state => state.tasks.initialSelectedTaskThree)
 
-    const taskSelectorTwo = useSelector(state => state.taskType.taskTwo)
-    const taskSelectorThree = useSelector(state => state.taskType.taskThree)
+    /*const taskSelectorTwo = useSelector(state => state.taskType.taskTwo)
+    const taskSelectorThree = useSelector(state => state.taskType.taskThree)*/
     console.log('TaskContainer tasks', tasks)
-
 
 
     return (
@@ -31,6 +39,7 @@ const TaskContainer = ({tasks}) => {
                 {
                     initialSelectorTaskOne !== null ?
                         <TaskBlock
+                            title={stateData.home.taskOne[stateData.lang]}
                             selector={initialSelectorTaskOne}
                             setTask={dataTasksOneAction}
                             removeInitial={setInitialSelectedTaskOne}
@@ -38,20 +47,48 @@ const TaskContainer = ({tasks}) => {
                         />
                         :
                         <TaskBlock
+                            title={stateData.home.taskOne[stateData.lang]}
                             selector={taskSelectorOne}
                             setTask={dataTasksOneAction}
                             setSelectedTask={setSelectedTaskOneAction}
                         />
 
                 }
-                <TaskBlock
-                    selector={taskSelectorTwo}
-                    setTask={setTaskTwo}
-                />
-                <TaskBlock
-                    selector={taskSelectorThree}
-                    setTask={setTaskThree}
-                />
+                {
+                    initialSelectorTaskTwo !== null ?
+                        <TaskBlock
+                            title={stateData.home.taskTwo[stateData.lang]}
+                            selector={initialSelectorTaskTwo}
+                            removeInitial={setInitialSelectedTaskTwo}
+                            setTask={dataTasksTwoAction}
+                            setSelectedTask={setSelectedTaskTwoAction}
+                        />
+                        :
+
+                        <TaskBlock
+                            title={stateData.home.taskTwo[stateData.lang]}
+                            selector={taskSelectorTwo}
+                            setTask={dataTasksTwoAction}
+                            setSelectedTask={setSelectedTaskTwoAction}
+                        />
+                }
+                {
+                    initialSelectorTaskThree !== null ?
+                        <TaskBlock
+                            title={stateData.home.taskThree[stateData.lang]}
+                            selector={initialSelectorTaskThree}
+                            removeInitial={setInitialSelectedTaskThree}
+                            setTask={dataTasksThreeAction}
+                            setSelectedTask={setSelectedTaskThreeAction}
+                        />
+                        :
+                        <TaskBlock
+                            title={stateData.home.taskThree[stateData.lang]}
+                            selector={taskSelectorThree}
+                            setTask={dataTasksThreeAction}
+                            setSelectedTask={setSelectedTaskThreeAction}
+                        />
+                }
             </div>
         </div>
     );

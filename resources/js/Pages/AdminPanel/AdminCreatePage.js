@@ -9,6 +9,13 @@ import {changeNewGame} from "../../reducers/gameReducer";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
 import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
+import {
+    setTasksForGameAction,
+    setTasksForGameThreeAction,
+    setTasksForGameTwoAction,
+    updateTasksForGameAction, updateTasksForGameThreeAction, updateTasksForGameTwoAction
+} from "../../reducers/TaskReducer";
+import {cleanTempState, compareTasks} from "../../actions/tasks";
 
 const AdminCreatePage = () => {
     const dispatch = useDispatch()
@@ -28,12 +35,25 @@ const AdminCreatePage = () => {
     const gifts = useSelector(state => state.gifts.gifts)
     const tasks = useSelector(state => state.tasks.tasks)
 
+    const taskOneFromServer = useSelector(state => state.tasks.taskOneFromServer)
+    const selectedTaskOne = useSelector(state => state.tasks.selectedTaskOne)
+
+    const taskTwoFromServer = useSelector(state => state.tasks.taskTwoFromServer)
+    const selectedTaskTwo = useSelector(state => state.tasks.selectedTaskTwo)
+
+    const taskThreeFromServer = useSelector(state => state.tasks.taskThreeFromServer)
+    const selectedTaskThree = useSelector(state => state.tasks.selectedTaskThree)
+
+
     useEffect(() => {
         if (game.status == 2) {
             const tempGame = game
             tempGame.status = 0
             dispatch(changeNewGame(tempGame));
         }
+        dispatch(setTasksForGameAction(game))
+        dispatch(setTasksForGameTwoAction(game))
+        dispatch(setTasksForGameThreeAction(game))
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
@@ -44,6 +64,10 @@ const AdminCreatePage = () => {
         console.log('submitHandler', game)
         await dispatch(updateGame(game))
         await dispatch(changeNewGame({}))
+        await dispatch(compareTasks(taskOneFromServer, selectedTaskOne))
+        await dispatch(compareTasks(taskTwoFromServer, selectedTaskTwo))
+        await dispatch(compareTasks(taskThreeFromServer, selectedTaskThree))
+        await dispatch(cleanTempState())
         window.location.reload()
     };
 
@@ -115,7 +139,8 @@ const AdminCreatePage = () => {
             </div>
 
             {
-                game.isCompetition ? <TaskContainer tasks={tasks}/> : <div/>
+                game.isCompetition && game.isCompetition != 0
+                    ? <TaskContainer tasks={tasks}/> : <div/>
             }
 
             <div className={s.btnWrapper}>

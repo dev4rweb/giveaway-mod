@@ -34,6 +34,9 @@ const defaultState = {
             en: 'Get the key', ru: 'Получить ключ'
         },
         task: {en: 'task', ru: 'задача'},
+        taskOne: {en: 'Task One', ru: 'задача 1'},
+        taskTwo: {en: 'Task Two', ru: 'задача 2 '},
+        taskThree: {en: 'Task Three', ru: 'задача 3'},
         copy: {en: 'Copy', ru: 'Копировать'},
         subscribe: {en: 'Subscribe', ru: 'Подписаться'},
         addCom: {en: 'Add Comment', ru: 'Добавить комментарий'},
