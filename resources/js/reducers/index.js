@@ -9,6 +9,7 @@ import modalReducer from "./modalReducer";
 import taskTypeReducer from "./taskTypeReducer";
 import giftReducer from "./giftReducer";
 import taskReducer from "./TaskReducer";
+import userPageReducer from "./userPageReducer";
 
 const rootReducer = combineReducers({
     lang: translateReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     modal: modalReducer,
     taskType: taskTypeReducer,
     gifts: giftReducer,
-    tasks: taskReducer
+    tasks: taskReducer,
+    userPage: userPageReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\User;
+use App\Models\UserGame;
 use App\Models\UserPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +20,19 @@ class UserPageController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $partGames = UserGame::where('user_id', '=', $user->id)
+            ->orderBy('game_id', 'DESC')->get();
+        $games = [];
+        foreach ($partGames as $partGame) {
+            array_push($games, Game::where('id', '=', $partGame->game_id)->with('users')->first());
+        }
+        $userGames = User::where('id', '=', $user->id)->with('games')->first();
+
         return Inertia::render('UserPage', [
-            'user' => $user
+            'user' => $user,
+//            'partGames' => $partGames,
+            'games' => $games,
+//            'userGames' => $userGames
         ]);
     }
 

@@ -13,7 +13,7 @@ class Game extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_games', 'user_id', 'id');
+        return $this->belongsToMany(User::class, 'user_games', 'game_id', 'user_id');
     }
 
     public function gifts()

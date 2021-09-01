@@ -25,8 +25,9 @@ class GameFactory extends Factory
             'name' => $this->faker->words(2, true),
             'description' => $this->faker->sentence(30),
             'status' => $this->faker->numberBetween(0, 3),
-            'startDate' => $this->faker->numberBetween( 1629011412,1630221012),
-            'endDate' => $this->faker->numberBetween( 1629011412,1630221012),
+            'startDate' => $this->faker->numberBetween( 1629011412,1632988414),
+            'endDate' => $this->faker->numberBetween( 1629011412,1632988414),
+            'winner_id' => $this->faker->numberBetween(0, 22)
         ];
     }
 }
