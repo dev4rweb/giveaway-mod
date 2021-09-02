@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../../sass/components/AdminTable.scss'
 import {useSelector} from "react-redux";
+import UserTableItem from "./tables/UserTable/UserTableItem";
 
 const UserTable = ({games, user}) => {
     const stateData = useSelector(state => state.lang)
@@ -26,35 +27,14 @@ const UserTable = ({games, user}) => {
             </tr>
             </thead>
             <tbody>
-            {games.map((item, index) => {
-                /*if (item.result.includes('Неудача')
-                    || item.result.includes('Failure')) color = '#e72d2d';*/
-                const date = new Date(item.startDate * 1000)
-                const day = date.getDate() < 10 ?
-                    `0${date.getDate()}` :
-                    date.getDate();
-                const month = (date.getMonth() + 1) < 10 ?
-                    `0${date.getMonth() + 1}` :
-                    date.getMonth() + 1;
-                const isWinner = item.winner_id == user.id ? 'won' : 'failure'
-                let color = isWinner === true ? '#60d346' : '#e72d2d';
-
-                // console.log('date', date)
-                return (
-                    <tr key={index}>
-                        <th scope="row">#{item.id}</th>
-                        <td>id{item.winner_id}</td>
-                        <td>{`${day}/${month}/${date.getFullYear()}`}</td>
-                        <td>{item.users.length}</td>
-                        <td
-                            className="table-status"
-                            style={{color: color}}
-                        >
-                            {isWinner}
-                        </td>
-                    </tr>
-                )
-            })}
+            {
+                games.map((item, index) =>
+                    <UserTableItem
+                        item={item}
+                        user={user}
+                        key={index}
+                    />)
+            }
             </tbody>
         </table>
     );

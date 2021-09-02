@@ -7,6 +7,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserGameController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/task/create', [TaskController::class, 'store']);
     Route::post('/task/update', [TaskController::class, 'update']);
     Route::delete('/task/{id}', [TaskController::class, 'destroy']);
+
+    Route::get('/users_games', [UserGameController::class, 'index']);
+    Route::post('/user_game/create', [UserGameController::class, 'store']);
+    Route::post('/user_game/update', [UserGameController::class, 'update']);
+    Route::delete('/user_game/{id}', [UserGameController::class, 'destroy']);
 });
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

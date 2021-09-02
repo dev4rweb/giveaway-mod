@@ -147,6 +147,7 @@ const defaultState = {
         pend: {en: 'Pending', ru: 'В ожидании'},
         victory: {en: 'Victory', ru: 'Победа'},
         fail: {en: 'Failure', ru: 'Неудача'},
+        ongoing: {en: 'Ongoing', ru: 'В процессе'},
         comp: {en: 'Competition', ru: 'Конкурс'},
         own: {en: 'Owner', ru: 'Владелец'},
         date: {en: 'date of creation', ru: 'Дата создания'},

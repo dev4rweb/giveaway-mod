@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserGame;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserGameController extends Controller
@@ -10,11 +11,20 @@ class UserGameController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        try {
+            $usersGames = UserGame::all();
+            $response['message'] = 'All usersGames';
+            $response['success'] = true;
+            $response['models'] = $usersGames;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -31,22 +41,40 @@ class UserGameController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $userGame = UserGame::create($request->all());
+            $response['message'] = 'User game created';
+            $response['success'] = true;
+            $response['model'] = $userGame;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserGame  $userGame
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function show(UserGame $userGame)
+    public function show($id)
     {
-        //
+        try {
+            $userGame = UserGame::findOrFail($id);
+            $response['message'] = 'Find userGame model';
+            $response['success'] = true;
+            $response['model'] = $userGame;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -63,23 +91,42 @@ class UserGameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserGame  $userGame
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return JsonResponse
      */
-    public function update(Request $request, UserGame $userGame)
+    public function update(Request $request)
     {
-        //
+        try {
+            $userGame = UserGame::findOrFail($request['id']);
+            $userGame->update($request->all());
+            $response['message'] = 'User game updated';
+            $response['success'] = true;
+            $response['model'] = $userGame;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserGame  $userGame
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function destroy(UserGame $userGame)
+    public function destroy($id)
     {
-        //
+        try {
+            $userGame = UserGame::findOrFail($id);
+            $userGame->delete();
+            $response['message'] = 'User Game deleted';
+            $response['success'] = true;
+            $response['id'] = $id;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 }
