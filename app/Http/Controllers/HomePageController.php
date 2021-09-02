@@ -20,6 +20,7 @@ class HomePageController extends Controller
         $games = Game::orderBy('endDate')
             ->where('isSponsored', '=', false)
             ->with('tasks')
+            ->with('users')
             ->where('status', '=', 0)
             ->get();
         $sponsorGames = Game::where('isSponsored', '=', true)->get();

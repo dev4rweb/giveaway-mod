@@ -1,15 +1,47 @@
 import React from 'react';
 import s from '../../../sass/components/GameDescription.module.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import {CopyToClipboard} from "react-copy-to-clipboard/src/Component";
 import {TelegramShareButton} from "react-share";
 import steam from '../../../assets/png/steam-icon-white.png'
 import share from '../../../assets/icons/share.png'
+import {setError} from "../../reducers/errorReducer";
+import {createUserGame} from "../../actions/userGame";
+import {getGames} from "../../actions/games";
+import ErrorMessage from "../UI/ErrorMessage";
 
 const GameDescription = () => {
+    const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
+    const error = useSelector(state => state.error.error)
     const item = useSelector(state => state.modal.gameDescription)
+    const allGames = useSelector(state => state.games.games)
+    const user = useSelector(state => state.user.user)
+    const btnText = item && item.isCompetition ?
+        stateData.home.get_key[stateData.lang] :
+        stateData.home.join_giveaway[stateData.lang]
+
+    // console.log('GameDescription', user)
+
+    const handleClick = e => {
+        const game = allGames.find(i => i.id === item.id)
+        if (game) {
+            const isJoined = !!game.users.find(i => i.id === user.id);
+            if (isJoined) dispatch(setError('You are already joined'));
+            else {
+                const userGame = {
+                    user_id: user.id,
+                    game_id: item.id
+                }
+                dispatch(createUserGame(userGame))
+                dispatch(getGames())
+            }
+        } else {
+            console.log('click', game);
+            console.log('isJoined', isJoined)
+        }
+    };
 
     if (item)
         return (
@@ -41,18 +73,6 @@ const GameDescription = () => {
                                         item.tasks && item.tasks.map((item, index) => <Tab key={index}><img src={steam}
                                                                                                             alt="steam"/></Tab>)
                                     }
-                                    {
-                                        // item.taskOne &&
-                                        // <Tab><img src={steam} alt="steam"/></Tab>
-                                    }
-                                    {
-                                        // item.taskTwo &&
-                                        // <Tab><img src={steam} alt="steam"/></Tab>
-                                    }
-                                    {
-                                        // item.taskThree &&
-                                        // <Tab><img src={steam} alt="steam"/></Tab>
-                                    }
                                 </TabList>
                                 <div>
                                     {
@@ -76,60 +96,6 @@ const GameDescription = () => {
                                             )
                                         })
                                     }
-                                    {
-                                        // item.taskOne &&
-                                        /*<TabPanel>
-                                            <div className={s.subscribe}>
-                                                <p><span>
-                                                    {/!*{translate(item.taskOneDesc)} : *!/}
-                                                    Visit :
-                                                </span>
-                                                    {/!*{item.taskOne}*!/}
-                                                    HTTPS://SOURCE-BYTE.COM/
-                                                </p>
-                                                {/!*<CopyToClipboard text={item.taskOne}>*!/}
-                                                <button
-                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/!*</CopyToClipboard>*!/}
-                                            </div>
-                                        </TabPanel>*/
-                                    }
-                                    {
-                                        // item.taskTwo &&
-                                        /*<TabPanel>
-                                            <div className={s.subscribe}>
-                                                <p><span>
-                                                    {/!*{translate(item.taskTwoDesc)} : *!/}
-                                                    Subscribe :
-                                                </span>
-                                                    {/!*{item.taskTwo}*!/}
-                                                    HTTPS://SOURCE-BYTE.COM/
-                                                </p>
-                                                {/!*<CopyToClipboard text={item.taskTwo}>*!/}
-                                                <button
-                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/!*</CopyToClipboard>*!/}
-                                            </div>
-                                        </TabPanel>*/
-                                    }
-                                    {
-                                        // item.taskThree &&
-                                        /*<TabPanel>
-                                            <div className={s.subscribe}>
-                                                <p><span>
-                                                    {/!*{translate(item.taskThreeDesc)} : *!/}
-                                                    Repost :
-                                                </span>
-                                                    {/!*{item.taskThree}*!/}
-                                                    HTTPS://SOURCE-BYTE.COM/
-                                                </p>
-                                                {/!*<CopyToClipboard text={item.taskThree}>*!/}
-                                                <button
-                                                    className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                {/!*</CopyToClipboard>*!/}
-                                            </div>
-                                        </TabPanel>*/
-                                    }
                                 </div>
                             </Tabs>
                         </div>
@@ -148,11 +114,14 @@ const GameDescription = () => {
                     {/*<a href="#" className={s.share}><img src={share} alt="share"/></a>*/}
                     <button
                         className="btn btn-warning"
+                        onClick={handleClick}
                     >
-                        {stateData.home.get_key[stateData.lang]}
+                        {btnText}
                     </button>
                 </div>
-
+                {
+                    error && <ErrorMessage message={error} />
+                }
             </div>
         );
 

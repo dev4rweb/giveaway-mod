@@ -11,6 +11,9 @@ const GameCard = ({item}) => {
     const star = item.isFavorite == 1 ? fullStar : halfStar;
     const dispatch = useDispatch()
     const isAuth = useSelector(state => state.user.isAuth)
+    const btnText = item && item.isCompetition ?
+        stateData.home.get_key[stateData.lang] :
+        stateData.home.join_giveaway[stateData.lang]
 
     const handleClick = (e) => {
         // console.log('handleClick', item)
@@ -32,18 +35,6 @@ const GameCard = ({item}) => {
                         {
                             item.tasks && item.tasks.map((item, index) => <a key={index} href="#"><img src={steam} alt="steam"/></a>)
                         }
-                        {
-                            // item.taskOne &&
-                            // <a href="#"><img src={steam} alt="steam"/></a>
-                        }
-                        {
-                            // item.taskTwo &&
-                            // <a href="#"><img src={steam} alt="steam"/></a>
-                        }
-                        {
-                            // item.taskThree &&
-                            // <a href="#"><img src={steam} alt="steam"/></a>
-                        }
                     </div>
                         : <div/>
                 }
@@ -53,7 +44,7 @@ const GameCard = ({item}) => {
                         className="btn btn-warning"
                         onClick={event => handleClick(event)}
                     >
-                        {stateData.home.get_key[stateData.lang]}
+                        {btnText}
                     </button>
                 </div>
             </div>

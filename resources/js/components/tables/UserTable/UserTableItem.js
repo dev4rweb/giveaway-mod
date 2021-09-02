@@ -16,7 +16,7 @@ const UserTableItem = ({item, user}) => {
         stateData.user.fail[stateData.lang]
 
     item.status == 0 ?
-        isWinner = stateData.user.victory[stateData.lang] :
+        isWinner = stateData.user.ongoing[stateData.lang] :
         isWinner
     let color = isWinner == item.winner_id ||
     item.status == 0 ? '#60d346' : '#e72d2d';

@@ -29,6 +29,7 @@ class GameController extends Controller
             $games = GameResource::collection(
                 Game::with('users')
                     ->with('gifts')
+                    ->with('tasks')
                     ->orderBy('status')
                     ->orderBy('endDate', 'desc')
                     ->where('isSponsored', '!=', '1')

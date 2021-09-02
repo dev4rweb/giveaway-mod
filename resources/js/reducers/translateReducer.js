@@ -3,10 +3,10 @@ const SET_LANG = 'SET_LANG'
 const defaultState = {
     lang: 'en',
     modalIsLogged: {
-        please:  {en: 'Please, ', ru: 'Пожайлуста, '},
-        auth:  {en: ' Login ', ru: ' авторизуйтесь '},
-        or:  {en: ' or ', ru: ' или '},
-        register:  {en: ' Register ', ru: ' пройдите регистрацию '},
+        please: {en: 'Please, ', ru: 'Пожайлуста, '},
+        auth: {en: ' Login ', ru: ' авторизуйтесь '},
+        or: {en: ' or ', ru: ' или '},
+        register: {en: ' Register ', ru: ' пройдите регистрацию '},
     },
     loginWith: {
         en: 'Login with STEAM', ru: 'Войти с STEAM'
@@ -33,6 +33,7 @@ const defaultState = {
         get_key: {
             en: 'Get the key', ru: 'Получить ключ'
         },
+        join_giveaway: {en: 'join to giveaway', ru: 'присоединяйтесь к розыгрышу'},
         task: {en: 'task', ru: 'задача'},
         taskOne: {en: 'Task One', ru: 'задача 1'},
         taskTwo: {en: 'Task Two', ru: 'задача 2 '},
@@ -77,7 +78,7 @@ const defaultState = {
             table: {
                 give: {en: 'Competition', ru: 'Конкурс'},
                 owner: {en: 'Owner', ru: 'Владелец'},
-                created: {en: 'Planned finish or finished', ru:'Дата окончания/окончен'},
+                created: {en: 'Planned finish or finished', ru: 'Дата окончания/окончен'},
                 status: {en: 'Status', ru: 'Статус'},
                 edit: {en: 'edit', ru: 'редактировать'},
                 draw: {en: 'draw winner', ru: 'победитель розыгрыша'},
@@ -102,7 +103,7 @@ const defaultState = {
             part: {en: 'Participation', ru: 'Участий'},
             link: {en: 'Link', ru: 'Ссылка'},
         },
-        createGive:{
+        createGive: {
             title: {en: 'Add giveaway', ru: 'Добавить раздачу'},
             task: {en: 'Add Task', ru: 'Добавить задачу'},
             subTitle: {en: 'Type of giveaway', ru: 'Тип раздачи'},
