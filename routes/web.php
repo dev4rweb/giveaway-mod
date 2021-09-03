@@ -6,6 +6,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\mailController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserGameController;
 use App\Http\Controllers\UserPageController;
@@ -62,5 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user_game/update', [UserGameController::class, 'update']);
     Route::delete('/user_game/{id}', [UserGameController::class, 'destroy']);
 });
+
+Route::get('/send', [mailController::class, 'sendEmail']);
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);
