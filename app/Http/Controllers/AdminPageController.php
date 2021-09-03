@@ -95,12 +95,21 @@ class AdminPageController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\AdminPage $adminPage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, AdminPage $adminPage)
+    public function update(Request $request)
     {
-        //
+        try {
+            $user = User::findOrFail($request['id']);
+            $user->update($request->all());
+            $response['message'] = 'User updated';
+            $response['success'] = true;
+            $response['model'] = $user;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**

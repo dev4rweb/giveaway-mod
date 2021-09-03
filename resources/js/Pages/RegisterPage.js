@@ -93,6 +93,7 @@ const RegisterPage = () => {
         const fd = new FormData();
         fd.set('name', name)
         fd.set('email', email)
+        fd.set('votes', 1)
         fd.set('password', password)
         fd.set('password_confirmation', passwordConfirm)
 
@@ -100,7 +101,7 @@ const RegisterPage = () => {
         axios.post('/register', fd)
             .then(res => {
                 // console.log(res)
-                if (res.status === 204) {
+                if (res.status === 201) { // before was 204
                     // console.log('You are logged in')
                     document.location.reload()
                 }

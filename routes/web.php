@@ -42,6 +42,7 @@ Route::post('/game/update', [GameController::class, 'update']);
 Route::delete('/game/{id}', [GameController::class, 'destroy']);
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::post('/update-votes', [AdminPageController::class, 'update']);
     Route::delete('/admin-panel/destroy/{id}', [AdminPageController::class, 'destroy']);
 
     Route::post('/file-upload', [FileUploadController::class, 'store']);

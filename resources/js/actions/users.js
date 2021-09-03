@@ -1,5 +1,5 @@
 import axios from "axios";
-import {deleteUser} from "../reducers/userReducer";
+import {deleteUser, setUser} from "../reducers/userReducer";
 import {setError, setLoading} from "../reducers/errorReducer";
 
 export const removeUser = (userId) => {
@@ -21,4 +21,22 @@ export const removeUser = (userId) => {
                 dispatch(setLoading(false))
             });
     }
+};
+
+export const updateUser = user => {
+    const fd = new FormData()
+    for (let key in user) fd.set(key, user[key])
+
+    return async (dispatch) => {
+        dispatch(setLoading(true))
+        await axios.post('/update-votes', fd)
+            .then(res => {
+                // console.log('/update-votes', res.data)
+                res.data.success ?
+                    dispatch(setUser(res.data.model)):
+                    dispatch(setError(res.data.message))
+            })
+            .catch(err => dispatch(setError(err.response.data.message)))
+            .finally(()=> dispatch(setLoading(false)));
+    };
 };

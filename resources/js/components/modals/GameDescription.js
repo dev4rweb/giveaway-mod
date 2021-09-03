@@ -10,6 +10,8 @@ import {setError} from "../../reducers/errorReducer";
 import {createUserGame} from "../../actions/userGame";
 import {getGames} from "../../actions/games";
 import ErrorMessage from "../UI/ErrorMessage";
+import {setGameDescription, setModalGameDescription} from "../../reducers/modalReducer";
+import {updateUser} from "../../actions/users";
 
 const GameDescription = () => {
     const dispatch = useDispatch()
@@ -24,7 +26,7 @@ const GameDescription = () => {
 
     // console.log('GameDescription', user)
 
-    const handleClick = e => {
+    const handleClick = async e => {
         const game = allGames.find(i => i.id === item.id)
         if (game) {
             const isJoined = !!game.users.find(i => i.id === user.id);
@@ -34,9 +36,16 @@ const GameDescription = () => {
                     user_id: user.id,
                     game_id: item.id
                 }
-                dispatch(createUserGame(userGame))
-                dispatch(getGames())
+                await dispatch(createUserGame(userGame))
+                let updateVotesUser = user
+                updateVotesUser.votes = updateVotesUser.votes + 1
+                await dispatch(updateUser(updateVotesUser))
+                await dispatch(getGames())
             }
+            setTimeout(() => {
+                dispatch(setModalGameDescription(false))
+                dispatch(setGameDescription(null))
+            }, 2000);
         } else {
             console.log('click', game);
             console.log('isJoined', isJoined)

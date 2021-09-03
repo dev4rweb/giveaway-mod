@@ -60,7 +60,7 @@ export const updateTask = task => {
         dispatch(setLoading(true))
         await axios.post('/task/update', fd)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.data.success) dispatch(updateTaskAction(res.data.model))
                 dispatch(setError(res.data.message))
             })

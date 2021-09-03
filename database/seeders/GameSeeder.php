@@ -29,6 +29,13 @@ class GameSeeder extends Seeder
             'isFavorite' => false
         ]);
 
+        Game::factory()->count(1)->create([
+            'isCompetition' => false,
+            'isFavorite' => false,
+            'status' => 1,
+            'winner_id' => 2
+        ]);
+
         Game::factory()->count(10)->create([
             'isCompetition' => true,
         ]);
