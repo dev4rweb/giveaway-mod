@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\FaqPageController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
@@ -35,6 +36,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
 Route::get('/user-panel', [UserPageController::class, 'index'])->name('user-panel');
+
+Route::get('/faq', [FaqPageController::class, 'index']);
 
 Route::get('/games', [GameController::class, 'index']);
 Route::post('/game/create', [GameController::class, 'create']);
