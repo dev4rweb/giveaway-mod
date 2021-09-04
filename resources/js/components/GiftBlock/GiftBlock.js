@@ -55,7 +55,7 @@ const GiftBlock = ({gameId, gifts}) => {
     };
 
     const addKey = item => {
-        console.log('addKey', item)
+        // console.log('addKey', item)
         const gift = {
             giftKey: item,
             game_id: gameId,

@@ -9,7 +9,6 @@ import {
     setTasksForGameThreeAction,
     setTasksForGameTwoAction
 } from "../../../reducers/TaskReducer";
-
 const AdminTableCompetitionItem = ({item}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
@@ -49,8 +48,9 @@ const AdminTableCompetitionItem = ({item}) => {
         dispatch(setTasksForGameThreeAction(item))
     };
 
-    const drawHandler = (ev) => {
+    const drawHandler = async (ev) => {
         // console.log('drawHandler', item)
+        // dispatch(randomCandidates(item))
         dispatch(setModalDrawWinner(true))
         dispatch(editDrawWinner(item))
     };

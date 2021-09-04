@@ -29,7 +29,7 @@ const TaskContainer = ({tasks}) => {
 
     /*const taskSelectorTwo = useSelector(state => state.taskType.taskTwo)
     const taskSelectorThree = useSelector(state => state.taskType.taskThree)*/
-    console.log('TaskContainer tasks', tasks)
+    // console.log('TaskContainer tasks', tasks)
 
 
     return (

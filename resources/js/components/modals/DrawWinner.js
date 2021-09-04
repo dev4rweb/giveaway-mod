@@ -1,15 +1,53 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../../sass/components/ModalDrawWinner.module.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import DrawTable from "../tables/DrawTable";
 
+let users = []
+
 const DrawWinner = () => {
-    const stateData = useSelector(state => state.lang)
-    const drawingWinner = useSelector(state => state.games.editDrawWinner)
-    const [game, setGame] = useState(drawingWinner)
+    const dispatch = useDispatch()
+    const editDrawWinner = useSelector(state => state.games.editDrawWinner)
+    const [keys, setKeys] = useState(editDrawWinner.gifts)
+    const [candidates, setCandidates] = useState(editDrawWinner.users)
+    const [canChange, setCanChange] = useState(true)
+    const stateData = useSelector(state => state.lang);
+
+
+    // console.log('Draw winner');
+
+    function getCandidates() {
+        let items = []
+        for (let i = 0; i < keys.length; i++) {
+            if (users.length > 0) {
+                let item = Math.floor(Math.random() * users.length);
+                items.push(users[item]);
+                users.splice(item, 1);
+            } else {
+                setCanChange(true)
+            }
+        }
+        console.log('getCandidates users', users)
+        console.log('getCandidates items', items)
+        setCandidates(items)
+    }
+
+    useEffect(() => {
+        console.log('useEfect')
+        if (keys.length > candidates.length) {
+            setCanChange(true)
+        } else if (keys.length === candidates.length) {
+            setCanChange(true)
+        } else {
+            setCanChange(false)
+            users = candidates
+            getCandidates()
+        }
+    }, []);
 
     const submitHandler = ev => {
         console.log('submitHandler')
+        getCandidates()
     };
 
     const handleFinish = ev => {
@@ -20,20 +58,21 @@ const DrawWinner = () => {
         <div>
             <h5 style={{color: '#fbb527'}}>Draw Winner</h5>
             <div className={s.modalDrawWinner}>
-                <p>amount of added keys: {game.gifts.length}</p>
+                <p>amount of added keys: {keys.length}</p>
                 <div className={s.btnWrapper}>
                     <button
                         className="btn btn-warning w-100"
                         onClick={submitHandler}
+                        disabled={canChange}
                     >
                         {stateData.admin.createGive.btnDraw[stateData.lang]}
                     </button>
                 </div>
 
-                <div  className="mt-5 mb-5 text-center">
+                <div className="mt-5 mb-5 text-center">
                     {
-                        game.users.length > 0 ?
-                            <DrawTable users={game.users}/>
+                        candidates.length > 0 ?
+                            <DrawTable users={candidates}/>
                             :
                             <h5>
                                 No one users in this competition

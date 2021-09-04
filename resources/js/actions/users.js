@@ -26,17 +26,20 @@ export const removeUser = (userId) => {
 export const updateUser = user => {
     const fd = new FormData()
     for (let key in user) fd.set(key, user[key])
-
+    // console.log('updateUser', user)
     return async (dispatch) => {
         dispatch(setLoading(true))
         await axios.post('/update-votes', fd)
             .then(res => {
                 // console.log('/update-votes', res.data)
                 res.data.success ?
-                    dispatch(setUser(res.data.model)):
+                    dispatch(setUser(res.data.model)) :
                     dispatch(setError(res.data.message))
             })
-            .catch(err => dispatch(setError(err.response.data.message)))
-            .finally(()=> dispatch(setLoading(false)));
+            .catch(err => {
+                // console.log(err.response.data.message)
+                dispatch(setError(err.response.data.message))
+            })
+            .finally(() => dispatch(setLoading(false)));
     };
 };

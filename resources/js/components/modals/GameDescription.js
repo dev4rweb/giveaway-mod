@@ -29,7 +29,9 @@ const GameDescription = () => {
     const handleClick = async e => {
         const game = allGames.find(i => i.id === item.id)
         if (game) {
+            // console.log('GameDescription', game)
             const isJoined = !!game.users.find(i => i.id === user.id);
+            // console.log('isJoined', isJoined)
             if (isJoined) dispatch(setError('You are already joined'));
             else {
                 const userGame = {
@@ -47,8 +49,8 @@ const GameDescription = () => {
                 dispatch(setGameDescription(null))
             }, 2000);
         } else {
-            console.log('click', game);
-            console.log('isJoined', isJoined)
+            // console.log('click', game);
+            // console.log('isJoined', isJoined)
         }
     };
 

@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
     gifts: giftReducer,
     tasks: taskReducer,
     userPage: userPageReducer,
-    userGame: usersGamesReducer
+    userGame: usersGamesReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

@@ -6,15 +6,15 @@ const DrawTable = ({users}) => {
     const stateData = useSelector(state => state.lang)
 
     const changeUser = (ev, user) => {
-        // console.log(user)
+        console.log(user)
     }
 
     return (
         <table className="table table-striped">
             <tbody>
             {
-                users.map(user =>
-                    <tr key={user.id}>
+                users.map((user, index) =>
+                    <tr key={index}>
                         <th scope="row">#{user.id}</th>
                         <td>{user.name}</td>
                         <td>profile link</td>

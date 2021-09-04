@@ -12,7 +12,7 @@ export const getAllUsersGames = () => {
         dispatch(setLoading(true))
         await axios.get('/users_games')
             .then(res => {
-                console.log('all users games', res.data)
+                // console.log('all users games', res.data)
                 if (res.data.success) dispatch(fetchAllUsersGamesAction(res.data.models))
                 else dispatch(setError(res.data.message))
             })
@@ -31,12 +31,16 @@ export const createUserGame = userGame => {
         await axios.post('/user_game/create', fd)
             .then(res => {
                 if (res.data.success) {
+                    // console.log('/user_game/create', res.data)
                     dispatch(addUserGameAction(res.data.model))
                     dispatch(setError('member added'))
                 } else dispatch(setError(res.data.message))
             })
-            .catch(err => dispatch(setError(err.response.data.message)))
-            .finally(()=> dispatch(setLoading(false)));
+            .catch(err => {
+                // console.log('err', err)
+                dispatch(setError(err.response.data.message))
+            })
+            .finally(() => dispatch(setLoading(false)));
     };
 };
 

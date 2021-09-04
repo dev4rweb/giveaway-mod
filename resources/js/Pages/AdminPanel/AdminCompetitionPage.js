@@ -11,7 +11,7 @@ const AdminCompetitionPage = ({games}) => {
     const stateData = useSelector(state => state.lang)
     const isEditPageOpen = useSelector(state => state.modal.editPage)
     const isModalDrawWinnerOpen = useSelector(state => state.modal.modalDrawWinner)
-    console.log('AdminCompetitionPage', games)
+    // console.log('AdminCompetitionPage', games)
 
     return (
         <div className={`container ${s.adminMainPage}`}>

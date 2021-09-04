@@ -57,11 +57,11 @@ const AdminCreatePage = () => {
         dispatch(setTaskOne(null))
         dispatch(setTaskTwo(null))
         dispatch(setTaskThree(null))
-        console.log('game', game)
+        // console.log('game', game)
     }, []);
 
     const submitHandler = async e => {
-        console.log('submitHandler', game)
+        // console.log('submitHandler', game)
         await dispatch(updateGame(game))
         await dispatch(changeNewGame({}))
         await dispatch(compareTasks(taskOneFromServer, selectedTaskOne))

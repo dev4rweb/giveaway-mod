@@ -8,7 +8,7 @@ const TaskBlock = ({selector, setTask, setSelectedTask, removeInitial = null, ti
     const dispatch = useDispatch()
 
     const handleTaskChange = selectedOption => {
-        console.log('selectedOption',selectedOption);
+        // console.log('selectedOption',selectedOption);
         if (removeInitial) {
             dispatch(removeInitial(null))
         }
