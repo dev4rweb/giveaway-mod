@@ -27,13 +27,13 @@ const DrawWinner = () => {
                 setCanChange(true)
             }
         }
-        console.log('getCandidates users', users)
-        console.log('getCandidates items', items)
+        // console.log('getCandidates users', users)
+        // console.log('getCandidates items', items)
         setCandidates(items)
     }
 
     useEffect(() => {
-        console.log('useEfect')
+        // console.log('useEfect')
         if (keys.length > candidates.length) {
             setCanChange(true)
         } else if (keys.length === candidates.length) {
@@ -47,6 +47,7 @@ const DrawWinner = () => {
 
     const changeOneCandidate = (user) => {
         // console.log('changeOneCandidate', user)user
+        // UPDATE STATE IN ARRAY OBJECT USING SPREAD
         if (users.length > 0) {
             let items = candidates;
             let index = items.indexOf(user)
@@ -65,7 +66,7 @@ const DrawWinner = () => {
     };
 
     const submitHandler = ev => {
-        console.log('submitHandler')
+        // console.log('submitHandler')
         getCandidates()
     };
 
