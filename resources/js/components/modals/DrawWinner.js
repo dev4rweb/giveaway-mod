@@ -45,6 +45,25 @@ const DrawWinner = () => {
         }
     }, []);
 
+    const changeOneCandidate = (user) => {
+        // console.log('changeOneCandidate', user)user
+        if (users.length > 0) {
+            let items = candidates;
+            let index = items.indexOf(user)
+            let randomItem = Math.floor(Math.random() * users.length)
+            let randomUser = users[randomItem]
+            if (index !== -1) {
+                items[index] = randomUser
+                let markers = [...candidates]
+                markers[index] = {...markers[index], key: randomUser}
+                setCandidates(markers)
+                // console.log('markers', markers)
+                users.splice(randomItem, 1)
+            } else setCanChange(true)
+            // console.log('changeOneCandidate', randomUser, ' - ', items);
+        } else setCanChange(true)
+    };
+
     const submitHandler = ev => {
         console.log('submitHandler')
         getCandidates()
@@ -72,7 +91,11 @@ const DrawWinner = () => {
                 <div className="mt-5 mb-5 text-center">
                     {
                         candidates.length > 0 ?
-                            <DrawTable users={candidates}/>
+                            <DrawTable
+                                users={candidates}
+                                canChange={canChange}
+                                changeOneCandidate={changeOneCandidate}
+                            />
                             :
                             <h5>
                                 No one users in this competition

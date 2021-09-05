@@ -2,11 +2,20 @@ import React from 'react';
 import s from '../../../sass/components/DrawWinner.module.scss'
 import {useSelector} from "react-redux";
 
-const DrawTable = ({users}) => {
+const DrawTable = ({users, canChange, changeOneCandidate}) => {
     const stateData = useSelector(state => state.lang)
+    const style = canChange ?
+    {
+        color: '#f0f0f0',
+        opacity: '.5',
+        cursor: 'not-allowed'
+    } : {}
 
     const changeUser = (ev, user) => {
-        console.log(user)
+        if (!canChange) {
+            changeOneCandidate(user)
+        }
+        // console.log(user, ' can ', canChange);
     }
 
     return (
@@ -20,6 +29,7 @@ const DrawTable = ({users}) => {
                         <td>profile link</td>
                         <td
                             className={s.drawOther}
+                            style={style}
                             onClick={event => changeUser(event, user)}>
                             {stateData.admin.createGive.btnDrawOther[stateData.lang]}
                         </td>

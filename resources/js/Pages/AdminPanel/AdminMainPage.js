@@ -12,7 +12,7 @@ const AdminMainPage = ({users, games}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
 
-    // console.log('users', users)
+    console.log('AdminMainPage', games)
 
     return (
         <div className={`container ${s.adminMainPage}`}>
@@ -50,7 +50,9 @@ const AdminMainPage = ({users, games}) => {
                     {stateData.admin.mainPage.moder[stateData.lang]}
                 </p>
                 <span>
-                    6
+                    {
+                        games.filter(game => game.status == 2).length
+                    }
                 </span>
             </div>
         </div>
