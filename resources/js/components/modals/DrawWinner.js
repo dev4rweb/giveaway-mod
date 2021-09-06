@@ -2,13 +2,17 @@ import React, {useEffect, useState} from 'react';
 import s from '../../../sass/components/ModalDrawWinner.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import DrawTable from "../tables/DrawTable";
+import {createWinner} from "../../actions/winners";
+import {updateGift} from "../../actions/gifts";
+import {updateGame} from "../../actions/games";
+import {setLoading} from "../../reducers/errorReducer";
 
 let users = []
 
 const DrawWinner = () => {
     const dispatch = useDispatch()
     const editDrawWinner = useSelector(state => state.games.editDrawWinner)
-    const [keys, setKeys] = useState(editDrawWinner.gifts)
+    const [keys, setKeys] = useState(editDrawWinner.gifts.filter(gift => gift.user_id == null))
     const [candidates, setCandidates] = useState(editDrawWinner.users)
     const [canChange, setCanChange] = useState(true)
     const stateData = useSelector(state => state.lang);
@@ -70,8 +74,34 @@ const DrawWinner = () => {
         getCandidates()
     };
 
-    const handleFinish = ev => {
-        console.log('handleFinish')
+    const acceptWinners = () => {
+        for (let i = 0; i < candidates.length; i++) {
+            const winner = {
+                user_id: candidates[i].id,
+                game_id: editDrawWinner.id
+            }
+            dispatch(createWinner(winner))
+            const gift = {
+                id: keys[i].id,
+                user_id: candidates[i].id,
+                giftKey: keys[i].giftKey,
+            }
+            dispatch(updateGift(gift))
+        }
+    };
+
+    const handleFinish = async ev => {
+        console.log('handleFinish game', editDrawWinner)
+        console.log('handleFinish candidates', candidates)
+        acceptWinners()
+        // game.status = 1
+        // console.log('handleFinish game', game)
+        let game = {
+            id: editDrawWinner.id,
+            status: 1
+        }
+        await dispatch(updateGame(game))
+        window.location.reload()
     };
 
     return (

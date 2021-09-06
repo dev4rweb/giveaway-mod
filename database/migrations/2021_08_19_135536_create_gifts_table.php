@@ -17,6 +17,7 @@ class CreateGiftsTable extends Migration
             $table->id();
             $table->string('giftKey')->unique();
             $table->foreignId('game_id')->constrained()->onDelete('cascade');
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

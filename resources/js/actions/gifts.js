@@ -46,8 +46,11 @@ export const createGift = (gift) => {
 
 export const updateGift = gift => {
     const fd = new FormData();
-    fd.set('id', gift.id)
-    fd.set('giftKey', gift.giftKey)
+    for (let key in gift) {
+        fd.set(key, gift[key])
+    }
+    // fd.set('id', gift.id)
+    // fd.set('giftKey', gift.giftKey)
 
     return async (dispatch) => {
         dispatch(setLoading(true))
@@ -55,7 +58,7 @@ export const updateGift = gift => {
             .then(res => {
                 if (res.data.success) {
                     dispatch(updateGiftAction(res.data.model))
-                    dispatch(setError(res.data.message))
+                    // dispatch(setError(res.data.message))
                 } else dispatch(setError(res.data.message))
             })
             .catch(err => dispatch(setError(err.response.data.message)))
