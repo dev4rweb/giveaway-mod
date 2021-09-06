@@ -10,11 +10,20 @@ class WinnerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        try {
+            $winners = Winner::all();
+            $response['message'] = 'All winners';
+            $response['success'] = true;
+            $response['models'] = $winners;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -31,22 +40,40 @@ class WinnerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $winner = Winner::create($request->all());
+            $response['message'] = 'Winner created';
+            $response['success'] = true;
+            $response['model'] = $winner;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Winner  $winner
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Winner $winner)
+    public function show($id)
     {
-        //
+        try {
+            $winner = Winner::findOrFail($id);
+            $response['message'] = 'Winner found';
+            $response['success'] = true;
+            $response['model'] = $winner;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
@@ -64,22 +91,41 @@ class WinnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Winner  $winner
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Winner $winner)
+    public function update(Request $request)
     {
-        //
+        try {
+            $winner = Winner::findOrFail($request['id']);
+            $winner->update($request->all());
+            $response['message'] = 'Winner updated';
+            $response['success'] = true;
+            $response['model'] = $winner;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Winner  $winner
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Winner $winner)
+    public function destroy($id)
     {
-        //
+        try {
+            $winner = Winner::findOrFail($id);
+            $winner->delete();
+            $response['message'] = 'Winner deleted';
+            $response['success'] = true;
+            $response['id'] = $id;
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+        return response()->json($response);
     }
 }

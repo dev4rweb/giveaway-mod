@@ -25,4 +25,9 @@ class Game extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function winners()
+    {
+        return $this->belongsToMany(User::class, 'winners', 'game_id', 'user_id');
+    }
 }

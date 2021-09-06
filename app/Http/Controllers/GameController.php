@@ -30,6 +30,7 @@ class GameController extends Controller
                 Game::with('users')
                     ->with('gifts')
                     ->with('tasks')
+                    ->with('winners')
                     ->orderBy('status')
                     ->orderBy('endDate', 'desc')
                     ->where('isSponsored', '!=', '1')
@@ -101,7 +102,11 @@ class GameController extends Controller
     public function show($id)
     {
         try {
-            $game = new GameResource(Game::with('users')->findOrFail($id));
+            $game = new GameResource(Game::with('users')
+                ->with('gifts')
+                ->with('tasks')
+                ->with('winners')
+                ->findOrFail($id));
             $response['message'] = 'Find Game';
             $response['success'] = true;
             $response['model'] = $game;
@@ -139,6 +144,7 @@ class GameController extends Controller
                 Game::with('users')
                     ->with('gifts')
                     ->with('tasks')
+                    ->with('winners')
                     ->orderBy('status')
                     ->orderBy('endDate', 'desc')
                     ->where('isSponsored', '!=', '1')

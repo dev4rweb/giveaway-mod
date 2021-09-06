@@ -66,6 +66,7 @@ export const updateGame = (game) => {
     delete game.users
     delete game.gifts
     delete game.tasks
+    delete game.winners
     const fd = new FormData()
     for (let key in game) {
         fd.set(key, game[key])

@@ -11,6 +11,7 @@ use App\Http\Controllers\mailController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserGameController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\WinnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +66,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user_game/create', [UserGameController::class, 'store']);
     Route::post('/user_game/update', [UserGameController::class, 'update']);
     Route::delete('/user_game/{id}', [UserGameController::class, 'destroy']);
+
+    Route::get('/winners', [WinnerController::class, 'index']);
+    Route::get('/winner/{id}', [WinnerController::class, 'show']);
+    Route::post('/winner/create', [WinnerController::class, 'store']);
+    Route::post('/winner/update', [WinnerController::class, 'update']);
+    Route::delete('/winner/{id}', [WinnerController::class, 'destroy']);
 });
 
 Route::get('/send', [mailController::class, 'sendEmail']);

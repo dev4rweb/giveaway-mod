@@ -31,11 +31,13 @@ class AdminPageController extends Controller
     {
         $user = Auth::user();
         $allUsers = User::with('games')
+            ->with('winners')
             ->where('isAdmin', '!=', 1)
             ->get();
         $allGames = Game::with('users')
             ->with('gifts')
             ->with('tasks')
+            ->with('winners')
             ->orderBy('status')
             ->orderBy('endDate')
             ->where('isSponsored', '=', false)

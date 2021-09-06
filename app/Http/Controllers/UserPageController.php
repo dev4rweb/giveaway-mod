@@ -24,7 +24,10 @@ class UserPageController extends Controller
             ->orderBy('game_id', 'DESC')->get();
         $games = [];
         foreach ($partGames as $partGame) {
-            array_push($games, Game::where('id', '=', $partGame->game_id)->with('users')->first());
+            array_push($games, Game::where('id', '=', $partGame->game_id)
+                ->with('users')
+                ->with('winners')
+                ->first());
         }
         $userGames = User::where('id', '=', $user->id)->with('games')->first();
 
