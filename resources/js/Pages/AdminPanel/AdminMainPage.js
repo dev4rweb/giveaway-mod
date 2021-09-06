@@ -12,7 +12,7 @@ const AdminMainPage = ({users, games}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
 
-    console.log('AdminMainPage', games)
+    // console.log('AdminMainPage', games)
 
     return (
         <div className={`container ${s.adminMainPage}`}>

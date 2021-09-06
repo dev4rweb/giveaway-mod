@@ -24,6 +24,7 @@ import AdminCompetitionPage from "./AdminPanel/AdminCompetitionPage";
 import AdminCreatePage from "./AdminPanel/AdminCreatePage";
 import {addGame} from "../actions/games";
 import {createGift, getGifts} from "../actions/gifts";
+import {createWinner, getAllWinners, removeWinner} from "../actions/winners";
 
 const AdminPage = ({currentUser, allUsers, allGames}) => {
     const dispatch = useDispatch()
@@ -47,7 +48,7 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
     }
 
     // console.log('allGames', allUsers)
-    const testApi = ()=> {
+    const testApi = () => {
         // const time = (Math.ceil(new Date(Date.now()).getTime()/1000))
         // dispatch(getGames())
         // dispatch(addGame())
@@ -62,13 +63,20 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
         dispatch(updateGame(game))*/
         // dispatch(removeGame(36))
 
+        // dispatch(getAllWinners())
+        /*const winner = { // !!!only for user that contain game in userGame table
+            user_id: 5,
+            game_id: 8
+        }
+        dispatch(createWinner(winner))*/
 
+        // dispatch(removeWinner(156))
     }
-    // testApi()
 
     useEffect(() => {
         dispatch(setGames(allGames))
         dispatch(setAllUsers(allUsers))
+        testApi()
     }, []);
 
 
@@ -161,7 +169,7 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
                     <AdminCreatePage/>
                 </TabPanel>
             </Tabs>
-            {error && <ErrorMessage message={error} />}
+            {error && <ErrorMessage message={error}/>}
         </AdminLayout>
     );
 };
