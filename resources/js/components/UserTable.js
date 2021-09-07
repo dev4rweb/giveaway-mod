@@ -21,7 +21,7 @@ const UserTable = ({games, user}) => {
             <tr>
                 <th scope="col">{stateData.user.comp[stateData.lang]}</th>
                 <th scope="col">{stateData.user.own[stateData.lang]}</th>
-                <th scope="col">{stateData.user.date[stateData.lang]}</th>
+                <th scope="col">{stateData.user.dateEnd[stateData.lang]}</th>
                 <th scope="col">{stateData.user.amount[stateData.lang]}</th>
                 <th scope="col">{stateData.user.res[stateData.lang]}</th>
             </tr>

@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 const UserTableItem = ({item, user}) => {
     const stateData = useSelector(state => state.lang)
 
-    const date = new Date(item.startDate * 1000)
+    const date = new Date(item.endDate * 1000)
     const day = date.getDate() < 10 ?
         `0${date.getDate()}` :
         date.getDate();
@@ -23,7 +23,7 @@ const UserTableItem = ({item, user}) => {
 
     return (
         <tr>
-            <th scope="row">#{item.id}</th>
+            <th scope="row">#{item.id} {item.name}</th>
             <td>id{item.winner_id}</td>
             <td>{`${day}/${month}/${date.getFullYear()}`}</td>
             <td>{item.users.length}</td>

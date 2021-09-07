@@ -152,6 +152,7 @@ const defaultState = {
         comp: {en: 'Competition', ru: 'Конкурс'},
         own: {en: 'Owner', ru: 'Владелец'},
         date: {en: 'date of creation', ru: 'Дата создания'},
+        dateEnd: {en: 'Finish date', ru: 'Дата окончания'},
         amount: {en: 'Number of participants', ru: 'Колличество участников'},
         res: {en: 'Result', ru: 'Результат'},
     }
