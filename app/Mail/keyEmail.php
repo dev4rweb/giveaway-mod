@@ -7,21 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class adaptiveEmail extends Mailable
+class keyEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $sendTo;
-    protected $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($sendTo, $data = 'data')
+    public function __construct()
     {
-        $this->sendTo = $sendTo;
-        $this->data = $data;
+        //
     }
 
     /**
@@ -31,9 +28,6 @@ class adaptiveEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('keyEmail', [
-            'data' => $this->data,
-            ])
-            ->to($this->sendTo);
+        return $this->markdown('keyEmail');
     }
 }

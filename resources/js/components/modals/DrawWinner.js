@@ -5,7 +5,7 @@ import DrawTable from "../tables/DrawTable";
 import {createWinner} from "../../actions/winners";
 import {updateGift} from "../../actions/gifts";
 import {updateGame} from "../../actions/games";
-import {setLoading} from "../../reducers/errorReducer";
+import {setError, setLoading} from "../../reducers/errorReducer";
 
 let users = []
 
@@ -74,6 +74,19 @@ const DrawWinner = () => {
         getCandidates()
     };
 
+    const sendEmail = user => {
+        dispatch(setLoading(true))
+        const fd = new FormData()
+        for (let key in user) fd.set(key, user[key])
+
+        axios.post('/send-key', fd)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err.data.message))
+            .finally(() => dispatch(setLoading(false)))
+    };
+
     const acceptWinners = () => {
         for (let i = 0; i < candidates.length; i++) {
             const winner = {
@@ -87,7 +100,25 @@ const DrawWinner = () => {
                 giftKey: keys[i].giftKey,
             }
             dispatch(updateGift(gift))
+
+             const user = {
+                 name: candidates[i].name,
+                 email: candidates[i].email,
+                 giveawayName: editDrawWinner.name,
+                 giveDesc: editDrawWinner.description,
+                 gift: keys[i].giftKey
+             }
+
+            sendEmail(user)
         }
+/*        const user = {
+            name: candidates[0].name,
+            email: candidates[0].email,
+            giveawayName: editDrawWinner.name,
+            giveDesc: editDrawWinner.description,
+            gift: keys[0].giftKey
+        }
+        sendEmail(user)*/
     };
 
     const handleFinish = async ev => {
@@ -101,6 +132,7 @@ const DrawWinner = () => {
             status: 1
         }
         await dispatch(updateGame(game))
+        dispatch(setError('users emails sent'))
         window.location.reload()
     };
 

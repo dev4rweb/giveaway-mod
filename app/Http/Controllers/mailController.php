@@ -47,4 +47,21 @@ class mailController extends Controller
     {
         return view('aEmail');
     }
+
+    public function sendKey(Request $request){
+        try {
+//            $emailTo = 'dev4rweb@gmail.com';
+            $emailTo = $request['email'];
+            $data = $request->all();
+            Mail::send(new adaptiveEmail($emailTo, $data));
+            $response['message'] = 'Email Send';
+            $response['success'] = true;
+        }catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['add'] = 'Email Doesnt send';
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
+    }
 }

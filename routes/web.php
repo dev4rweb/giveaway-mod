@@ -75,5 +75,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/send', [mailController::class, 'sendEmail']);
+Route::post('/send-key', [mailController::class, 'sendKey']);
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);
