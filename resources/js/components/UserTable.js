@@ -15,6 +15,8 @@ const UserTable = ({games, user}) => {
         {id: 7, competition: 77, owner: 7988, date: '10/10/2021', people: 780, result: stateData.user.victory[stateData.lang]},
     ]);
 
+    // console.log('UserTable',games)
+
     return (
         <table className="table table-striped">
             <thead>

@@ -11,14 +11,15 @@ const UserTableItem = ({item, user}) => {
     const month = (date.getMonth() + 1) < 10 ?
         `0${date.getMonth() + 1}` :
         date.getMonth() + 1;
-    let isWinner = item.winner_id == user.id ?
+    // let isWinner = item.winner_id == user.id ?
+    let isWinner = item.winners.find(winner => winner.id == user.id) ?
         stateData.user.victory[stateData.lang] :
         stateData.user.fail[stateData.lang]
 
     item.status == 0 ?
         isWinner = stateData.user.ongoing[stateData.lang] :
         isWinner
-    let color = isWinner == item.winner_id ||
+    let color = isWinner === stateData.user.victory[stateData.lang] ||
     item.status == 0 ? '#60d346' : '#e72d2d';
 
     return (
@@ -30,6 +31,8 @@ const UserTableItem = ({item, user}) => {
             <td
                 className="table-status"
                 style={{color: color}}
+                /*onClick={() => console.log('UserTableItem', user,
+                    '\n Game', item, '\n isWinner ', isWinner)}*/
             >
                 {isWinner}
             </td>
