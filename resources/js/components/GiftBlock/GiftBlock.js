@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 const GiftBlock = ({gameId, gifts}) => {
     const dispatch = useDispatch()
     const [keys, setKeys] = useState([
-        {id: 1, game_id: gameId, giftKey: '5896-7896-4445-128896-25'}
+        // {id: 1, game_id: gameId, giftKey: '5896-7896-4445-128896-25'}
     ]);
 
     useEffect(() => {
@@ -63,6 +63,11 @@ const GiftBlock = ({gameId, gifts}) => {
         dispatch(createGift(gift))
     };
 
+    const removeKey = item => {
+        // console.log('removeKey', item)
+        dispatch(removeGift(item.id))
+    };
+
     return (
         <div className="gift-container">
             <ul className="gift-list">
@@ -77,6 +82,12 @@ const GiftBlock = ({gameId, gifts}) => {
                         <p>
                             {item.giftKey}
                         </p>
+                        <span
+                            className="remove-key"
+                            onClick={()=> removeKey(item)}
+                        >
+                            X
+                        </span>
                     </li>
                 )}
             </ul>

@@ -7,7 +7,7 @@ export const getGifts = () => {
         dispatch(setLoading(true))
         await axios.get('/gifts')
             .then(res => {
-                console.log('success', res.data)
+                // console.log('success', res.data)
                 if (res.data.success)
                     dispatch(fetchAllGifts(res.data.models));
                 else dispatch(setError(res.data.message));

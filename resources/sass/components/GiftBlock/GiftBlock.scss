@@ -6,18 +6,41 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 
-    span{
+    span {
         color: $text-color;
     }
 
-    p{
+    p {
         margin-bottom: 0;
         margin-left: 20px;
+        color: $text-color;
+    }
+
+    .remove-key {
+        color: $text-color;
+        font-size: 18px;
+        font-weight: bold;
+        -webkit-transition: all .2s;
+        -moz-transition: all .2s;
+        -ms-transition: all .2s;
+        -o-transition: all .2s;
+        transition: all .2s;
+
+        &:hover {
+            cursor: pointer;
+            color: $red-bg;
+            -webkit-transform: scale(1.5, 1.5);
+            -moz-transform: scale(1.5, 1.5);
+            -ms-transform: scale(1.5, 1.5);
+            -o-transform: scale(1.5, 1.5);
+            transform: scale(1.5, 1.5);
+        }
     }
 }
 
-.gift-container{
+.gift-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
