@@ -6,7 +6,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    height: 35px;
 
     span {
         color: $text-color;
@@ -37,6 +37,12 @@
             -o-transform: scale(1.5, 1.5);
             transform: scale(1.5, 1.5);
         }
+    }
+
+    .used-key{
+        color: $text-grey;
+        font-size: 18px;
+        font-weight: bold;
     }
 }
 

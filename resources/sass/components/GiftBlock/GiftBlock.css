@@ -4,7 +4,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; }
+  height: 35px; }
   .gift-list-item span {
     color: #fdfdfd; }
   .gift-list-item p {
@@ -28,6 +28,10 @@
       -ms-transform: scale(1.5, 1.5);
       -o-transform: scale(1.5, 1.5);
       transform: scale(1.5, 1.5); }
+  .gift-list-item .used-key {
+    color: #9a9a9a;
+    font-size: 18px;
+    font-weight: bold; }
 
 .gift-container {
   width: 100%;

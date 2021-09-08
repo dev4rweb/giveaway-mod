@@ -13,12 +13,14 @@ const DrawWinner = () => {
     const dispatch = useDispatch()
     const editDrawWinner = useSelector(state => state.games.editDrawWinner)
     const [keys, setKeys] = useState(editDrawWinner.gifts.filter(gift => gift.user_id == null))
+    // const allGames = useSelector(state => state.games.games)
     const [candidates, setCandidates] = useState(editDrawWinner.users)
     const [canChange, setCanChange] = useState(true)
     const stateData = useSelector(state => state.lang);
 
 
-    // console.log('Draw winner');
+    // console.log('Draw winner all users', allGames.find(item => item.id === editDrawWinner.id).users);
+    // console.log('Draw winner all candidates', editDrawWinner.users);
 
     function getCandidates() {
         let items = []

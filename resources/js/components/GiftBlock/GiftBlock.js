@@ -75,19 +75,40 @@ const GiftBlock = ({gameId, gifts}) => {
                     <li
                         key={index}
                         className="gift-list-item"
+                        onClick={() => console.log(item)}
                     >
-                        <span>
+                        <span
+                        >
                             #{index + 1} -
                         </span>
-                        <p>
-                            {item.giftKey}
-                        </p>
-                        <span
-                            className="remove-key"
-                            onClick={()=> removeKey(item)}
-                        >
-                            X
-                        </span>
+                        {
+                            item.user_id !== null ?
+                                <p
+                                    style={{color: '#9a9a9a'}}
+                                >
+                                    {item.giftKey}
+                                </p>
+                                :
+                                <p>
+                                    {item.giftKey}
+                                </p>
+                        }
+
+                        {
+                            item.user_id !== null ?
+                                <span
+                                    className="used-key"
+                                >
+                                    -
+                                </span>
+                                :
+                                <span
+                                    className="remove-key"
+                                    onClick={() => removeKey(item)}
+                                >
+                                    X
+                                </span>
+                        }
                     </li>
                 )}
             </ul>
