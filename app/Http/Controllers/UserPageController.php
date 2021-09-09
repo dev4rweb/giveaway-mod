@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Gift;
 use App\Models\User;
 use App\Models\UserGame;
 use App\Models\UserPage;
+use App\Models\Winner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -20,6 +22,10 @@ class UserPageController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $user = User::where('id', '=', $user->id)
+            ->with('games')
+            ->with('winners')
+            ->first();
         $partGames = UserGame::where('user_id', '=', $user->id)
             ->orderBy('game_id', 'DESC')->get();
         $games = [];
@@ -29,6 +35,8 @@ class UserPageController extends Controller
                 ->with('winners')
                 ->first());
         }
+
+        $wins = Gift::where('user_id', '=', $user->id)->get();
         $userGames = User::where('id', '=', $user->id)->with('games')->first();
 
         return Inertia::render('UserPage', [
@@ -36,6 +44,7 @@ class UserPageController extends Controller
 //            'partGames' => $partGames,
             'games' => $games,
 //            'userGames' => $userGames
+            'gifts' => $wins
         ]);
     }
 
@@ -52,7 +61,7 @@ class UserPageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +72,7 @@ class UserPageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserPage  $userPage
+     * @param \App\Models\UserPage $userPage
      * @return \Illuminate\Http\Response
      */
     public function show(UserPage $userPage)
@@ -74,7 +83,7 @@ class UserPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserPage  $userPage
+     * @param \App\Models\UserPage $userPage
      * @return \Illuminate\Http\Response
      */
     public function edit(UserPage $userPage)
@@ -85,8 +94,8 @@ class UserPageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserPage  $userPage
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\UserPage $userPage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserPage $userPage)
@@ -97,7 +106,7 @@ class UserPageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserPage  $userPage
+     * @param \App\Models\UserPage $userPage
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserPage $userPage)

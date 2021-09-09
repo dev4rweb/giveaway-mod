@@ -2,6 +2,7 @@
 
 .user-page {
     height: calc(100vh - 130px);
+    overflow-y: auto;
 
     .user-statistic {
         width: 100%;
@@ -40,6 +41,7 @@
         background-color: $footer-bg;
     }
 }
+
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {

@@ -62,6 +62,12 @@ const defaultState = {
         mainTab: {
             en: 'Main', ru: 'Главная'
         },
+        mainProfile: {
+            en: 'Profile Settings', ru: 'Настройки профиля'
+        },
+        mainWin: {
+            en: 'Achievements', ru: 'Достижения'
+        },
         competitionTab: {
             en: 'Competitions', ru: 'Конкурсы'
         },
@@ -155,6 +161,7 @@ const defaultState = {
         dateEnd: {en: 'Finish date', ru: 'Дата окончания'},
         amount: {en: 'Number of participants', ru: 'Колличество участников'},
         res: {en: 'Result', ru: 'Результат'},
+        gift: {en: 'Your key', ru: 'Твой ключ'},
     }
 }
 

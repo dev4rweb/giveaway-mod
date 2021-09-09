@@ -1,9 +1,11 @@
 const SET_USER_PAGE_USER = 'SET_USER_PAGE_USER'
 const SET_USER_PAGE_GAMES = 'SET_USER_PAGE_GAMES'
+const SET_USER_PAGE_GIFTS = 'SET_USER_PAGE_GIFTS'
 
 const defaultState = {
     user: {},
-    games: []
+    games: [],
+    gifts:  []
 }
 
 export default function userPageReducer(state = defaultState, action) {
@@ -18,6 +20,11 @@ export default function userPageReducer(state = defaultState, action) {
                 ...state,
                 games: action.payload
             }
+        case SET_USER_PAGE_GIFTS:
+            return {
+                ...state,
+                gifts: action.payload
+            }
         default:
             return state
     }
@@ -25,3 +32,4 @@ export default function userPageReducer(state = defaultState, action) {
 
 export const setUserPageUserAction = user => ({type: SET_USER_PAGE_USER, payload: user})
 export const setUserPageGamesAction = games => ({type: SET_USER_PAGE_GAMES, payload: games})
+export const setUserPageGiftsAction = gifts => ({type: SET_USER_PAGE_GIFTS, payload: gifts})

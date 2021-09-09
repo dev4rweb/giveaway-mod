@@ -7,15 +7,18 @@ import steam from "../../assets/png/steam-icon-white.png";
 import logout from "../../assets/icons/logout-blue.png";
 import {useDispatch, useSelector} from "react-redux";
 import UserMainPage from "./UserPanel/UserMainPage";
-import {setUserPageGamesAction, setUserPageUserAction} from "../reducers/userPageReducer";
+import {setUserPageGamesAction, setUserPageGiftsAction, setUserPageUserAction} from "../reducers/userPageReducer";
+import UserProfilePage from "./UserPanel/UserProfilePage";
+import UserWinPage from "./UserPanel/UserWinPage";
 
-const UserPage = ({user, games}) => {
+const UserPage = ({user, games, gifts}) => {
     const dispatch = useDispatch();
     const stateData = useSelector(state => state.lang)
 
     useEffect(() => {
         dispatch(setUserPageUserAction(user))
         dispatch(setUserPageGamesAction(games))
+        dispatch(setUserPageGiftsAction(gifts))
     }, []);
 
     return (
@@ -24,6 +27,8 @@ const UserPage = ({user, games}) => {
 
                 <TabList className={s.navigation}>
                     <Tab className={s.item}>{stateData.admin.mainTab[stateData.lang]}</Tab>
+                    <Tab className={s.item}>{stateData.admin.mainProfile[stateData.lang]}</Tab>
+                    <Tab className={s.item}>{stateData.admin.mainWin[stateData.lang]}</Tab>
                     <div className={s.btnWrapper}>
                         <div className='outline-radius'>
                             <InertiaLink
@@ -45,6 +50,12 @@ const UserPage = ({user, games}) => {
 
                 <TabPanel>
                     <UserMainPage />
+                </TabPanel>
+                <TabPanel>
+                    <UserProfilePage />
+                </TabPanel>
+                <TabPanel>
+                    <UserWinPage />
                 </TabPanel>
             </Tabs>
         </UserLayout>

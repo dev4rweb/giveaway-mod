@@ -6,6 +6,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import {useDispatch, useSelector} from "react-redux";
+import {setError, setLoading} from "../reducers/errorReducer";
+import ErrorMessage from "../components/UI/ErrorMessage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 const AuthPage = () => {
     const classes = useStyles();
+    const dispatch = useDispatch()
+    const error = useSelector(state => state.error.error)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isRemember, setIsRemember] = useState(false)
@@ -96,6 +101,7 @@ const AuthPage = () => {
         // console.log('password', password)
         // console.log('isRemember', isRemember)
 
+        dispatch(setLoading(true))
         const fd = new FormData();
         fd.set('email', email)
         fd.set('password', password)
@@ -111,7 +117,11 @@ const AuthPage = () => {
             })
             .catch(err => {
                 console.log(err.response.data)
-            });
+                dispatch(setError(err.response.data.message))
+                setEmail('');
+                setPassword('')
+            })
+            .finally(()=> dispatch(setLoading(false)));
     };
 
     return (
@@ -182,6 +192,9 @@ const AuthPage = () => {
             >
                 or Register
             </InertiaLink>
+            {
+                error && <ErrorMessage message={error} />
+            }
         </div>
     );
 };
