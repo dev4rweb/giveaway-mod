@@ -9,7 +9,9 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
-<body>
+<body style="position: relative">
 @inertia
+@include('auth.social')
+@yield('js')
 </body>
 </html>

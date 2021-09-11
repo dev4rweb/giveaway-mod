@@ -96,6 +96,13 @@ const UserProfilePage = () => {
         dispatch(setUserPageUserAction(user))
     }
 
+    const facebookClick = ev => {
+        const fakeButton = document.querySelector('.ulogin-button-facebook')
+        console.log('facebookClick')
+        console.log('facebookClick', fakeButton)
+        if (fakeButton) fakeButton.click()
+    };
+
     return (
         <div className={`container user-page`}>
             <div className="title-wrapper">
@@ -132,6 +139,57 @@ const UserProfilePage = () => {
                     {/*</ThemeProvider>*/}
                 </form>
             </div>
+
+            <Button
+                variant="outlined"
+                // color="primary"
+                className={classes.button}
+                onClick={facebookClick}
+                type="button"
+            >
+                Facebook
+            </Button>
+
+            {
+                currentUser.social_ulogins.length > 0
+                && currentUser.social_ulogins.map((item, index) => {
+                    const firstName = item.first_name
+                    const last_name = item.last_name
+                    const email = item.email
+                    const nickname = item.nickname
+                    const bdate = item.bdate
+                    const sex = item.sex
+                    const phone = item.phone
+                    const photo = item.photo
+                    const photo_big = item.photo_big
+                    const city = item.city
+                    const country = item.country
+
+                    const network = item.network
+                    const profile = item.profile
+                    const verified_email = item.verified_email
+                    return (
+                        <ol key={index}>
+                            {network && <li>Social: {network} </li>}
+                            {firstName && <li>First Name: {firstName} </li>}
+                            {last_name && <li>Last Name: {last_name} </li>}
+                            {email && <li>Email: {email} </li>}
+                            {nickname && <li>Nickname: {nickname} </li>}
+                            {bdate && <li>Birthday: {bdate} </li>}
+                            {sex && <li>Gender: {sex == 2 ? 'male' : 'female'} </li>}
+                            {phone && <li>Phone: {phone} </li>}
+                            {photo && <li>Avatar: {photo} </li>}
+                            {photo_big && <li>Big Photo: {photo_big} </li>}
+                            {city && <li>City: {city} </li>}
+                            {country && <li>Country: {country} </li>}
+
+                            {profile && <li><a href={profile}>profile link</a> </li>}
+                            {verified_email && <li>verified email: {verified_email == 1 ? 'verified' : 'NOT verified'} </li>}
+
+                        </ol>
+                    )
+                })
+            }
         </div>
     );
 };

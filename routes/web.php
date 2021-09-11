@@ -9,6 +9,7 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\mailController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UloginController;
 use App\Http\Controllers\UserGameController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\WinnerController;
@@ -72,9 +73,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/winner/create', [WinnerController::class, 'store']);
     Route::post('/winner/update', [WinnerController::class, 'update']);
     Route::delete('/winner/{id}', [WinnerController::class, 'destroy']);
+
+    Route::get('/send', [mailController::class, 'sendEmail']);
+    Route::post('/send-key', [mailController::class, 'sendKey']);
+
+    Route::post('ulogin', [UloginController::class, 'login']);
 });
 
-Route::get('/send', [mailController::class, 'sendEmail']);
-Route::post('/send-key', [mailController::class, 'sendKey']);
 // Error Page
 Route::fallback([ErrorPageController::class, 'index']);

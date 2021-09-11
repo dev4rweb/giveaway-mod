@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Game::class, 'winners', 'user_id', 'game_id');
     }
+
+    public function socialUlogins()
+    {
+        return $this->hasMany(SocialUlogin::class, 'user_id', 'id');
+    }
 }
