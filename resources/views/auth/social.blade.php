@@ -43,3 +43,4 @@
 @section('js')
     <script src="//ulogin.ru/js/ulogin.js"></script>
 @endsection
+{{--redirect_uri=http%3A%2F%2Fgiveaways.zzz.com.ua%2Fulogin;--}}

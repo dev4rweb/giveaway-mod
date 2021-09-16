@@ -11,7 +11,7 @@
 </head>
 <body style="position: relative">
 @inertia
-@include('auth.social')
-@yield('js')
+{{--@include('auth.social')--}}
+{{--@yield('js')--}}
 </body>
 </html>

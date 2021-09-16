@@ -32,6 +32,7 @@
         "react-copy-to-clipboard": "^5.0.3",
         "react-custom-radio-buttons": "^1.0.1",
         "react-date-picker": "^8.3.2",
+        "react-facebook": "^8.1.4",
         "react-flags-select": "^2.1.2",
         "react-redux": "^7.2.4",
         "react-share": "^4.4.0",

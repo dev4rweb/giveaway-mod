@@ -6,6 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {updateUser} from "../../actions/users";
 import {setUserPageUserAction} from "../../reducers/userPageReducer";
+import { FacebookProvider, LoginButton, Profile, Page, EmbeddedPost  } from 'react-facebook';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     input: {
         '& input, label': {
             color: 'white',
-            fontFamaly: 'Montserrat, sans-serif'
+            fontFamily: 'Montserrat, sans-serif'
         },
         '& label.Mui-focused': {
             color: '#9a9a9a',
@@ -85,6 +86,7 @@ const UserProfilePage = () => {
     const stateData = useSelector(state => state.lang)
     const currentUser = useSelector(state => state.userPage.user)
     const [name, setName] = useState(currentUser.name)
+    const [dataFB, setDataFB] = useState(null)
     // console.log('UserProfilePage', currentUser)
 
     const submitHandler = ev => {
@@ -102,6 +104,15 @@ const UserProfilePage = () => {
         console.log('facebookClick', fakeButton)
         if (fakeButton) fakeButton.click()
     };
+
+    const handleResponse = (data) => {
+        console.log(data);
+        setDataFB(data.profile)
+    }
+
+    const handleError = (error) => {
+        console.log(error)
+    }
 
     return (
         <div className={`container user-page`}>
@@ -140,7 +151,7 @@ const UserProfilePage = () => {
                 </form>
             </div>
 
-            <Button
+            {/*            <Button
                 variant="outlined"
                 // color="primary"
                 className={classes.button}
@@ -148,9 +159,9 @@ const UserProfilePage = () => {
                 type="button"
             >
                 Facebook
-            </Button>
+            </Button>*/}
 
-            {
+            {/*{
                 currentUser.social_ulogins.length > 0
                 && currentUser.social_ulogins.map((item, index) => {
                     const firstName = item.first_name
@@ -189,6 +200,45 @@ const UserProfilePage = () => {
                         </ol>
                     )
                 })
+            }*/}
+
+            <div>
+                {/*https://www.npmjs.com/package/react-facebook*/}
+                {/*https://developers.facebook.com/apps/162919759328231/app-review/permissions/*/}
+                <FacebookProvider appId="162919759328231">
+                    <LoginButton
+                        scope="email, public_profile"
+                        onCompleted={handleResponse}
+                        onError={handleError}
+                    >
+                        <span>Facebook</span>
+                    </LoginButton>
+                </FacebookProvider>
+
+            </div>
+
+            {
+                dataFB &&
+                <ol>
+                    <li>Email - {dataFB.email ?? 'undefined'}</li>
+                    <li>Name - {dataFB.first_name ?? 'undefined'}</li>
+                    <li>Last Name - {dataFB.last_name ?? 'undefined'}</li>
+                    <li>Full Name - {dataFB.name ?? 'undefined'}</li>
+                    <li>
+                        Avatar - <br/>
+                        {
+                            dataFB.picture ?
+                                <img
+                                    src={dataFB.picture.data.url}
+                                    width={dataFB.picture.data.width}
+                                    height={dataFB.picture.data.height}
+                                    alt="avatar"
+                                />
+                                :
+                                "User hasn't avatar"
+                        }
+                    </li>
+                </ol>
             }
         </div>
     );
