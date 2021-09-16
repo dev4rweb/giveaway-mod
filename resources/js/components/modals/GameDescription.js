@@ -54,6 +54,12 @@ const GameDescription = () => {
         }
     };
 
+    const visitWebsite = (e, url) => {
+        // console.log('visitWebsite', url)
+        window.open(url, "_blank")
+        handleClick(e).then(r => console.log(r))
+    };
+
     if (item)
         return (
             <div className={s.gameDesc}>
@@ -98,10 +104,27 @@ const GameDescription = () => {
                                                             {/*{item.taskOne}*/}
                                                             {i.url}
                                                         </p>
-                                                        <CopyToClipboard text={i.url}>
-                                                            <button
-                                                                className={s.clipboard}>{stateData.home.copy[stateData.lang]}</button>
-                                                        </CopyToClipboard>
+                                                        {
+                                                            i.task.toLowerCase().includes('check website') ?
+                                                                <button
+                                                                    className={s.clipboard}
+                                                                    onClick={event =>  visitWebsite(event, i.url)}
+                                                                >
+                                                                    {
+                                                                        stateData.home.visit[stateData.lang]
+                                                                    }
+                                                                </button>
+                                                                :
+                                                                <CopyToClipboard text={i.url}>
+                                                                    <button
+                                                                        className={s.clipboard}>
+                                                                        {
+                                                                            stateData.home.copy[stateData.lang]
+                                                                        }
+                                                                    </button>
+                                                                </CopyToClipboard>
+
+                                                        }
                                                     </div>
                                                 </TabPanel>
                                             )

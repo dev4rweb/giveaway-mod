@@ -14,7 +14,7 @@ const UserMainPage = () => {
     return (
         <div className={`container user-page`}>
             <div className="title-wrapper">
-                <p className="admin-title">| {stateData.admin.mainTab[stateData.lang]}</p>
+                <p className="admin-title">| {stateData.admin.mainTab[stateData.lang]} points - {user.votes}</p>
                 <hr/>
             </div>
 

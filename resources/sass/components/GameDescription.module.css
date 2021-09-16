@@ -80,7 +80,15 @@
       color: #9a9a9a;
       font-weight: 900;
       font-size: 14px;
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      user-select: none;
+      /* Likely future */ }
     .gameDesc .links .subscribe span {
       color: #fdfdfd;
       margin-right: 25px; }
