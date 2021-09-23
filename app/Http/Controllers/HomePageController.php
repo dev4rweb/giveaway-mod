@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\HomePage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -22,12 +23,23 @@ class HomePageController extends Controller
             ->with('tasks')
             ->with('winners')
             ->with('users')
+            ->with('tasks')
             ->where('status', '=', 0)
             ->get();
+        $user = Auth::user();
+        if ($user) {
+            $user = User::where('id', '=', $user->id)
+                ->with('games')
+                ->with('tasks')
+                ->with('winners')
+                ->with('socialUlogins')
+                ->first();
+        }
         $sponsorGames = Game::where('isSponsored', '=', true)->get();
         return Inertia::render('HomePage', [
             'homePage' => HomePage::all(),
-            'user' => Auth::user(),
+//            'user' => Auth::user(),
+            'user' => $user,
             'games' => $games,
             'sponsorGames' => $sponsorGames
         ]);

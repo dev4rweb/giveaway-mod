@@ -31,6 +31,7 @@ class AdminPageController extends Controller
     {
         $user = Auth::user();
         $allUsers = User::with('games')
+            ->with('tasks')
             ->with('winners')
             ->where('isAdmin', '!=', 1)
             ->get();

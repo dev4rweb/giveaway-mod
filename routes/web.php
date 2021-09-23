@@ -12,6 +12,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UloginController;
 use App\Http\Controllers\UserGameController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\UserTaskController;
 use App\Http\Controllers\WinnerController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/winner/create', [WinnerController::class, 'store']);
     Route::post('/winner/update', [WinnerController::class, 'update']);
     Route::delete('/winner/{id}', [WinnerController::class, 'destroy']);
+
+    Route::get('/users-tasks', [UserTaskController::class, 'index']);
+    Route::get('/user-task/{id}', [UserTaskController::class, 'show']);
+    Route::post('/user-task/create', [UserTaskController::class, 'store']);
+    Route::post('/user-task/update', [UserTaskController::class, 'update']);
+    Route::delete('/user-task/{id}', [UserTaskController::class, 'destroy']);
 
     Route::get('/send', [mailController::class, 'sendEmail']);
     Route::post('/send-key', [mailController::class, 'sendKey']);

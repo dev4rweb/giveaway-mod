@@ -25,6 +25,7 @@ class UserPageController extends Controller
         $user = User::where('id', '=', $user->id)
             ->with('games')
             ->with('winners')
+            ->with('tasks')
             ->with('socialUlogins')
             ->first();
         $partGames = UserGame::where('user_id', '=', $user->id)

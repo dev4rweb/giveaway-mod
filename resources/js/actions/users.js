@@ -27,6 +27,7 @@ export const updateUser = user => {
     delete user.games
     delete user.winners
     delete user.socialUlogins
+    delete user.tasks
     const fd = new FormData()
     for (let key in user) fd.set(key, user[key])
     // console.log('updateUser', user)
