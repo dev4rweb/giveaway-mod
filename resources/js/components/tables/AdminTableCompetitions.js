@@ -11,6 +11,8 @@ const AdminTableCompetitions = () => {
             <thead>
             <tr>
                 <th scope="col">{stateData.admin.compPage.table.give[stateData.lang]}</th>
+                <th scope="col">{stateData.admin.compPage.table.title[stateData.lang]}</th>
+                <th scope="col">{stateData.admin.compPage.table.type[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.compPage.table.owner[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.compPage.table.created[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.compPage.table.status[stateData.lang]}</th>

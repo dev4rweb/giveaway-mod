@@ -24,26 +24,38 @@ const GameDescription = () => {
         stateData.home.get_key[stateData.lang] :
         stateData.home.join_giveaway[stateData.lang]
 
-    // console.log('GameDescription', user)
+    console.log('GameDescription', user)
+    console.log('GameDescription item', item)
+
+    const getKeyHandlerForCompetition = game => {
+        console.log('getKeyHandlerForCompetition', game)
+    };
+
+    const getKeyHandlerForGiveaway = async game => {
+        console.log('getKeyHandlerForGiveaway', game)
+        const isJoined = !!game.users.find(i => i.id === user.id);
+        // console.log('isJoined', isJoined)
+        if (isJoined) dispatch(setError('You are already joined'));
+        else {
+            const userGame = {
+                user_id: user.id,
+                game_id: item.id
+            }
+            await dispatch(createUserGame(userGame))
+            let updateVotesUser = user
+            updateVotesUser.votes = updateVotesUser.votes + 1
+            await dispatch(updateUser(updateVotesUser))
+            await dispatch(getGames())
+        }
+    };
 
     const handleClick = async e => {
         const game = allGames.find(i => i.id === item.id)
         if (game) {
             // console.log('GameDescription', game)
-            const isJoined = !!game.users.find(i => i.id === user.id);
-            // console.log('isJoined', isJoined)
-            if (isJoined) dispatch(setError('You are already joined'));
-            else {
-                const userGame = {
-                    user_id: user.id,
-                    game_id: item.id
-                }
-                await dispatch(createUserGame(userGame))
-                let updateVotesUser = user
-                updateVotesUser.votes = updateVotesUser.votes + 1
-                await dispatch(updateUser(updateVotesUser))
-                await dispatch(getGames())
-            }
+            if (game.isCompetition == 1) getKeyHandlerForCompetition(game)
+            else await getKeyHandlerForGiveaway(game)
+
             setTimeout(() => {
                 dispatch(setModalGameDescription(false))
                 dispatch(setGameDescription(null))

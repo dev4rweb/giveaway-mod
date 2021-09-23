@@ -84,6 +84,9 @@ const defaultState = {
             give: {en: 'Active giveaways', ru: 'Активные раздачи'},
             table: {
                 give: {en: 'Competition', ru: 'Конкурс'},
+                title: {en: 'Title', ru: 'Заголовок'},
+                giveaway: {en: 'Giveaway', ru: 'Раздача'},
+                type: {en: 'Type', ru: 'Тип'},
                 owner: {en: 'Owner', ru: 'Владелец'},
                 created: {en: 'Planned finish or finished', ru: 'Дата окончания/окончен'},
                 status: {en: 'Status', ru: 'Статус'},
@@ -106,6 +109,8 @@ const defaultState = {
         },
         userPage: {
             date: {en: 'Registration date', ru: 'Дата регистрации'},
+            email: {en: 'email', ru: 'email'},
+            votes: {en: 'Points', ru: 'Очки'},
             give: {en: 'Giveaways', ru: 'Раздач'},
             part: {en: 'Participation', ru: 'Участий'},
             link: {en: 'Link', ru: 'Ссылка'},

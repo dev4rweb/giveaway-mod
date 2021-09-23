@@ -26,6 +26,13 @@ const DrawTable = ({users, canChange, changeOneCandidate}) => {
                     <tr key={index}>
                         <th scope="row">#{user.id}</th>
                         <td>{user.name}</td>
+                        <td>2 points</td>
+                        <td>
+                            <ol>
+                                <li>watch video</li>
+                                <li>add post</li>
+                            </ol>
+                        </td>
                         <td>profile link</td>
                         <td
                             className={s.drawOther}

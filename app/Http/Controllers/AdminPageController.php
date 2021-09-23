@@ -42,11 +42,13 @@ class AdminPageController extends Controller
             ->orderBy('endDate')
             ->where('isSponsored', '=', false)
             ->get();
+        $userGames = UserGame::all();
 
         return Inertia::render('AdminPage', [
             'currentUser' => $user,
             'allUsers' => $allUsers,
             'allGames' => $allGames,
+            'userGames' => $userGames
         ]);
     }
 

@@ -19,6 +19,9 @@ const AdminTableCompetitionItem = ({item}) => {
     const month = (date.getMonth() + 1) < 10 ?
         `0${date.getMonth() + 1}` :
         date.getMonth() + 1;
+    const itemType = item.isCompetition == 1 ?
+        stateData.admin.compPage.table.give[stateData.lang] :
+        stateData.admin.compPage.table.giveaway[stateData.lang]
     // console.log('date', date)
     let color = '#e72d2d';
     if (item.status == 3) color = '#cd953e';
@@ -63,6 +66,8 @@ const AdminTableCompetitionItem = ({item}) => {
     return (
         <tr>
             <th scope="row">#{item.id}</th>
+            <th scope="row">{item.name}</th>
+            <th scope="row">{itemType}</th>
             <td>id{/*{item.owner}*/}1</td>
             <td>
                 {`${day}/${month}/${date.getFullYear()}`}

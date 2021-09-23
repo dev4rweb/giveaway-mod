@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserGamesTable extends Migration
+class CreateUserTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateUserGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_games', function (Blueprint $table) {
+        Schema::create('user_tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('game_id')->constrained()->onDelete('cascade');
-            $table->integer('points')->nullable();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_done')->nullable();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateUserGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_games');
+        Schema::dropIfExists('user_tasks');
     }
 }

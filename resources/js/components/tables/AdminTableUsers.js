@@ -6,6 +6,7 @@ import {removeUser} from "../../actions/users";
 const AdminTableUsers = ({users}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
+
     // const removeFirstElem = users.shift();
 
     function deleteHandler(item) {
@@ -20,6 +21,8 @@ const AdminTableUsers = ({users}) => {
                 <th scope="col">№</th>
                 <th scope="col">Id</th>
                 <th scope="col">{stateData.admin.userPage.date[stateData.lang]}</th>
+                <th scope="col">{stateData.admin.userPage.email[stateData.lang]}</th>
+                <th scope="col">{stateData.admin.userPage.votes[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.userPage.give[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.userPage.part[stateData.lang]}</th>
                 <th scope="col">{stateData.admin.userPage.link[stateData.lang]}</th>
@@ -38,14 +41,15 @@ const AdminTableUsers = ({users}) => {
 
                 return (
                     <tr key={index}>
-                        <th scope="row">#{index}</th>
+                        <th scope="row">#{index + 1}</th>
                         <td>id{item.id}</td>
                         <td>
                             {`
                         ${day}/${month}/${date.getFullYear()}
                         `}
                         </td>
-
+                        <td>{item.email}</td>
+                        <td>{item.votes}</td>
                         <td>789</td>
                         <td>789</td>
                         <td
