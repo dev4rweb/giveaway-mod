@@ -12,6 +12,7 @@ import taskReducer from "./TaskReducer";
 import userPageReducer from "./userPageReducer";
 import usersGamesReducer from "./userGameReducer";
 import winnerReducer from "./winnerReducer";
+import usersTasksReducer from "./usersTasksReducer";
 
 const rootReducer = combineReducers({
     lang: translateReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     tasks: taskReducer,
     userPage: userPageReducer,
     userGame: usersGamesReducer,
-    winners: winnerReducer
+    winners: winnerReducer,
+    usersTasks: usersTasksReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

@@ -1,0 +1,35 @@
+import React from 'react';
+import s from "../../../sass/components/GameDescription.module.scss";
+import {CopyToClipboard} from "react-copy-to-clipboard/lib/Component";
+import {useSelector} from "react-redux";
+
+const SwitchGameDescBtn = ({task, user, handleClick, setBtnDisabled}) => {
+    const stateData = useSelector(state => state.lang)
+    // console.log(user)
+
+    if (task.task.toLowerCase().includes('check website')) {
+        return (
+            <button
+                className={s.clipboard}
+                onClick={event =>  handleClick(event, task)}
+            >
+                {
+                    stateData.home.visit[stateData.lang]
+                }
+            </button>
+        )
+    }
+
+    return (
+        <CopyToClipboard text={task.url}>
+            <button
+                className={s.clipboard}>
+                {
+                    stateData.home.copy[stateData.lang]
+                }
+            </button>
+        </CopyToClipboard>
+    );
+};
+
+export default SwitchGameDescBtn;

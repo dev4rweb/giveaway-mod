@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../../sass/components/GameDescription.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
@@ -12,6 +12,8 @@ import {getGames} from "../../actions/games";
 import ErrorMessage from "../UI/ErrorMessage";
 import {setGameDescription, setModalGameDescription} from "../../reducers/modalReducer";
 import {updateUser} from "../../actions/users";
+import SwitchGameDescBtn from "../UI/SwitchGameDescBtn";
+import {createUserTask, getAllUsersTasks, removeUserTask, updateUserTask} from "../../actions/userTask";
 
 const GameDescription = () => {
     const dispatch = useDispatch()
@@ -20,12 +22,45 @@ const GameDescription = () => {
     const item = useSelector(state => state.modal.gameDescription)
     const allGames = useSelector(state => state.games.games)
     const user = useSelector(state => state.user.user)
+    const userTasks = useSelector(state => state.usersTasks.usersTasks)
+    const [isBtnDisabled, setBtnDisabled] = useState(false)
     const btnText = item && item.isCompetition ?
         stateData.home.get_key[stateData.lang] :
         stateData.home.join_giveaway[stateData.lang]
 
     console.log('GameDescription', user)
     console.log('GameDescription item', item)
+
+    const testUserTaskApi = (task)=> {
+        // create
+        /*const userTask = {
+            user_id: user.id,
+            task_id: task.id,
+            is_done: 0
+        }*/
+        // dispatch(createUserTask(userTask)) // working
+
+        // update
+        /*const userTask = {
+            id: 1,
+            user_id: user.id,
+            task_id: task.id,
+            is_done: 0
+        }
+        dispatch(updateUserTask(userTask))*/ // working
+
+        // remove
+        // dispatch(removeUserTask(1)) // working
+
+        // get all
+        dispatch(getAllUsersTasks()) // working
+    }
+
+    useEffect(() => {
+        console.log('useEffect', item)
+        if (item && item.isCompetition == 1) setBtnDisabled(true)
+        else setBtnDisabled(false)
+    }, [item]);
 
     const getKeyHandlerForCompetition = game => {
         console.log('getKeyHandlerForCompetition', game)
@@ -66,10 +101,11 @@ const GameDescription = () => {
         }
     };
 
-    const visitWebsite = (e, url) => {
-        // console.log('visitWebsite', url)
-        window.open(url, "_blank")
-        handleClick(e).then(r => console.log(r))
+    const visitWebsite = (e, task) => {
+        console.log('visitWebsite', task)
+        testUserTaskApi(task)
+        // window.open(task.url, "_blank")
+        // handleClick(e).then(r => console.log(r))
     };
 
     if (item)
@@ -116,27 +152,12 @@ const GameDescription = () => {
                                                             {/*{item.taskOne}*/}
                                                             {i.url}
                                                         </p>
-                                                        {
-                                                            i.task.toLowerCase().includes('check website') ?
-                                                                <button
-                                                                    className={s.clipboard}
-                                                                    onClick={event =>  visitWebsite(event, i.url)}
-                                                                >
-                                                                    {
-                                                                        stateData.home.visit[stateData.lang]
-                                                                    }
-                                                                </button>
-                                                                :
-                                                                <CopyToClipboard text={i.url}>
-                                                                    <button
-                                                                        className={s.clipboard}>
-                                                                        {
-                                                                            stateData.home.copy[stateData.lang]
-                                                                        }
-                                                                    </button>
-                                                                </CopyToClipboard>
-
-                                                        }
+                                                        <SwitchGameDescBtn
+                                                            task={i}
+                                                            userTasks={userTasks}
+                                                            handleClick={visitWebsite}
+                                                            setBtnDisabled={setBtnDisabled}
+                                                        />
                                                     </div>
                                                 </TabPanel>
                                             )
@@ -160,6 +181,7 @@ const GameDescription = () => {
                     {/*<a href="#" className={s.share}><img src={share} alt="share"/></a>*/}
                     <button
                         className="btn btn-warning"
+                        disabled={isBtnDisabled}
                         onClick={handleClick}
                     >
                         {btnText}
