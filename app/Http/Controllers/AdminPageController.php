@@ -6,6 +6,7 @@ use App\Models\AdminPage;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\UserGame;
+use App\Models\UserTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -44,12 +45,14 @@ class AdminPageController extends Controller
             ->where('isSponsored', '=', false)
             ->get();
         $userGames = UserGame::all();
+        $usersTasks = UserTask::all();
 
         return Inertia::render('AdminPage', [
             'currentUser' => $user,
             'allUsers' => $allUsers,
             'allGames' => $allGames,
-            'userGames' => $userGames
+            'userGames' => $userGames,
+            'usersTasks' => $usersTasks
         ]);
     }
 

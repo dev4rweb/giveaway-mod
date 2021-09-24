@@ -25,8 +25,10 @@ import AdminCreatePage from "./AdminPanel/AdminCreatePage";
 import {addGame} from "../actions/games";
 import {createGift, getGifts} from "../actions/gifts";
 import {createWinner, getAllWinners, removeWinner} from "../actions/winners";
+import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
+import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
 
-const AdminPage = ({currentUser, allUsers, allGames}) => {
+const AdminPage = ({currentUser, allUsers, allGames, userGames, usersTasks}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const isLoading = useSelector(state => state.error.isLoading)
@@ -76,7 +78,9 @@ const AdminPage = ({currentUser, allUsers, allGames}) => {
     useEffect(() => {
         dispatch(setGames(allGames))
         dispatch(setAllUsers(allUsers))
-        testApi()
+        dispatch(fetchAllUsersGamesAction(userGames))
+        dispatch(fetchAllUsersTasksAction(usersTasks))
+        // testApi()
     }, []);
 
 
