@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Models\HomePage;
 use App\Models\User;
+use App\Models\UserGame;
 use App\Models\UserTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class HomePageController extends Controller
             ->get();
         $user = Auth::user();
         $userTasks = null;
+        $userGames = null;
         if ($user) {
             $user = User::where('id', '=', $user->id)
                 ->with('games')
@@ -37,6 +39,7 @@ class HomePageController extends Controller
                 ->with('socialUlogins')
                 ->first();
             $userTasks = UserTask::where('user_id', '=', $user->id)->get();
+            $userGames = UserGame::where('user_id', '=', $user->id)->get();
         }
         $sponsorGames = Game::where('isSponsored', '=', true)->get();
         return Inertia::render('HomePage', [
@@ -45,7 +48,8 @@ class HomePageController extends Controller
             'user' => $user,
             'games' => $games,
             'sponsorGames' => $sponsorGames,
-            'userTasks' => $userTasks
+            'userTasks' => $userTasks,
+            'userGames' => $userGames
         ]);
     }
 

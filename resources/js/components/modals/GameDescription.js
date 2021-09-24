@@ -7,7 +7,7 @@ import {TelegramShareButton} from "react-share";
 import steam from '../../../assets/png/steam-icon-white.png'
 import share from '../../../assets/icons/share.png'
 import {setError} from "../../reducers/errorReducer";
-import {createUserGame} from "../../actions/userGame";
+import {createUserGame, updateUserGame} from "../../actions/userGame";
 import {getGames} from "../../actions/games";
 import ErrorMessage from "../UI/ErrorMessage";
 import {setGameDescription, setModalGameDescription} from "../../reducers/modalReducer";
@@ -23,15 +23,16 @@ const GameDescription = () => {
     const allGames = useSelector(state => state.games.games)
     const user = useSelector(state => state.user.user)
     const userTasks = useSelector(state => state.usersTasks.usersTasks)
+    const userGames = useSelector(state => state.userGame.usersGames)
     const [isBtnDisabled, setBtnDisabled] = useState(false)
     const btnText = item && item.isCompetition ?
         stateData.home.get_key[stateData.lang] :
         stateData.home.join_giveaway[stateData.lang]
 
-    console.log('GameDescription', user)
-    console.log('GameDescription item', item)
+    // console.log('GameDescription', userTasks)
+    // console.log('GameDescription item', item)
 
-    const testUserTaskApi = (task)=> {
+    const testUserTaskApi = (task) => {
         // create
         /*const userTask = {
             user_id: user.id,
@@ -53,21 +54,38 @@ const GameDescription = () => {
         // dispatch(removeUserTask(1)) // working
 
         // get all
-        dispatch(getAllUsersTasks()) // working
+        // dispatch(getAllUsersTasks()) // working
+    }
+
+    const compareDoneList = () => {
+        // console.log('compareDoneList')
+        const doneList = []
+        item.tasks.map(item => {
+            const doneTask = userTasks.find(i => i.task_id == item.id)
+            // console.log('compareDoneList',doneTask)
+            if (doneTask && doneTask.is_done == 1)
+                doneList.push(doneTask)
+        });
+        if (doneList.length === item.tasks.length)
+            setBtnDisabled(false)
     }
 
     useEffect(() => {
-        console.log('useEffect', item)
+        // console.log('useEffect', item)
         if (item && item.isCompetition == 1) setBtnDisabled(true)
         else setBtnDisabled(false)
+        if (userTasks && item && item.isCompetition == 1)
+            compareDoneList()
     }, [item]);
 
     const getKeyHandlerForCompetition = game => {
         console.log('getKeyHandlerForCompetition', game)
+        console.log('getKeyHandlerForCompetition userGames', userGames)
+
     };
 
     const getKeyHandlerForGiveaway = async game => {
-        console.log('getKeyHandlerForGiveaway', game)
+        // console.log('getKeyHandlerForGiveaway', game)
         const isJoined = !!game.users.find(i => i.id === user.id);
         // console.log('isJoined', isJoined)
         if (isJoined) dispatch(setError('You are already joined'));
@@ -101,11 +119,49 @@ const GameDescription = () => {
         }
     };
 
+    const addPoints = points => {
+        if (userGames) {
+            const userGameUsed = userGames.find(i => i.game_id == item.id);
+            console.log(userGameUsed)
+            if (userGameUsed) {
+                // console.log('update UserGame');
+                const userGame = {
+                    id: userGameUsed.id,
+                    user_id: user.id,
+                    game_id: item.id,
+                    points: userGameUsed.points + 1
+                }
+                dispatch(updateUserGame(userGame))
+            } else {
+                const userGame = {
+                    user_id: user.id,
+                    game_id: item.id,
+                    points: points
+                };
+                dispatch(createUserGame(userGame))
+            }
+        } else {
+            const userGame = {
+                user_id: user.id,
+                game_id: item.id,
+                points: points
+            };
+            dispatch(createUserGame(userGame))
+        }
+    };
+
     const visitWebsite = (e, task) => {
-        console.log('visitWebsite', task)
-        testUserTaskApi(task)
-        // window.open(task.url, "_blank")
-        // handleClick(e).then(r => console.log(r))
+        // console.log('visitWebsite', task)
+        const userTask = {
+            user_id: user.id,
+            task_id: task.id,
+            is_done: 1
+        }
+        dispatch(createUserTask(userTask))
+        addPoints(1)
+        // testUserTaskApi(task)
+        window.open(task.url, "_blank")
+        handleClick(e).then(r => document.location.reload())
     };
 
     if (item)
@@ -156,7 +212,6 @@ const GameDescription = () => {
                                                             task={i}
                                                             userTasks={userTasks}
                                                             handleClick={visitWebsite}
-                                                            setBtnDisabled={setBtnDisabled}
                                                         />
                                                     </div>
                                                 </TabPanel>
@@ -188,7 +243,7 @@ const GameDescription = () => {
                     </button>
                 </div>
                 {
-                    error && <ErrorMessage message={error} />
+                    error && <ErrorMessage message={error}/>
                 }
             </div>
         );

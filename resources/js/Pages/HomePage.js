@@ -23,10 +23,11 @@ import KeyFrame from "../components/modals/KeyFrame";
 import ModalAuth from "../components/modals/ModalAuth";
 import AuthPage from "./AuthPage";
 import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
+import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
 
 /*https://youtu.be/tODggNhelQ4*/
 
-const HomePage = ({user, errors, games, sponsorGames, userTasks}) => {
+const HomePage = ({user, errors, games, sponsorGames, userTasks, userGames}) => {
         const dispatch = useDispatch()
         const stateData = useSelector(state => state.lang)
         const isLoading = useSelector(state => state.error.isLoading)
@@ -44,6 +45,8 @@ const HomePage = ({user, errors, games, sponsorGames, userTasks}) => {
             dispatch(setFilterGames(games))
             if (userTasks)
                 dispatch(fetchAllUsersTasksAction(userTasks))
+            if (userGames)
+                dispatch(fetchAllUsersGamesAction(userGames))
             // console.log(user)
         }, []);
 
