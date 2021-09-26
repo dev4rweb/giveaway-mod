@@ -29,10 +29,11 @@ const SwitchGameDescBtn = ({task, userTasks, handleClick}) => {
         return (
             <button
                 className={s.clipboard}
+                style={{fontSize: '20px'}}
                 onClick={event => handleClick(event, task)}
             >
                 {
-                    stateData.home.visit[stateData.lang]
+                    stateData.home.plus_one[stateData.lang]
                 }
             </button>
         );

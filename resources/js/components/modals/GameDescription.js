@@ -26,7 +26,7 @@ const GameDescription = () => {
     const userGames = useSelector(state => state.userGame.usersGames)
     const [isBtnDisabled, setBtnDisabled] = useState(false)
     const btnText = item && item.isCompetition ?
-        stateData.home.get_key[stateData.lang] :
+        stateData.home.join_competition[stateData.lang] :
         stateData.home.join_giveaway[stateData.lang]
 
     // console.log('GameDescription', userTasks)
@@ -103,6 +103,7 @@ const GameDescription = () => {
     };
 
     const handleClick = async e => {
+        addPoints(1)
         const game = allGames.find(i => i.id === item.id)
         if (game) {
             // console.log('GameDescription', game)
