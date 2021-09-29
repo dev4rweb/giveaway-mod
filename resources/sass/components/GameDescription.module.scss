@@ -90,6 +90,7 @@
         .subscribe {
             display: flex;
             justify-content: space-between;
+            position: relative;
             flex-wrap: wrap;
             border: 2px solid $text-color-three;
             padding: 30px 5px 20px 5px;
@@ -124,14 +125,37 @@
 
             .clipboard {
                 outline: none;
-                border: none;
+                //border: none;
                 background: none;
                 text-transform: uppercase;
                 text-decoration: underline;
-                padding: 0;
+                padding: 2px 5px;
                 font-weight: 900;
                 color: $text-grey;
                 font-size: 14px;
+                border: 1px solid transparent;
+                -webkit-transition: all .2s;
+                -moz-transition: all .2s;
+                -ms-transition: all .2s;
+                -o-transition: all .2s;
+                transition: all .2s;
+                &:hover {
+                    text-decoration: none;
+                    border: 1px solid $text-color-orange;
+                    color: $text-color-orange;
+                    -webkit-transform: scale(1.3,1.3);
+                    -moz-transform: scale(1.3,1.3);
+                    -ms-transform: scale(1.3,1.3);
+                    -o-transform: scale(1.3,1.3);
+                    transform: scale(1.3,1.3);
+                    -webkit-box-shadow: -10px 0px 13px -7px #ff8758, 10px 0px 13px -7px #ff8758, 5px 5px 15px 5px rgba(0,0,0,0);
+                    box-shadow: -10px 0px 13px -7px #ff8758, 10px 0px 13px -7px #ff8758, 5px 5px 15px 5px rgba(0,0,0,0);
+                }
+            }
+
+            .checkWebsite{
+
+
             }
         }
     }

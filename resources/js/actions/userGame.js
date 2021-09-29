@@ -22,6 +22,7 @@ export const getAllUsersGames = () => {
 };
 
 export const createUserGame = userGame => {
+    console.log('createUserGame', userGame)
     const fd = new FormData();
     for (let key in userGame)
         fd.set(key, userGame[key])
@@ -45,6 +46,7 @@ export const createUserGame = userGame => {
 };
 
 export const updateUserGame = userGame => {
+    console.log('updateUserGame', userGame)
     const fd = new FormData();
     for (let key in userGame) fd.set(key, userGame[key])
 

@@ -28,7 +28,7 @@ const SwitchGameDescBtn = ({task, userTasks, handleClick}) => {
     if (task.task.toLowerCase().includes('check website')) {
         return (
             <button
-                className={s.clipboard}
+                className={`${s.clipboard} ${s.checkWebsite}`}
                 style={{fontSize: '20px'}}
                 onClick={event => handleClick(event, task)}
             >

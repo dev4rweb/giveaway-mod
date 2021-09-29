@@ -85,7 +85,7 @@ const GameDescription = () => {
     };
 
     const getKeyHandlerForGiveaway = async game => {
-        // console.log('getKeyHandlerForGiveaway', game)
+        console.log('getKeyHandlerForGiveaway', game)
         const isJoined = !!game.users.find(i => i.id === user.id);
         // console.log('isJoined', isJoined)
         if (isJoined) dispatch(setError('You are already joined'));
@@ -106,7 +106,7 @@ const GameDescription = () => {
         addPoints(1)
         const game = allGames.find(i => i.id === item.id)
         if (game) {
-            // console.log('GameDescription', game)
+            console.log('GameDescription', game)
             if (game.isCompetition == 1) getKeyHandlerForCompetition(game)
             else await getKeyHandlerForGiveaway(game)
 
@@ -151,18 +151,19 @@ const GameDescription = () => {
         }
     };
 
-    const visitWebsite = (e, task) => {
-        // console.log('visitWebsite', task)
+    const visitWebsite = async (e, task) => {
+        console.log('visitWebsite', task)
         const userTask = {
             user_id: user.id,
             task_id: task.id,
             is_done: 1
         }
         dispatch(createUserTask(userTask))
-        addPoints(1)
+        await addPoints(1)
         // testUserTaskApi(task)
         window.open(task.url, "_blank")
-        handleClick(e).then(r => document.location.reload())
+        await handleClick(e)
+        .then(r => document.location.reload());
     };
 
     if (item)

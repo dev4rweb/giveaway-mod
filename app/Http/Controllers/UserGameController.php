@@ -40,14 +40,23 @@ class UserGameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return JsonResponse
      */
     public function store(Request $request)
     {
         try {
-            $userGame = UserGame::create($request->all());
-            $response['message'] = 'User game created';
+            $userGame = UserGame::where('user_id', '=', $request['user_id'])
+                ->where('game_id', '=', $request['game_id'])
+                ->first();
+            if ($userGame) {
+                $request['id'] = $userGame['id'];
+                $userGame->update($request->all());
+                $response['message'] = 'UserGame found and updated';
+            } else {
+                $userGame = UserGame::create($request->all());
+                $response['message'] = 'User game created';
+            }
             $response['success'] = true;
             $response['model'] = $userGame;
         } catch (\Exception $exception) {
@@ -80,7 +89,7 @@ class UserGameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserGame  $userGame
+     * @param \App\Models\UserGame $userGame
      * @return \Illuminate\Http\Response
      */
     public function edit(UserGame $userGame)
