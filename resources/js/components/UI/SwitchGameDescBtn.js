@@ -1,12 +1,21 @@
 import React from 'react';
 import s from "../../../sass/components/GameDescription.module.scss";
 import {CopyToClipboard} from "react-copy-to-clipboard/lib/Component";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setModalVisitWebsiteAction, setVisitWebsiteDetailsAction} from "../../reducers/modalReducer";
 
-const SwitchGameDescBtn = ({task, userTasks, handleClick}) => {
+const SwitchGameDescBtn = ({task, userTasks}) => {
+    const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
     const doneTask = userTasks.find(item => item.task_id === task.id)
     // console.log('SwitchGameDescBtn', doneTask)
+
+    const checkWebsiteHandler = (e) => {
+        console.log('checkWebsiteHandler')
+        dispatch(setModalVisitWebsiteAction(true))
+        dispatch(setVisitWebsiteDetailsAction(task))
+        // handleClick(event, task)
+    };
 
     if (doneTask && doneTask.is_done == 1) {
         return (
@@ -28,9 +37,9 @@ const SwitchGameDescBtn = ({task, userTasks, handleClick}) => {
     if (task.task.toLowerCase().includes('check website')) {
         return (
             <button
-                className={`${s.clipboard} ${s.checkWebsite}`}
+                className={`${s.checkWebsite}`}
                 style={{fontSize: '20px'}}
-                onClick={event => handleClick(event, task)}
+                onClick={event => checkWebsiteHandler(event)}
             >
                 {
                     stateData.home.plus_one[stateData.lang]

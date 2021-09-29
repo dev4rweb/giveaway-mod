@@ -10,7 +10,12 @@ import {setError} from "../../reducers/errorReducer";
 import {createUserGame, updateUserGame} from "../../actions/userGame";
 import {getGames} from "../../actions/games";
 import ErrorMessage from "../UI/ErrorMessage";
-import {setGameDescription, setModalGameDescription} from "../../reducers/modalReducer";
+import {
+    checkWebsiteClickAction,
+    setGameDescription,
+    setModalGameDescription,
+    setVisitWebsiteDetailsAction
+} from "../../reducers/modalReducer";
 import {updateUser} from "../../actions/users";
 import SwitchGameDescBtn from "../UI/SwitchGameDescBtn";
 import {createUserTask, getAllUsersTasks, removeUserTask, updateUserTask} from "../../actions/userTask";
@@ -24,6 +29,8 @@ const GameDescription = () => {
     const user = useSelector(state => state.user.user)
     const userTasks = useSelector(state => state.usersTasks.usersTasks)
     const userGames = useSelector(state => state.userGame.usersGames)
+    const remoteTask = useSelector(state => state.modal.checkWebsiteDetails)
+    const remoteCheckWebsiteClick = useSelector(state => state.modal.checkWebsiteClick)
     const [isBtnDisabled, setBtnDisabled] = useState(false)
     const btnText = item && item.isCompetition ?
         stateData.home.join_competition[stateData.lang] :
@@ -78,6 +85,17 @@ const GameDescription = () => {
             compareDoneList()
     }, [item]);
 
+    useEffect(() => {
+        if (remoteCheckWebsiteClick && remoteTask) {
+            // console.log('use Effect ', remoteTask);
+            visitWebsite(remoteTask).then(r => {
+                dispatch(setVisitWebsiteDetailsAction(null))
+                dispatch(checkWebsiteClickAction(false))
+                document.location.reload()
+            });
+        }
+    }, [remoteCheckWebsiteClick]);
+
     const getKeyHandlerForCompetition = game => {
         console.log('getKeyHandlerForCompetition', game)
         console.log('getKeyHandlerForCompetition userGames', userGames)
@@ -102,11 +120,11 @@ const GameDescription = () => {
         }
     };
 
-    const handleClick = async e => {
+    const handleClick = async () => {
         addPoints(1)
         const game = allGames.find(i => i.id === item.id)
         if (game) {
-            console.log('GameDescription', game)
+            // console.log('GameDescription', game)
             if (game.isCompetition == 1) getKeyHandlerForCompetition(game)
             else await getKeyHandlerForGiveaway(game)
 
@@ -151,7 +169,7 @@ const GameDescription = () => {
         }
     };
 
-    const visitWebsite = async (e, task) => {
+    const visitWebsite = async (task) => {
         console.log('visitWebsite', task)
         const userTask = {
             user_id: user.id,
@@ -162,8 +180,8 @@ const GameDescription = () => {
         await addPoints(1)
         // testUserTaskApi(task)
         window.open(task.url, "_blank")
-        await handleClick(e)
-        .then(r => document.location.reload());
+        await handleClick()
+            .then(r => console.log(''));
     };
 
     if (item)
@@ -213,7 +231,6 @@ const GameDescription = () => {
                                                         <SwitchGameDescBtn
                                                             task={i}
                                                             userTasks={userTasks}
-                                                            handleClick={visitWebsite}
                                                         />
                                                     </div>
                                                 </TabPanel>

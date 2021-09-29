@@ -24,6 +24,8 @@ import ModalAuth from "../components/modals/ModalAuth";
 import AuthPage from "./AuthPage";
 import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
 import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
+import ModalVisitWebsite from "../components/modals/ModalVisitWebsite";
+import CheckWebsiteDetails from "../components/modals/CheckWebsiteDetails";
 
 /*https://youtu.be/tODggNhelQ4*/
 
@@ -96,19 +98,9 @@ const HomePage = ({user, errors, games, sponsorGames, userTasks, userGames}) => 
                 <ModalAuth>
                     <AuthPage/>
                 </ModalAuth>
-
-                {/*<h1>Home Page</h1>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-            <div>isAuth {isAuth ? 'Auth' : 'No logged'} </div>
-            <div>username: {currentUser ? currentUser.name : 'Not Registered'}</div>
-            <ul>
-                {
-                    posts.map(post =>
-                    <li key={post.id}>{post.title}</li>
-                )}
-            </ul>
-            {error && <ErrorMessage message={error} />}*/}
+                <ModalVisitWebsite>
+                    <CheckWebsiteDetails />
+                </ModalVisitWebsite>
             </Layout>
         );
     }

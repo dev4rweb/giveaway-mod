@@ -6,6 +6,9 @@ const SET_MODAL_AUTH = 'SET_MODAL_AUTH'
 const SET_MODAL_REGISTER = 'SET_MODAL_REGISTER'
 const SET_EDIT_PAGE = 'SET_EDIT_PAGE'
 const SET_MODAL_DRAW_WINNER = 'SET_MODAL_DRAW_WINNER'
+const SET_MODAL_GAME_DETAILS = 'SET_MODAL_GAME_DETAILS'
+const SET_VISIT_SITE_DETAILS = 'SET_VISIT_SITE_DETAILS'
+const CLICK_CHECK_WEBSITE = 'CLICK_CHECK_WEBSITE'
 
 const defaultState = {
     modalIsAuth: false,
@@ -16,6 +19,9 @@ const defaultState = {
     modalRegister: false,
     editPage: false,
     modalDrawWinner: false,
+    modalGameDetails: false,
+    checkWebsiteDetails: null,
+    checkWebsiteClick: false
 }
 
 export default function modalReducer(state = defaultState, action) {
@@ -60,6 +66,21 @@ export default function modalReducer(state = defaultState, action) {
                 ...state,
                 modalDrawWinner: action.payload
             }
+        case SET_MODAL_GAME_DETAILS:
+            return {
+                ...state,
+                modalGameDetails: action.payload
+            }
+        case SET_VISIT_SITE_DETAILS:
+            return {
+                ...state,
+                checkWebsiteDetails: action.payload
+            }
+        case CLICK_CHECK_WEBSITE:
+            return {
+                ...state,
+                checkWebsiteClick: action.payload
+            }
         default:
             return state
     }
@@ -73,3 +94,6 @@ export const setModalAuth = (isOpen) => ({type: SET_MODAL_AUTH, payload: isOpen}
 export const setModalRegister = (isOpen) => ({type: SET_MODAL_REGISTER, payload: isOpen})
 export const setEditPage = (isOpen) => ({type: SET_EDIT_PAGE, payload: isOpen})
 export const setModalDrawWinner = (isOpen) => ({type: SET_MODAL_DRAW_WINNER, payload: isOpen})
+export const setModalVisitWebsiteAction = isOpen => ({type: SET_MODAL_GAME_DETAILS, payload: isOpen})
+export const setVisitWebsiteDetailsAction = item => ({type: SET_VISIT_SITE_DETAILS, payload: item})
+export const checkWebsiteClickAction = isClick => ({type: CLICK_CHECK_WEBSITE, payload: isClick})
