@@ -17,16 +17,24 @@ const CheckWebsiteDetails = () => {
 
     return (
         <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolores iusto numquam quisquam rerum
-                voluptatem voluptatibus! Accusantium cumque dolorum eos eveniet excepturi, laborum officia, porro,
-                provident quia saepe sequi tempora voluptate. Deserunt esse et eum explicabo ipsam itaque nihil, odio
-                optio sapiente sequi similique, sint tenetur! Ducimus earum nesciunt repellat.</p>
-            <button
-                className="btn btn-warning"
-                onClick={handleClick}
+            <p
+                style={{
+                    textAlign: 'center',
+                    padding: '20px 0'
+                }}
             >
-                {stateData.home.visit[stateData.lang]}
-            </button>
+                Get your points for visiting our website
+            </p>
+            <div
+                style={{display: 'flex', justifyContent: 'center'}}
+            >
+                <button
+                    className="btn btn-warning"
+                    onClick={handleClick}
+                >
+                    {stateData.home.visit[stateData.lang]}
+                </button>
+            </div>
         </div>
     );
 };

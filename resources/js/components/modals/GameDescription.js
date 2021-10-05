@@ -91,19 +91,22 @@ const GameDescription = () => {
             visitWebsite(remoteTask).then(r => {
                 dispatch(setVisitWebsiteDetailsAction(null))
                 dispatch(checkWebsiteClickAction(false))
-                document.location.reload()
+                // document.location.reload()
             });
         }
     }, [remoteCheckWebsiteClick]);
 
     const getKeyHandlerForCompetition = game => {
-        console.log('getKeyHandlerForCompetition', game)
-        console.log('getKeyHandlerForCompetition userGames', userGames)
-
+        // console.log('getKeyHandlerForCompetition', game)
+        // console.log('getKeyHandlerForCompetition userGames', userGames)
+        // console.log('getKeyHandlerForCompetition userTasks', userTasks)
+        const userGame = userGames.find(i => i.game_id == game.id)
+        if (userGame.points >= game.tasks.length + 1) dispatch(setError('You are already joined'))
+        else addPoints(1)
     };
 
     const getKeyHandlerForGiveaway = async game => {
-        console.log('getKeyHandlerForGiveaway', game)
+        // console.log('getKeyHandlerForGiveaway', game)
         const isJoined = !!game.users.find(i => i.id === user.id);
         // console.log('isJoined', isJoined)
         if (isJoined) dispatch(setError('You are already joined'));
@@ -117,11 +120,11 @@ const GameDescription = () => {
             updateVotesUser.votes = updateVotesUser.votes + 1
             await dispatch(updateUser(updateVotesUser))
             await dispatch(getGames())
+            addPoints(1)
         }
     };
 
     const handleClick = async () => {
-        addPoints(1)
         const game = allGames.find(i => i.id === item.id)
         if (game) {
             // console.log('GameDescription', game)
@@ -148,7 +151,7 @@ const GameDescription = () => {
                     id: userGameUsed.id,
                     user_id: user.id,
                     game_id: item.id,
-                    points: userGameUsed.points + 1
+                    points: parseInt(userGameUsed.points) + 1
                 }
                 dispatch(updateUserGame(userGame))
             } else {
@@ -170,7 +173,7 @@ const GameDescription = () => {
     };
 
     const visitWebsite = async (task) => {
-        console.log('visitWebsite', task)
+        // console.log('visitWebsite', task)
         const userTask = {
             user_id: user.id,
             task_id: task.id,
@@ -179,9 +182,8 @@ const GameDescription = () => {
         dispatch(createUserTask(userTask))
         await addPoints(1)
         // testUserTaskApi(task)
+        dispatch(getAllUsersTasks())
         window.open(task.url, "_blank")
-        await handleClick()
-            .then(r => console.log(''));
     };
 
     if (item)

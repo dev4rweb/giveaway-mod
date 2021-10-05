@@ -53,12 +53,12 @@ class GameController extends Controller
     public function create()
     {
         try {
-            $response['message'] = "Game created";
-            $response['success'] = false;
             $response['model'] = Game::create([
                 'name' => 'new Game'
 //                'status' => 'На модерации',
             ]);
+            $response['message'] = "Game created";
+            $response['success'] = true;
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
