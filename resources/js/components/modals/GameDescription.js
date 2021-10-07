@@ -101,6 +101,7 @@ const GameDescription = () => {
         // console.log('getKeyHandlerForCompetition userGames', userGames)
         // console.log('getKeyHandlerForCompetition userTasks', userTasks)
         const userGame = userGames.find(i => i.game_id == game.id)
+        // console.log('getKeyHandlerForCompetition', userGame)
         if (userGame.points >= game.tasks.length + 1) dispatch(setError('You are already joined'))
         else addPoints(1)
     };

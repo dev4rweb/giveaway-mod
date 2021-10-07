@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import ErrorMessage from "../components/UI/ErrorMessage";
+import {setError, setLoading} from "../reducers/errorReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,15 +83,20 @@ const useStyles = makeStyles((theme) => ({
 
 const RegisterPage = () => {
     const classes = useStyles();
+    const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+    const error = useSelector(state => state.error.error)
+
 
     const submitHandler = (e) => {
         e.preventDefault()
         // console.log('email', email)
         // console.log('password', password)
+
+        dispatch(setLoading(true))
 
         const fd = new FormData();
         fd.set('name', name)
@@ -103,11 +111,32 @@ const RegisterPage = () => {
                 // console.log(res)
                 if (res.status === 201) { // before was 204
                     // console.log('You are logged in')
-                    document.location.reload()
+
                 }
             })
             .catch(err => {
                 console.log(err.response.data)
+                const messages = err.response.data.errors
+                if (messages.email.length || messages.password.length) {
+                    if (messages.email.length) {
+                        messages.email.forEach(msg => dispatch(setError(msg)));
+                        return
+                    }
+
+                    if (messages.password.length) {
+                        messages.password.forEach(msg => dispatch(setError(msg)));
+                    }
+                } else {
+                    setError(err.response.data.message)
+                }
+            })
+            .finally(() => {
+                dispatch(setLoading(false))
+                if (error) {
+                    setTimeout(() => {
+                        document.location.reload()
+                    }, 3000);
+                } else document.location.reload()
             });
     };
 
@@ -183,6 +212,10 @@ const RegisterPage = () => {
             >
                 or Login
             </InertiaLink>
+
+            {
+                error && <ErrorMessage message={error} />
+            }
         </div>
     );
 };
