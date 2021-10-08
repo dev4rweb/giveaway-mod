@@ -64,7 +64,7 @@ const HomePage = ({user, errors, games, sponsorGames, userTasks, userGames}) => 
         if (error) {
             setTimeout(() => {
                 dispatch(setError(''))
-            }, 2000);
+            }, 5000);
         }
 
         return (

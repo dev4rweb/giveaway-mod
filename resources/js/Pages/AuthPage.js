@@ -117,11 +117,31 @@ const AuthPage = () => {
             })
             .catch(err => {
                 console.log(err.response.data)
-                dispatch(setError(err.response.data.message))
+                /*dispatch(setError(err.response.data.message))
                 setEmail('');
-                setPassword('')
+                setPassword('')*/
+                const messages = err.response.data.errors
+                if (messages.email.length || messages.password.length) {
+                    if (messages.email.length) {
+                        messages.email.forEach(msg => dispatch(setError(msg)));
+                        return
+                    }
+
+                    if (messages.password.length) {
+                        messages.password.forEach(msg => dispatch(setError(msg)));
+                    }
+                } else {
+                    setError(err.response.data.message)
+                }
             })
-            .finally(()=> dispatch(setLoading(false)));
+            .finally(() => {
+                dispatch(setLoading(false))
+                if (error) {
+                    setTimeout(() => {
+                        // document.location.reload()
+                    }, 3000);
+                } // else document.location.reload()
+            });
     };
 
     return (
@@ -193,7 +213,7 @@ const AuthPage = () => {
                 or Register
             </InertiaLink>
             {
-                error && <ErrorMessage message={error} />
+                error && <ErrorMessage message={error} hideTime={5000}  />
             }
         </div>
     );

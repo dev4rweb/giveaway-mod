@@ -73,6 +73,8 @@ const GameDescription = () => {
             if (doneTask && doneTask.is_done == 1)
                 doneList.push(doneTask)
         });
+        // console.log('compareDoneList doneList.length', doneList.length)
+        // console.log('compareDoneList item.tasks.length', item.tasks.length)
         if (doneList.length === item.tasks.length)
             setBtnDisabled(false)
     }

@@ -11,7 +11,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
     // console.log('SwitchGameDescBtn', doneTask)
 
     const checkWebsiteHandler = (e) => {
-        console.log('checkWebsiteHandler')
+        // console.log('checkWebsiteHandler')
         dispatch(setModalVisitWebsiteAction(true))
         dispatch(setVisitWebsiteDetailsAction(task))
         // handleClick(event, task)

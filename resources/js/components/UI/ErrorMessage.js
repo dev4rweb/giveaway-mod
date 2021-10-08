@@ -4,7 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const ErrorMessage = ({message = ''}) => {
+const ErrorMessage = ({message = '', hideTime = 5000}) => {
     const [open, setOpen] = React.useState(true);
 
     const handleClose = (event, reason) => {
@@ -23,7 +23,7 @@ const ErrorMessage = ({message = ''}) => {
                     horizontal: 'left',
                 }}
                 open={open}
-                autoHideDuration={3000}
+                autoHideDuration={hideTime}
                 onClose={handleClose}
                 message={message}
                 action={
