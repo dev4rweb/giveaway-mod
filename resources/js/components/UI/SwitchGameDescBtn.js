@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "../../../sass/components/GameDescription.module.scss";
 import {CopyToClipboard} from "react-copy-to-clipboard/lib/Component";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,8 +7,9 @@ import {setModalVisitWebsiteAction, setVisitWebsiteDetailsAction} from "../../re
 const SwitchGameDescBtn = ({task, userTasks}) => {
     const dispatch = useDispatch()
     const stateData = useSelector(state => state.lang)
-    const doneTask = userTasks.find(item => item.task_id === task.id)
+    let doneTask = userTasks.find(item => item.task_id == task.id)
     // console.log('SwitchGameDescBtn', doneTask)
+    // console.log('SwitchGameDescBtn userTasks', userTasks)
 
     const checkWebsiteHandler = (e) => {
         // console.log('checkWebsiteHandler')
@@ -16,6 +17,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
         dispatch(setVisitWebsiteDetailsAction(task))
         // handleClick(event, task)
     };
+
 
     if (doneTask && doneTask.is_done == 1) {
         return (

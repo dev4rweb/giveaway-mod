@@ -54,7 +54,7 @@ const GameCard = ({item}) => {
     };*/
 
     const handleClick = (e) => {
-        console.log('handleClick', item)
+        // console.log('handleClick', item)
         if (isAuth) {
             dispatch(setModalGameDescription(true))
             dispatch(setGameDescription(item))

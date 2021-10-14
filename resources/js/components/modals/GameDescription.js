@@ -79,6 +79,7 @@ const GameDescription = () => {
             setBtnDisabled(false)
     }
 
+
     useEffect(() => {
         // console.log('useEffect', item)
         if (item && item.isCompetition == 1) setBtnDisabled(true)
@@ -182,10 +183,10 @@ const GameDescription = () => {
             task_id: task.id,
             is_done: 1
         }
-        dispatch(createUserTask(userTask))
         await addPoints(1)
+        dispatch(createUserTask(userTask))
         // testUserTaskApi(task)
-        dispatch(getAllUsersTasks())
+        // dispatch(getAllUsersTasks())
         window.open(task.url, "_blank")
     };
 
