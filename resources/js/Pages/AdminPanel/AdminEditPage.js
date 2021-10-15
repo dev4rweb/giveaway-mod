@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {setEditPage} from "../../reducers/modalReducer";
@@ -15,7 +15,7 @@ import {
     setTaskOneFromServer, setTaskThreeFromServer, setTaskTwoFromServer,
     updateTasksForGameAction, updateTasksForGameThreeAction, updateTasksForGameTwoAction
 } from "../../reducers/TaskReducer";
-import {cleanTempState, compareTasks, getTasks} from "../../actions/tasks";
+import {cleanTempState, compareTasks} from "../../actions/tasks";
 
 const AdminEditPage = () => {
     const dispatch = useDispatch()
@@ -51,14 +51,12 @@ const AdminEditPage = () => {
                     dispatch(setInitialSelectedTaskOne(tasks[i]))
                 }
                 if (i === 1) {
-                    // dispatch(setTaskTwo(tasks[1].taskType));
                     // console.log('AdminEditPage 1 ', tasks[i])
                     dispatch(setTaskTwoFromServer(tasks[i]))
                     dispatch(updateTasksForGameTwoAction(tasks[i]))
                     dispatch(setInitialSelectedTaskTwo(tasks[i]))
                 }
                 if (i === 2) {
-                    // dispatch(setTaskThree(tasks[2].taskType))
                     // console.log('AdminEditPage 2 ', tasks[i])
                     dispatch(setTaskThreeFromServer(tasks[i]))
                     dispatch(updateTasksForGameThreeAction(tasks[i]))
@@ -157,7 +155,7 @@ const AdminEditPage = () => {
             </div>
 
             {
-                game.isCompetition && <TaskContainer tasks={game.tasks}/>
+                game.isCompetition && <TaskContainer />
             }
 
             <div className={s.btnWrapper}>

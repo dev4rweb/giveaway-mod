@@ -16,9 +16,6 @@ import {
     updateTaskAction
 } from "../reducers/TaskReducer";
 import {fetchAllGifts, removeGiftAction} from "../reducers/giftReducer";
-import {setEditPage} from "../reducers/modalReducer";
-import {setTaskOne, setTaskThree, setTaskTwo} from "../reducers/taskTypeReducer";
-import {useSelector} from "react-redux";
 
 export const getTasks = () => {
     return async (dispatch) => {
@@ -85,9 +82,6 @@ export const removeTask = id => {
 export const cleanTempState = () => {
     return async (dispatch) => {
         // dispatch(setLoading(true))
-        dispatch(setTaskOne(null))
-        dispatch(setTaskTwo(null))
-        dispatch(setTaskThree(null))
 
         dispatch(setInitialSelectedTaskOne(null))
         dispatch(setTaskOneFromServer(null))

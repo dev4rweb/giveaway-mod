@@ -23,8 +23,6 @@ import ErrorMessage from "../components/UI/ErrorMessage";
 import AdminCompetitionPage from "./AdminPanel/AdminCompetitionPage";
 import AdminCreatePage from "./AdminPanel/AdminCreatePage";
 import {addGame} from "../actions/games";
-import {createGift, getGifts} from "../actions/gifts";
-import {createWinner, getAllWinners, removeWinner} from "../actions/winners";
 import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
 import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
 

@@ -6,7 +6,7 @@ import RadioItem from "./RadioItem";
 import CustomRadioGroup from "./CustomRadioGroup";
 
 const TaskBlockMod = ({selector, setSelectedTask}) => {
-
+    console.log('selector', selector)
 
     return (
         <div className="task-block">

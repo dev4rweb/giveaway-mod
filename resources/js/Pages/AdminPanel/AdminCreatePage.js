@@ -8,12 +8,10 @@ import AttachFilesBlock from "../../components/AttachFilesBlock";
 import {changeNewGame} from "../../reducers/gameReducer";
 import GiftBlock from "../../components/GiftBlock/GiftBlock";
 import TaskContainer from "../../components/Tasks/TaskContainer";
-import {setTaskOne, setTaskThree, setTaskTwo} from "../../reducers/taskTypeReducer";
 import {
     setTasksForGameAction,
     setTasksForGameThreeAction,
     setTasksForGameTwoAction,
-    updateTasksForGameAction, updateTasksForGameThreeAction, updateTasksForGameTwoAction
 } from "../../reducers/TaskReducer";
 import {cleanTempState, compareTasks} from "../../actions/tasks";
 
@@ -24,16 +22,9 @@ const AdminCreatePage = () => {
     const setGame = game => {
         dispatch(changeNewGame(game))
     };
-/*    const [game, setGame] = useState({
-        ...mainGame,
-        status: 0,
-        users: [],
-        gifts: [],
-        tasks: [],
-        isCompetition: 0
-    })*/
+
+
     const gifts = useSelector(state => state.gifts.gifts)
-    const tasks = useSelector(state => state.tasks.tasks)
 
     const taskOneFromServer = useSelector(state => state.tasks.taskOneFromServer)
     const selectedTaskOne = useSelector(state => state.tasks.selectedTaskOne)
@@ -54,9 +45,6 @@ const AdminCreatePage = () => {
         dispatch(setTasksForGameAction(game))
         dispatch(setTasksForGameTwoAction(game))
         dispatch(setTasksForGameThreeAction(game))
-        dispatch(setTaskOne(null))
-        dispatch(setTaskTwo(null))
-        dispatch(setTaskThree(null))
         // console.log('game', game)
     }, []);
 
@@ -140,7 +128,7 @@ const AdminCreatePage = () => {
 
             {
                 game.isCompetition && game.isCompetition != 0
-                    ? <TaskContainer tasks={tasks}/> : <div/>
+                    ? <TaskContainer /> : <div/>
             }
 
             <div className={s.btnWrapper}>

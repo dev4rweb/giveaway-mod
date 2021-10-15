@@ -1,11 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from '../../../sass/pages/CreatePage.module.scss'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import TaskBlock from "./TaskBlock";
-import {
-    setTaskThree,
-    setTaskTwo
-} from "../../reducers/taskTypeReducer";
 import {
     dataTasksOneAction, dataTasksThreeAction,
     dataTasksTwoAction,
@@ -16,8 +12,8 @@ import {
     setSelectedTaskTwoAction,
 } from "../../reducers/TaskReducer";
 
-const TaskContainer = ({tasks}) => {
-    const dispatch = useDispatch()
+const TaskContainer = () => {
+
     const stateData = useSelector(state => state.lang)
 
     const taskSelectorOne = useSelector(state => state.tasks.dataTasksOne)
@@ -27,8 +23,6 @@ const TaskContainer = ({tasks}) => {
     const taskSelectorThree = useSelector(state => state.tasks.dataTasksThree)
     const initialSelectorTaskThree = useSelector(state => state.tasks.initialSelectedTaskThree)
 
-    /*const taskSelectorTwo = useSelector(state => state.taskType.taskTwo)
-    const taskSelectorThree = useSelector(state => state.taskType.taskThree)*/
     // console.log('TaskContainer tasks', tasks)
 
 
