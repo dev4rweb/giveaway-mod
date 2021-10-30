@@ -2,7 +2,11 @@ import React, {useEffect} from 'react';
 import s from "../../../sass/components/GameDescription.module.scss";
 import {CopyToClipboard} from "react-copy-to-clipboard/lib/Component";
 import {useDispatch, useSelector} from "react-redux";
-import {setModalVisitWebsiteAction, setVisitWebsiteDetailsAction} from "../../reducers/modalReducer";
+import {
+    setModalTwitterViewPostAction,
+    setModalVisitWebsiteAction,
+    setVisitWebsiteDetailsAction
+} from "../../reducers/modalReducer";
 
 const SwitchGameDescBtn = ({task, userTasks}) => {
     const dispatch = useDispatch()
@@ -42,6 +46,23 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
                 className={`${s.checkWebsite}`}
                 style={{fontSize: '20px'}}
                 onClick={event => checkWebsiteHandler(event)}
+            >
+                {
+                    stateData.home.plus_one[stateData.lang]
+                }
+            </button>
+        );
+    }
+
+    if (task.task.toLowerCase().includes('view post')) {
+        const twitterViewPostHandler = e => {
+            dispatch(setModalTwitterViewPostAction(true))
+        };
+        return (
+            <button
+                className={`${s.checkWebsite}`}
+                style={{fontSize: '20px'}}
+                onClick={event => twitterViewPostHandler(event)}
             >
                 {
                     stateData.home.plus_one[stateData.lang]

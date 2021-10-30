@@ -33,8 +33,9 @@ const DrawWinner = () => {
                 setCanChange(true)
             }
         }
-        // console.log('getCandidates users', users)
-        // console.log('getCandidates items', items)
+        items.sort((a,b) => (a.votes < b.votes) ? 1 : ((b.votes < a.votes) ? -1 : 0))
+        console.log('getCandidates users', users)
+        console.log('getCandidates items', items)
         setCandidates(items)
     }
 

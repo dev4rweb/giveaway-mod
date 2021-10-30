@@ -9,6 +9,7 @@ const SET_MODAL_DRAW_WINNER = 'SET_MODAL_DRAW_WINNER'
 const SET_MODAL_GAME_DETAILS = 'SET_MODAL_GAME_DETAILS'
 const SET_VISIT_SITE_DETAILS = 'SET_VISIT_SITE_DETAILS'
 const CLICK_CHECK_WEBSITE = 'CLICK_CHECK_WEBSITE'
+const SET_MODAL_TWITTER_VIEW_POST = 'SET_MODAL_TWITTER_VIEW_POST'
 
 const defaultState = {
     modalIsAuth: false,
@@ -21,7 +22,8 @@ const defaultState = {
     modalDrawWinner: false,
     modalGameDetails: false,
     checkWebsiteDetails: null,
-    checkWebsiteClick: false
+    checkWebsiteClick: false,
+    modalTwitterViewPost: false
 }
 
 export default function modalReducer(state = defaultState, action) {
@@ -81,6 +83,11 @@ export default function modalReducer(state = defaultState, action) {
                 ...state,
                 checkWebsiteClick: action.payload
             }
+        case SET_MODAL_TWITTER_VIEW_POST:
+            return {
+                ...state,
+                modalTwitterViewPost: action.payload
+            }
         default:
             return state
     }
@@ -97,3 +104,4 @@ export const setModalDrawWinner = (isOpen) => ({type: SET_MODAL_DRAW_WINNER, pay
 export const setModalVisitWebsiteAction = isOpen => ({type: SET_MODAL_GAME_DETAILS, payload: isOpen})
 export const setVisitWebsiteDetailsAction = item => ({type: SET_VISIT_SITE_DETAILS, payload: item})
 export const checkWebsiteClickAction = isClick => ({type: CLICK_CHECK_WEBSITE, payload: isClick})
+export const setModalTwitterViewPostAction = isOpen => ({type: SET_MODAL_TWITTER_VIEW_POST, payload: isOpen})

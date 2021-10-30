@@ -8,6 +8,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\mailController;
+use App\Http\Controllers\PolicyPageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UloginController;
 use App\Http\Controllers\UserGameController;
@@ -47,6 +48,8 @@ Route::post('/game/create', [GameController::class, 'create']);
 Route::post('/game/store', [GameController::class, 'store']);
 Route::post('/game/update', [GameController::class, 'update']);
 Route::delete('/game/{id}', [GameController::class, 'destroy']);
+
+Route::get('/privacy-policy', [PolicyPageController::class, 'index']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/update-votes', [AdminPageController::class, 'update']);

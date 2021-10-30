@@ -213,6 +213,10 @@ const RegisterPage = () => {
                 or Login
             </InertiaLink>
 
+            <div>
+                <InertiaLink href={'/privacy-policy'}>Privacy Policy</InertiaLink>
+            </div>
+
             {
                 error && <ErrorMessage message={error} />
             }

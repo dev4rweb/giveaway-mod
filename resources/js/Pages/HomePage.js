@@ -26,6 +26,8 @@ import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
 import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
 import ModalVisitWebsite from "../components/modals/ModalVisitWebsite";
 import CheckWebsiteDetails from "../components/modals/CheckWebsiteDetails";
+import ModalTwitterViewPost from "../components/modals/ModalTwitterViewPost";
+import TwitterViewPost from "../components/modals/TwitterViewPost";
 
 /*https://youtu.be/tODggNhelQ4*/
 
@@ -101,6 +103,9 @@ const HomePage = ({user, errors, games, sponsorGames, userTasks, userGames}) => 
                 <ModalVisitWebsite>
                     <CheckWebsiteDetails />
                 </ModalVisitWebsite>
+                <ModalTwitterViewPost>
+                    <TwitterViewPost />
+                </ModalTwitterViewPost>
             </Layout>
         );
     }

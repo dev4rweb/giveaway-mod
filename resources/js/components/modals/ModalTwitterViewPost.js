@@ -1,19 +1,17 @@
 import React from 'react';
+import s from '../../../sass/components/Modal.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import s from "../../../sass/components/Modal.module.scss";
-import {setModalAuth} from "../../reducers/modalReducer";
+import {setModalTwitterViewPostAction} from "../../reducers/modalReducer";
 
-const ModalAuth = ({children, zIndex = 10}) => {
+const ModalTwitterViewPost = ({children, zIndex = 20}) => {
     const dispatch = useDispatch()
-    const visible = useSelector(state => state.modal.modalAuth)
+    const visible = useSelector(state => state.modal.modalTwitterViewPost)
     const rootClasses = [s.modal]
 
-    if (visible) {
-        rootClasses.push(s.active)
-    }
+    if (visible) rootClasses.push(s.active)
 
-    const handleClose = (ev) => {
-        dispatch(setModalAuth(false))
+    const handleClose = e => {
+        dispatch(setModalTwitterViewPostAction(false))
     };
 
     return (
@@ -40,4 +38,4 @@ const ModalAuth = ({children, zIndex = 10}) => {
     );
 };
 
-export default ModalAuth;
+export default ModalTwitterViewPost;

@@ -212,6 +212,9 @@ const AuthPage = () => {
             >
                 or Register
             </InertiaLink>
+            <div>
+                <InertiaLink href={'/privacy-policy'}>Privacy Policy</InertiaLink>
+            </div>
             {
                 error && <ErrorMessage message={error} hideTime={5000}  />
             }
