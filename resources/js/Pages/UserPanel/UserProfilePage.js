@@ -6,7 +6,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {updateUser} from "../../actions/users";
 import {setUserPageUserAction} from "../../reducers/userPageReducer";
-import { FacebookProvider, LoginButton, Profile, Page, EmbeddedPost  } from 'react-facebook';
+import { FacebookProvider, LoginButton, ShareButton, Profile, Page, EmbeddedPost  } from 'react-facebook';
+import Like from "react-facebook/module/Like";
+import Share from "react-facebook/module/Share";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,6 +100,46 @@ const UserProfilePage = () => {
         dispatch(setUserPageUserAction(user))
     }
 
+    const clickToFb = ev => {
+        console.log('click')
+        FB.init({
+            appId: '260240649373300',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v12.0'
+        });
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"email,first_name,birthday,last_name,website,picture,posts,photos"},
+                    function(response) {
+                        console.log(response)
+                    }
+                );
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        });
+    };
+
+    const addPost = ev => {
+        FB.init({
+            appId: '260240649373300',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v12.0'
+        });
+        FB.ui({
+            method: 'share',
+            href: 'https://giveaways.zzz.com.ua/'
+        }, function(response){
+            console.log(response)
+        });
+    };
+
     const facebookClick = ev => {
         const fakeButton = document.querySelector('.ulogin-button-facebook')
         console.log('facebookClick')
@@ -112,6 +154,10 @@ const UserProfilePage = () => {
 
     const handleError = (error) => {
         console.log(error)
+    }
+
+    const handleChange = (response) => {
+        console.log(response);
     }
 
     return (
@@ -205,7 +251,8 @@ const UserProfilePage = () => {
             <div>
                 {/*https://www.npmjs.com/package/react-facebook*/}
                 {/*https://developers.facebook.com/apps/162919759328231/app-review/permissions/*/}
-                <FacebookProvider appId="162919759328231">
+                {/*<FacebookProvider appId="162919759328231">*/}
+                {/*<FacebookProvider appId="260240649373300">
                     <LoginButton
                         scope="email, public_profile"
                         onCompleted={handleResponse}
@@ -213,8 +260,18 @@ const UserProfilePage = () => {
                     >
                         <span>Facebook</span>
                     </LoginButton>
-                </FacebookProvider>
+                </FacebookProvider>*/}
+                <button
+                    onClick={event => clickToFb(event)}
+                >
+                    Facebook
+                </button>
 
+                <button
+                    onClick={event => addPost(event)}
+                >
+                    add post
+                </button>
             </div>
 
             {
