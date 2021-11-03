@@ -135,30 +135,15 @@ const UserProfilePage = () => {
         FB.ui({
             method: 'share',
             href: 'https://giveaways.zzz.com.ua/'
-        }, function(response){
-            console.log(response)
+        },   function(response) {
+            if (response && !response.error_message) {
+                alert('Posting completed.');
+            } else {
+                alert('Error while posting.');
+            }
         });
     };
 
-    const facebookClick = ev => {
-        const fakeButton = document.querySelector('.ulogin-button-facebook')
-        console.log('facebookClick')
-        console.log('facebookClick', fakeButton)
-        if (fakeButton) fakeButton.click()
-    };
-
-    const handleResponse = (data) => {
-        console.log(data);
-        setDataFB(data.profile)
-    }
-
-    const handleError = (error) => {
-        console.log(error)
-    }
-
-    const handleChange = (response) => {
-        console.log(response);
-    }
 
     return (
         <div className={`container user-page`}>
@@ -249,18 +234,6 @@ const UserProfilePage = () => {
             }*/}
 
             <div>
-                {/*https://www.npmjs.com/package/react-facebook*/}
-                {/*https://developers.facebook.com/apps/162919759328231/app-review/permissions/*/}
-                {/*<FacebookProvider appId="162919759328231">*/}
-                {/*<FacebookProvider appId="260240649373300">
-                    <LoginButton
-                        scope="email, public_profile"
-                        onCompleted={handleResponse}
-                        onError={handleError}
-                    >
-                        <span>Facebook</span>
-                    </LoginButton>
-                </FacebookProvider>*/}
                 <button
                     onClick={event => clickToFb(event)}
                 >

@@ -36,8 +36,8 @@ const GameDescription = () => {
         stateData.home.join_competition[stateData.lang] :
         stateData.home.join_giveaway[stateData.lang]
 
-    // console.log('GameDescription', userTasks)
-    // console.log('GameDescription item', item)
+    console.log('GameDescription', userTasks)
+    console.log('GameDescription item', item)
 
     const testUserTaskApi = (task) => {
         // create
