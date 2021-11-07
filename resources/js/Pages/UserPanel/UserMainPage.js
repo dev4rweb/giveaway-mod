@@ -8,7 +8,7 @@ const UserMainPage = () => {
     const games = useSelector(state => state.userPage.games)
     const user = useSelector(state => state.userPage.user)
     const participation = games.length
-    const wins = games.filter(item => item.winner_id == user.id).length
+    const wins = games.filter(item => item.winner_id == user.id).length || 0
     const pending = games.filter(item => item.status == 0).length
 
     return (

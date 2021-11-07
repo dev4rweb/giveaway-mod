@@ -25,7 +25,7 @@ const UserTableItem = ({item, user}) => {
     return (
         <tr>
             <th scope="row">#{item.id} {item.name}</th>
-            <td>id{item.winner_id}</td>
+            <td>id{item.winner_id || 0}</td>
             <td>{`${day}/${month}/${date.getFullYear()}`}</td>
             <td>{item.users.length}</td>
             <td
