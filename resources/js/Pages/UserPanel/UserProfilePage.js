@@ -6,6 +6,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {updateUser} from "../../actions/users";
 import {setUserPageUserAction} from "../../reducers/userPageReducer";
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
 import { FacebookProvider, LoginButton, ShareButton, Profile, Page, EmbeddedPost  } from 'react-facebook';
 import Like from "react-facebook/module/Like";
 import Share from "react-facebook/module/Share";
@@ -144,6 +146,9 @@ const UserProfilePage = () => {
         });
     };
 
+    const responseGoogle = (response) => {
+        console.log(response);
+    }
 
     return (
         <div className={`container user-page`}>
@@ -246,6 +251,15 @@ const UserProfilePage = () => {
                     add post
                 </button>
             </div>
+
+            {/*https://youtu.be/-OgU5EAcQmo*/}
+            <GoogleLogin
+                clientId="1031122997941-euqhln98umjvsv62v60g7juejlf3t9vt.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+            />
 
             {
                 dataFB &&
