@@ -37,6 +37,7 @@ class HomePageController extends Controller
                 ->with('tasks')
                 ->with('winners')
                 ->with('socialUlogins')
+                ->with('googleUserData')
                 ->first();
             $userTasks = UserTask::where('user_id', '=', $user->id)->get();
             $userGames = UserGame::where('user_id', '=', $user->id)->get();

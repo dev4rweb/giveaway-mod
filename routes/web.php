@@ -6,6 +6,7 @@ use App\Http\Controllers\FaqPageController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GiftController;
+use App\Http\Controllers\GoogleUserDataController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\mailController;
 use App\Http\Controllers\PolicyPageController;
@@ -88,6 +89,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/send-key', [mailController::class, 'sendKey']);
 
     Route::post('ulogin', [UloginController::class, 'login']);
+
+    Route::resources([
+        'googleData' => GoogleUserDataController::class
+    ]);
 });
 
 // Error Page

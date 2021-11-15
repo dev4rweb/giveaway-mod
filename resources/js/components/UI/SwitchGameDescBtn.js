@@ -8,6 +8,11 @@ import {
     setVisitWebsiteDetailsAction
 } from "../../reducers/modalReducer";
 import {createUserTask} from "../../actions/userTask";
+import GoogleLogin from "react-google-login";
+import {createGoogleAccount} from "../../actions/googleUser";
+import {setError} from "../../reducers/errorReducer";
+
+
 
 const SwitchGameDescBtn = ({task, userTasks}) => {
     const dispatch = useDispatch()
@@ -43,6 +48,89 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
         )
     }
 
+    if (task.taskType === 3 && !user.google_user_data) {
+        const responseGoogle = (response) => {
+            console.log(response);
+            const googleUser = {
+                user_id: user.id,
+                name: response.profileObj.name,
+                email: response.profileObj.email,
+                googleId: response.profileObj.googleId,
+            }
+            dispatch(createGoogleAccount(googleUser))
+        }
+        return (
+                <GoogleLogin
+                    clientId="1031122997941-euqhln98umjvsv62v60g7juejlf3t9vt.apps.googleusercontent.com"
+                    buttonText="Login"
+                    render={renderProps => (
+                        <button
+                            onClick={renderProps.onClick}
+                            className={s.checkWebsite}
+                            title={`In this task you will need to connect your Google Account`}
+                            style={{fontSize: '20px'}}
+                            // disabled={renderProps.disabled}
+                        >
+                            google auth
+                        </button>
+                    )}
+                    className={s.loginGoogle}
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+        )
+    }
+
+    if (task.taskType === 3 && user.google_user_data) {
+        console.log('userData', user)
+        let done = false
+        const getAllComments = () => {
+            const videoUrl = task.url.substr(32)
+            const api_key = 'AIzaSyDH7whYUcUbVazRJOPrVrtd0s7m6M3lN-A'
+            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&key=${api_key}&videoId=${videoUrl}&maxResults=100`
+
+            axios.get(url)
+                .then(res => {
+                    console.log(res)
+                    const comment = res.data.items.find(item =>
+                        item.snippet.topLevelComment.snippet.authorDisplayName == user.google_user_data.name)
+                    if (comment) {
+                        console.log('done', comment);
+                        done = true
+                    } else {
+                        console.log('not found', comment)
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+            return done
+        };
+
+        getAllComments();
+
+        const addComment = e => {
+            if (done) {
+                dispatch(setError('This task is done'));
+            } else {
+                window.location.href = task.url;
+            }
+        };
+
+        return (
+            <button
+                className={`${s.checkWebsite}`}
+                style={{fontSize: '20px'}}
+                onClick={addComment}
+            >
+                {
+                    done ? 'Done' : 'Add Comment'
+                }
+            </button>
+        );
+    }
+
     if (task.taskTypeId === 14) {
         // other fields
         /*https://developers.facebook.com/docs/sharing/reference/share-dialog*/
@@ -59,7 +147,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
             FB.ui({
                 method: 'share',
                 href: task.url
-            },   function(response) {
+            }, function (response) {
                 if (response && !response.error_message) {
                     alert('Posting completed.');
                     const userTask = {
@@ -73,7 +161,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
                 }
             });
         };
-        return  (
+        return (
             <button
                 className={`${s.checkWebsite}`}
                 style={{fontSize: '20px'}}
@@ -81,7 +169,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
             >
                 Share
             </button>
-        )
+        );
     }
 
     if (task.task.toLowerCase().includes('check website')) {

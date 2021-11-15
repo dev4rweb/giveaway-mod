@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SocialUlogin::class, 'user_id', 'id');
     }
+
+    public function googleUserData()
+    {
+        return $this->hasOne(GoogleUserData::class, 'user_id', 'id');
+    }
 }
