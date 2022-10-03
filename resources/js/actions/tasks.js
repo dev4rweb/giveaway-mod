@@ -109,14 +109,15 @@ export const compareTasks = (serverTask, frontTask) => {
         if (serverTask && frontTask) {
             let task = frontTask
             task.id = serverTask.id
-            // console.log('compareTasks', task)
+            console.log('compareTasks', task)
             dispatch(updateTask(task))
         }
         if (serverTask === null && frontTask) {
-            // console.log('createTask')
+            console.log('createTask')
             dispatch(createTask(frontTask))
         }
         if (serverTask && frontTask === null) {
+            console.log('removeTask')
             dispatch(removeTask(serverTask.id))
         }
     }

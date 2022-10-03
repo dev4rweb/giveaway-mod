@@ -10,7 +10,7 @@
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body style="position: relative">
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+{{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>--}}
 @inertia
 {{--@include('auth.social')--}}
 {{--@yield('js')--}}

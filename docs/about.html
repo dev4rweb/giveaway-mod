@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Youtube comment</h1>
+    <form>
+        <div class="fourm-group">
+            <input type="text" class="form-control" id="videoId">
+            <button class="btn btn-danger">Display</button>
+        </div>
+    </form>
+    <ul class="list-group" id="list"></ul>
+</div>
+<!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // const registerForm = () => {
+    axios.post('https://api.lead9.com/reciever/logicweb/act331', {
+        /*mode: 'no-cors',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Credentials': true,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS'
+        },
+        withCredentials: true,
+        credentials: 'same-origin',*/
+        params: {
+            command: 'registerUser',
+            msisdn: '380976760232',
+            user_id: '102',
+            user_name: 'Alex',
+            password: '123',
+            email: 'khomichenko@gmail.com',
+            ip: '127.0.0.1',
+            device: 'macos',
+            comment: 'test'
+        }
+    }).then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    });
+    // };
+</script>-->
+<!--
+<script>
+    /*https://developers.facebook.com/docs/javascript/reference/v12.0*/
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '260240649373300',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v12.0'
+        });
+
+        /*FB.api(
+            "/102134298954417/comments",
+            "POST",
+            {
+                "message": "This is a test comment",
+            },
+            function (response) {
+                console.log('comment', response)
+                if (response && !response.error) {
+                    console.log('comment', response)
+                }
+            }
+        );*/
+
+
+
+        /*FB.ui({
+            method: 'share',
+            href: 'https://giveaways.zzz.com.ua/'
+        }, function(response){
+            console.log(response)
+        });*/
+
+        /*FB.logout(function(response) {
+            console.log(response)
+        });*/
+        /*https://developers.facebook.com/docs/graph-api/reference/user/*/
+        /*https://developers.facebook.com/tools/explorer/?method=GET&path=me%3Ffields%3Demail%2Cfirst_name%2Cfavorite_teams&version=v12.0*/
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"email,first_name,birthday,last_name,website,picture,posts,photos"},
+                    function(response) {
+                        console.log(response)
+                        const myPostId = '102134298954417'
+                        const nikoPostId = '10159698489399485'
+                        const myPostPage = '102132922287888_102134298954417'
+                        const nikoPostPage = '95575084484_10159698489399485'
+                        const postAboutGive = '186959713605478_187056256929157'
+                        /*FB.api(
+                            "/95575084484/feed",
+                            function (response) {
+                                console.log('feed', response)
+                                if (response && !response.error) {
+                                    /!* handle the result *!/
+                                }
+                            }
+                        );*/
+                        /*FB.ui({
+                            method: 'pagetab',
+                            redirect_uri: 'https://www.facebook.com/95575084484/posts/10159698489399485/'
+                        }, function(response){
+                            console.log(response)
+                        });*/
+                        FB.api('/10159698489399485', function(response) {
+                            console.log(response);
+                        });
+/*                        FB.api(
+                            `/${nikoPostPage}/comments`,
+                            "POST",
+                            {
+                                "message": "This is a test comment",
+                            },
+                            function (response) {
+                                console.log('comment create', response)
+                                if (response && !response.error) {
+                                    console.log('comment', response)
+                                }
+                            }
+                        );
+                        FB.api(
+                            `/${nikoPostPage}/comments`,
+                            function (response) {
+                                console.log('comments get', response)
+                                if (response && !response.error) {
+                                    /!* handle the result *!/
+                                }
+                            }
+                        );
+
+                        FB.api(
+                            `/${nikoPostPage}/likes`,
+                            "POST",
+                            function (response) {
+                                console.log('likes create', response)
+                                if (response && !response.error) {
+                                    console.log('comment', response)
+                                }
+                            }
+                        );
+                        FB.api(
+                            `/${nikoPostPage}/likes`,
+                            function (response) {
+                                console.log('likes get', response)
+                                if (response && !response.error) {
+                                    /!* handle the result *!/
+                                }
+                            }
+                        );*/
+                    }
+                );
+
+                /*
+                // FB.api('/me', function(response) {
+                FB.api('/me', function(response) {
+                    console.log(response)
+                    console.log('Good to see you, ' + response.name + '.');
+                    console.log('Good to see you, ' + response.picture + '.');
+                    /!*https://developers.facebook.com/tools/explorer/?method=GET&path=me%3Ffields%3Demail%2Cfirst_name%2Cfavorite_teams&version=v12.0*!/
+                });*/
+                /*FB.api('/186959713605478', function(response) {
+                    console.log(response);
+                });*/
+                /*FB.api(
+                    "/186959713605478_187629966871786/comments/?message=hello",
+                    function (response) {
+                        if (response && !response.error) {
+                            console.log('hello', response)
+                        }
+                    }
+                );*/
+
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        });
+
+
+
+        /*FB.ui({
+            method: 'pagetab',
+            redirect_uri: 'https://www.facebook.com/dialog/pagetab?' +
+                '  app_id=260240649373300' +
+                '  &redirect_uri=https://giveaways.zzz.com.ua/'
+        }, function(response){
+            console.log(response)
+        });*/
+
+        /*FB.api('/100068743516271', function(response) {
+            console.log(response);
+        });*/
+
+        /*FB.api('/me', {fields: 'last_name'}, function(response) {
+            console.log(response);
+        });*/
+
+        /*FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // The user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire.
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+            } else if (response.status === 'not_authorized') {
+                // The user hasn't authorized your application.  They
+                // must click the Login button, or you must call FB.login
+                // in response to a user gesture, to launch a login dialog.
+            } else {
+                // The user isn't logged in to Facebook. You can launch a
+                // login dialog with a user gesture, but the user may have
+                // to log in to Facebook before authorizing your application.
+            }
+            console.log(response)
+        });*/
+
+        /*FB.login(function(response) {
+            // handle the response
+            console.log(response)
+        }, {scope: 'email,user_likes,public_profile,user_link,user_posts'});*/
+
+        /*FB.getLoginStatus(function(response) {
+            console.log(response);
+        });*/
+    };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+-->
+<!--</script>-->
+<!--https://youtu.be/Z2ol5_qmvsg-->
+<!--youtube api-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            event.preventDefault()
+            let videoId = $("#videoId").val().substr(32)
+            let videoUrl = 'https://www.youtube.com/watch?v=Fj9v0kjrHVo'
+            console.log('path', videoUrl.substr(32))
+
+            const api_key = 'AIzaSyDH7whYUcUbVazRJOPrVrtd0s7m6M3lN-A'
+            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&key=${api_key}&videoId=${videoId}&maxResults=100`
+            // const url = `https://www.googleapis.com/youtube/v3/captions?part=snippet&key=${api_key}&videoId=${videoId}&maxResults=100`
+            $.get(url, function (data) {
+                console.log(data)
+
+                for (let i = 0; i < data.items.length; i++) {
+                    let result = `
+                    <li class="list-group-item">
+                        <img src="${data.items[i].snippet.topLevelComment.snippet.authorProfileImageUrl}" alt=""/>
+                        <span>${data.items[i].snippet.topLevelComment.snippet.textOriginal}</span>
+                    </li>
+                    `
+                    $('#list').append(result)
+                }
+            })
+        });
+    });
+</script>
+</script>
+
+
+
+<!--Google Api Test-->
+<script>
+    var GoogleAuth;
+    var SCOPE = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+    function handleClientLoad() {
+        // Load the API's client and auth2 modules.
+        // Call the initClient function after the modules load.
+        gapi.load('client:auth2', initClient);
+    }
+
+    function initClient() {
+        // In practice, your app can retrieve one or more discovery documents.
+        var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+
+        // Initialize the gapi.client object, which app uses to make API requests.
+        // Get API key and client ID from API Console.
+        // 'scope' field specifies space-delimited list of access scopes.
+        gapi.client.init({
+            'apiKey': 'AIzaSyDH7whYUcUbVazRJOPrVrtd0s7m6M3lN-A',
+            'clientId': '1031122997941-euqhln98umjvsv62v60g7juejlf3t9vt.apps.googleusercontent.com',
+            'discoveryDocs': [discoveryUrl],
+            'scope': SCOPE
+        }).then(function () {
+            GoogleAuth = gapi.auth2.getAuthInstance();
+
+            // Listen for sign-in state changes.
+            GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+            // Handle initial sign-in state. (Determine if user is already signed in.)
+            var user = GoogleAuth.currentUser.get();
+            setSigninStatus();
+
+            // Call handleAuthClick function when user clicks on
+            //      "Sign In/Authorize" button.
+            $('#sign-in-or-out-button').click(function() {
+                handleAuthClick();
+            });
+            $('#revoke-access-button').click(function() {
+                revokeAccess();
+            });
+        });
+    }
+
+    function handleAuthClick() {
+        if (GoogleAuth.isSignedIn.get()) {
+            // User is authorized and has clicked "Sign out" button.
+            GoogleAuth.signOut();
+        } else {
+            // User is not signed in. Start Google auth flow.
+            GoogleAuth.signIn();
+        }
+    }
+
+    function revokeAccess() {
+        GoogleAuth.disconnect();
+    }
+
+    function setSigninStatus() {
+        var user = GoogleAuth.currentUser.get();
+        var isAuthorized = user.hasGrantedScopes(SCOPE);
+        if (isAuthorized) {
+            $('#sign-in-or-out-button').html('Sign out');
+            $('#revoke-access-button').css('display', 'inline-block');
+            $('#auth-status').html('You are currently signed in and have granted ' +
+                'access to this app.');
+        } else {
+            $('#sign-in-or-out-button').html('Sign In/Authorize');
+            $('#revoke-access-button').css('display', 'none');
+            $('#auth-status').html('You have not authorized this app or you are ' +
+                'signed out.');
+        }
+    }
+
+    function updateSigninStatus() {
+        setSigninStatus();
+    }
+</script>
+
+<button id="sign-in-or-out-button"
+        style="margin-left: 25px">Sign In/Authorize</button>
+<button id="revoke-access-button"
+        style="display: none; margin-left: 25px">Revoke access</button>
+
+<div id="auth-status" style="display: inline; padding-left: 25px"></div><hr>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>

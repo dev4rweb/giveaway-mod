@@ -8,7 +8,7 @@ const UserMainPage = () => {
     const games = useSelector(state => state.userPage.games)
     const user = useSelector(state => state.userPage.user)
     const participation = games.length
-    const wins = games.filter(item => item.winner_id == user.id).length || 0
+    const wins = games.filter(item => item.winner_id == user.id).length || 0;
     const pending = games.filter(item => item.status == 0).length
 
     return (
@@ -25,7 +25,9 @@ const UserMainPage = () => {
                 </div>
                 <div className="user-stat-item stat-green">
                     <p>{stateData.user.wins[stateData.lang]} </p>
-                    <span>{wins}</span>
+                    <span>
+                        {wins}
+                    </span>
                 </div>
                 <div className="user-stat-item stat-blue">
                     <p>{stateData.user.pend[stateData.lang]} </p>

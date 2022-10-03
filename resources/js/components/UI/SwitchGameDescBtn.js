@@ -20,8 +20,8 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
     const visible = useSelector(state => state.modal.modalGameDetails)
     const user = useSelector(state => state.user.user)
     let doneTask = userTasks.find(item => item.task_id == task.id)
-    // console.log('SwitchGameDescBtn', doneTask)
-    // console.log('SwitchGameDescBtn userTasks', userTasks)
+    console.log('SwitchGameDescBtn', doneTask)
+    console.log('SwitchGameDescBtn userTasks', userTasks)
 
     const checkWebsiteHandler = (e) => {
         // console.log('checkWebsiteHandler')
@@ -83,7 +83,7 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
     }
 
     if (task.taskType === 3 && user.google_user_data) {
-        console.log('userData', user)
+        console.log('userData', user, task)
         let done = false
         const getAllComments = () => {
             const videoUrl = task.url.substr(32)
@@ -97,6 +97,11 @@ const SwitchGameDescBtn = ({task, userTasks}) => {
                         item.snippet.topLevelComment.snippet.authorDisplayName == user.google_user_data.name)
                     if (comment) {
                         console.log('done', comment);
+                        dispatch(createUserTask({
+                            user_id: user.id,
+                            task_id: task.id,
+                            is_done: 1
+                        }))
                         done = true
                     } else {
                         console.log('not found', comment)

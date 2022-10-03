@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@source-byte.com',
             'password' => \bcrypt('qa9h6`dNWNd{J#rd'),
         ]);
-        User::factory()->create([
+        /*User::factory()->create([
             'name' => 'Nikodem',
             'isAdmin' => false,
             'email' => 'nikodem@source-byte.com',
             'password' => \bcrypt('qa9h6`dNWNd{J#rd'),
-        ]);
+        ]);*/
 
         User::factory(20)->create([
             'isAdmin' => false,

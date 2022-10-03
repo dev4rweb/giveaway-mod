@@ -41,7 +41,7 @@ const AdminEditPage = () => {
     });
 
     useEffect(() => {
-        // console.log('AdminEditPage', tasks)
+        console.log('AdminEditPage', tasks)
         if (tasks.length > 0)
             for (let i = 0; i < tasks.length; i++) {
                 if (i === 0) {
