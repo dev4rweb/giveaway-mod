@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\CategoryTaskController;
 use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\FaqPageController;
 use App\Http\Controllers\FileUploadController;
@@ -39,7 +40,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
+//Route::get('/admin-panel', [AdminPageController::class, 'index'])->name('admin-panel');
+Route::get('/admin-panel', [AdminPageController::class, 'adminAdminPage'])->name('admin-panel');
+Route::get('/admin-users', [AdminPageController::class, 'adminUserPage'])->name('admin-users');
+Route::get('/admin-competitions', [AdminPageController::class, 'adminCompetitionPage'])->name('admin-competitions');
 Route::get('/user-panel', [UserPageController::class, 'index'])->name('user-panel');
 
 Route::get('/faq', [FaqPageController::class, 'index']);
@@ -91,7 +95,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('ulogin', [UloginController::class, 'login']);
 
     Route::resources([
-        'googleData' => GoogleUserDataController::class
+        'googleData' => GoogleUserDataController::class,
+        'admin-category' => CategoryTaskController::class
     ]);
 });
 

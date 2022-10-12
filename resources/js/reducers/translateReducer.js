@@ -79,6 +79,7 @@ const defaultState = {
         usersTab: {
             en: 'Users', ru: 'Пользователи'
         },
+        categoryTabs : {en: 'Categories', ru: 'Категории'},
         mainPage: {
             register: {en: 'Registered', ru: 'Зарегистрированных'},
             give: {en: 'Active giveaways', ru: 'Активные раздачи'},

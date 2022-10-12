@@ -56,6 +56,54 @@ class AdminPageController extends Controller
         ]);
     }
 
+    public function adminAdminPage()
+    {
+        $users = User::with('games')
+            ->with('tasks')
+            ->with('winners')
+            ->where('isAdmin', '!=', 1)
+            ->get();
+        return Inertia::render('AdminPanel/AdminMainPage', [
+            'users' => $users
+        ]);
+    }
+
+    public function adminUserPage()
+    {
+        $users = User::with('games')
+            ->with('tasks')
+            ->with('winners')
+            ->where('isAdmin', '!=', 1)
+            ->get();
+        $games = Game::with('users')
+            ->with('gifts')
+            ->with('tasks')
+            ->with('winners')
+            ->orderBy('status')
+            ->orderBy('endDate')
+            ->where('isSponsored', '=', false)
+            ->get();
+        return Inertia::render('AdminPanel/AdminUsersPage', [
+            'users' => $users,
+            'games' => $games
+        ]);
+    }
+
+    public function adminCompetitionPage()
+    {
+        $games = Game::with('users')
+            ->with('gifts')
+            ->with('tasks')
+            ->with('winners')
+            ->orderBy('status')
+            ->orderBy('endDate')
+            ->where('isSponsored', '=', false)
+            ->get();
+        return Inertia::render('AdminPanel/AdminCompetitionPage', [
+            'games' => $games
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

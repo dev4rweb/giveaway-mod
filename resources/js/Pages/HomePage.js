@@ -72,6 +72,7 @@ const HomePage = ({user, errors, games, sponsorGames, userTasks, userGames}) => 
         return (
             <Layout>
                 <article className={`${s.homePage}`}>
+
                     <div className={s.layer}>
                         <img className={s.back} src={dots} alt="canvas"/>
                     </div>

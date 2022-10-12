@@ -25,6 +25,7 @@ import AdminCreatePage from "./AdminPanel/AdminCreatePage";
 import {addGame} from "../actions/games";
 import {fetchAllUsersGamesAction} from "../reducers/userGameReducer";
 import {fetchAllUsersTasksAction} from "../reducers/usersTasksReducer";
+import AdminTasksPage from "./AdminPanel/AdminTasksPage";
 
 const AdminPage = ({currentUser, allUsers, allGames, userGames, usersTasks}) => {
     const dispatch = useDispatch()
@@ -133,6 +134,21 @@ const AdminPage = ({currentUser, allUsers, allGames, userGames, usersTasks}) => 
                     >
                         <p ref={hidTab}>Create</p>
                     </Tab>
+                    <InertiaLink
+                        href="/admin-category"
+                        className={s.item}
+                        style={{color: '#fdfdfd'}}
+                    >
+                        <img src={management} width="23px" alt=""/>
+                        {stateData.admin.mainTab[stateData.lang]}
+                    </InertiaLink>
+                    <InertiaLink
+                        href="/admin-category"
+                        className={s.item}
+                        style={{color: '#fdfdfd'}}
+                    >
+                        {stateData.admin.categoryTabs[stateData.lang]}
+                    </InertiaLink>
                     <div className={s.btnWrapper}>
                         <div className='outline-radius'
                         >
